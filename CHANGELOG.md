@@ -9,6 +9,16 @@ repository are recorded here.
 
 - Amazon purchase link for the Kindle edition.
 
+### Changed
+
+- Expanded DESIGN.md from a descriptive skeleton into an agent execution
+  contract connecting acceptance criteria, invariants, architecture,
+  operational safety, verification, rollback, implementation latitude, and
+  human decisions.
+- Rebuilt the Cagan four-risk supplement as a risk-to-evidence decision
+  instrument with evidence grades, falsifiers, precommitted thresholds,
+  engineering constraints, named owners, and generation-gate dispositions.
+
 ## [2.0.0] — 2026-08-16
 
 ### Added

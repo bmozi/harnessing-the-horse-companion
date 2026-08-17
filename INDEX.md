@@ -43,7 +43,7 @@ Foundation material; assets begin in Part II.
 | §4.3 Architecture as First-Class Artifact | Four baseline Mermaid diagrams (System Context, Component, Data Flow, Deployment) | [`diagrams/baseline-architecture-diagrams.md`](diagrams/baseline-architecture-diagrams.md) |
 | §4.4 The Harness Framework | Twelve Standards quick reference (framework mapping table) | [`references/twelve-standards-quick-reference.md`](references/twelve-standards-quick-reference.md) |
 | §4.6 Pipeline Artifacts | SPEC.md template | [`spec-templates/spec-md.md`](spec-templates/spec-md.md) |
-| §4.6 Pipeline Artifacts | DESIGN.md template | [`spec-templates/design-md.md`](spec-templates/design-md.md) |
+| §4.6 Pipeline Artifacts | DESIGN.md agent execution contract (traceability, invariants, proof, rollback, latitude, and human decisions) | [`spec-templates/design-md.md`](spec-templates/design-md.md) |
 | §4.6 Pipeline Artifacts | IMPL_NOTES.md template | [`spec-templates/impl-notes-md.md`](spec-templates/impl-notes-md.md) |
 | §4.6 Pipeline Artifacts | REVIEW.md template | [`spec-templates/review-md.md`](spec-templates/review-md.md) |
 
@@ -57,7 +57,7 @@ Foundation material; assets begin in Part II.
 | Std 1 — Post-Generation Gate | Post-generation verification checklist | [`checklists/post-generation-verification.md`](checklists/post-generation-verification.md) |
 | Std 3 — Blast Radius Analysis (plan-time) | Blast radius (SPEC-time) template | [`spec-templates/blast-radius-template.md`](spec-templates/blast-radius-template.md) |
 | Std 3 — Blast Radius Analysis (review-time) | Review-time blast radius prompt | [`prompts/blast-radius-analysis.md`](prompts/blast-radius-analysis.md) |
-| §5.1 Cagan's Four Risks | Cagan Four-Risk Assessment | [`spec-templates/cagan-four-risk-assessment.md`](spec-templates/cagan-four-risk-assessment.md) |
+| §5.1 Cagan's Four Risks | Four-Risk Evidence Contract with falsifiers, evidence grades, thresholds, owners, and generation gates | [`spec-templates/cagan-four-risk-assessment.md`](spec-templates/cagan-four-risk-assessment.md) |
 
 ### Chapter 6 — Task Division and Agent Scope
 

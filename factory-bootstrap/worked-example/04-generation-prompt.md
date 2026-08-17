@@ -2,7 +2,9 @@
 
 ## Task
 
-Implement the approved SPEC and DESIGN for per-channel reminder preferences.
+Implement the reversible expand/backfill phase authorized by the approved
+four-risk evidence contract, SPEC, and DESIGN for per-channel reminder
+preferences.
 
 ## Functional Requirements
 
@@ -14,14 +16,23 @@ Implement the approved SPEC and DESIGN for per-channel reminder preferences.
 
 - Read the current domain, API, repository, migration, and test files before
   proposing edits.
+- Read `01a-four-risk-evidence-contract.md` and preserve its authorized-work
+  boundary.
 - Reuse existing validation and transaction utilities.
 - Preserve the module boundaries in `00-project-context.md`.
 - Produce the smallest coherent change for the approved phase only.
 
 ## MUST-NOT List
 
-Repeat every MUST-NOT item from `02-spec.md` here. Treat an inability to prove an
-item as `VERIFY`, not as permission to proceed.
+- Do not add a package, service, queue, permission, or runtime capability.
+- Do not modify scheduling, retries, provider adapters, or analytics.
+- Do not default either new channel independently of the legacy global value.
+- Do not log email addresses, phone numbers, tokens, or message bodies.
+- Do not switch application reads, remove the legacy field, or down-migrate.
+- Do not access production data or execute a production migration.
+- Do not claim integration or scale evidence from unit or fixture results.
+
+Treat an inability to prove any item as `VERIFY`, not as permission to proceed.
 
 ## Output Format
 
@@ -41,4 +52,6 @@ legacy field.
 
 The implementation is not complete until every acceptance criterion has
 evidence, every MUST-NOT item is checked, migration rollback remains possible,
-and skipped integration evidence is explicit.
+skipped integration evidence is explicit, and every fixed DESIGN decision is
+preserved. Any required change outside the permitted latitude stops the session
+for human review.

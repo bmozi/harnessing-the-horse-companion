@@ -22,6 +22,7 @@ services, or self-improvement infrastructure.
 | --- | --- | --- |
 | 0 | [`00-project-context.md`](00-project-context.md) | What must every agent know about this repository? |
 | 1 | [`01-work-order.md`](01-work-order.md) | What outcome is authorized, and what is outside it? |
+| 1A | [`01a-four-risk-evidence-contract.md`](01a-four-risk-evidence-contract.md) | Does the feature have enough evidence to enter specification, and what work remains unauthorized? |
 | 2 | [`02-spec.md`](02-spec.md) | What behavior must be proven? |
 | 3 | [`03-design.md`](03-design.md) | How will the change preserve system boundaries? |
 | 4 | [`04-generation-prompt.md`](04-generation-prompt.md) | What exact contract does the implementation agent receive? |

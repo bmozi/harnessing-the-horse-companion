@@ -10,10 +10,11 @@
 
 ## Deviations
 
-The DESIGN proposed switching application reads in the same change. The
-implementer separated that switch into the next deployment phase because the
-repository has no production-like migration dataset in CI. This narrows the
-current blast radius and preserves rollback.
+No deviation from the approved DESIGN. The discovery-stage proposal originally
+combined expand, backfill, and switching reads. The four-risk evidence contract
+and DESIGN narrowed authorization before generation because the repository has
+no production-scale migration dataset in CI. The implementation preserved that
+boundary and left the read switch for a later Work Order.
 
 ## Evidence
 
