@@ -9,6 +9,8 @@ companion materials that belong with it.
 | Paperback | Revised first edition; Twelve Standards; EXPRESS software-factory path | [`v2.0.0`](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.0.0) |
 | Hardcover | Revised first edition; Twelve Standards; EXPRESS software-factory path | [`v2.0.0`](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.0.0) |
 
+The [Kindle edition is available on Amazon](https://www.amazon.com/dp/B0HCR9KHMB).
+
 ## Current Release
 
 The canonical companion for the revised first edition is **v2.0.0**,

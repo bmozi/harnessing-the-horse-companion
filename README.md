@@ -12,6 +12,8 @@ checklists, examples, and quick references without retyping them.
 > **Book:** *Harnessing the Horse: Engineering Discipline for Agentic
 > Development*
 >
+> **[Read on Kindle](https://www.amazon.com/dp/B0HCR9KHMB)**
+>
 > Match your Kindle, paperback, or hardcover to the correct companion in
 > [`EDITION-MAP.md`](EDITION-MAP.md), and check [`ERRATA.md`](ERRATA.md)
 > for confirmed corrections.
