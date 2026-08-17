@@ -13,7 +13,7 @@
 // © 2026 John Briggs — MIT licensed (see ../../LICENSE-CODE)
 
 // Pretend these match your project's actual types and ORM.
-interface HubSpotWebhookEvent {
+export interface HubSpotWebhookEvent {
   eventId: string;
   subscriptionType: string;
   objectId: string;
@@ -22,7 +22,7 @@ interface HubSpotWebhookEvent {
   occurredAt: number;
 }
 
-interface DomainContact {
+export interface DomainContact {
   externalId: string;
   email: string;
   firstName: string;
@@ -30,7 +30,7 @@ interface DomainContact {
   source: string;
 }
 
-interface DatabaseTransaction {
+export interface DatabaseTransaction {
   idempotencyKeys: {
     findUnique(args: { where: { key: string } }): Promise<{ key: string } | null>;
     create(args: { data: { key: string } }): Promise<void>;
@@ -54,39 +54,47 @@ interface DatabaseTransaction {
   };
 }
 
-interface Database {
+export interface Database {
   transaction<T>(fn: (tx: DatabaseTransaction) => Promise<T>): Promise<T>;
 }
 
-declare const db: Database;
-declare function transformToDomain(event: HubSpotWebhookEvent): DomainContact;
+export interface ContactWebhookDependencies {
+  db: Database;
+  transformToDomain(event: HubSpotWebhookEvent): DomainContact;
+}
 
-// The handler the agent generates against this pattern.
-export async function handleContactWebhook(event: HubSpotWebhookEvent): Promise<void> {
-  await db.transaction(async (tx) => {
-    // 1. Idempotency check
-    const exists = await tx.idempotencyKeys.findUnique({ where: { key: event.eventId } });
-    if (exists) return;  // Already processed — skip
-    await tx.idempotencyKeys.create({ data: { key: event.eventId } });
+// Dependency injection keeps the pattern runnable and testable without a
+// specific ORM. Production code supplies the real database and translation.
+export function createContactWebhookHandler({
+  db,
+  transformToDomain,
+}: ContactWebhookDependencies): (event: HubSpotWebhookEvent) => Promise<void> {
+  return async function handleContactWebhook(event: HubSpotWebhookEvent): Promise<void> {
+    await db.transaction(async (tx) => {
+      // 1. Idempotency check
+      const exists = await tx.idempotencyKeys.findUnique({ where: { key: event.eventId } });
+      if (exists) return;  // Already processed — skip
+      await tx.idempotencyKeys.create({ data: { key: event.eventId } });
 
-    // 2. Business logic — transform and persist
-    const contact = transformToDomain(event);
-    await tx.contacts.upsert({
-      where: { externalId: contact.externalId },
-      create: contact,
-      update: contact,
+      // 2. Business logic — transform and persist
+      const contact = transformToDomain(event);
+      await tx.contacts.upsert({
+        where: { externalId: contact.externalId },
+        create: contact,
+        update: contact,
+      });
+
+      // 3. Outbox — notification intent, same transaction
+      await tx.outbox.create({
+        data: {
+          aggregateId: contact.externalId,
+          eventType: 'contact.updated',
+          payload: contact,
+          topic: 'crm-events',
+        },
+      });
     });
-
-    // 3. Outbox — notification intent, same transaction
-    await tx.outbox.create({
-      data: {
-        aggregateId: contact.externalId,
-        eventType: 'contact.updated',
-        payload: contact,
-        topic: 'crm-events',
-      },
-    });
-  });
-  // Transaction committed — HubSpot gets 200 OK within timeout
-  // Outbox publisher delivers to Service Bus asynchronously
+    // Transaction committed — the sender gets a successful response.
+    // A separate outbox publisher delivers asynchronously.
+  };
 }

@@ -1,0 +1,90 @@
+{
+  "version": "2.0.0",
+  "title": "Harnessing the Horse",
+  "subtitle": "Reader Quick Start",
+  "promise": "Move from reading to one governed delivery loop - with artifacts, gates, evidence, and human judgment intact.",
+  "pages": [
+    {
+      "title": "Your 30-Minute Orientation",
+      "kicker": "Do not browse everything. Build a mental map, choose one task, and leave with a next action.",
+      "steps": [
+        ["0-5 min", "Read START-HERE.md and choose the governed-session path."],
+        ["5-10 min", "Scan the Twelve Standards quick reference. Notice which controls are blocking, asynchronous, or advisory."],
+        ["10-15 min", "Read the Complete Session Loop. Identify the artifact produced at each transition."],
+        ["15-22 min", "Open the fictional worked example. Follow its Work Order, SPEC, DESIGN, generation prompt, implementation notes, review, and learning record."],
+        ["22-27 min", "Choose one prompt and inspect its expected output in prompts/manifest.json."],
+        ["27-30 min", "Pick one low-risk repository task and write its Work Order. Stop before generation if acceptance criteria cannot be verified."]
+      ],
+      "callout": "Success is not reading every asset. Success is knowing which artifact to use next and what evidence will let a human approve the change."
+    },
+    {
+      "title": "One Governed Agent Session",
+      "kicker": "The loop turns model output into an engineering decision trail.",
+      "steps": [
+        ["1. Orient", "Load project rules, permissions, architecture, and the relevant source."],
+        ["2. Contract", "Write the Work Order and verifiable acceptance criteria before code generation."],
+        ["3. Design", "Define interfaces, blast radius, risks, and rollback expectations."],
+        ["4. Generate", "Give the agent a bounded contract and require explicit assumptions and verification markers."],
+        ["5. Falsify", "Run automated gates, then use a fresh review pass to try to disprove correctness."],
+        ["6. Decide and learn", "A human accepts, revises, or rejects the change; durable lessons update project memory."]
+      ],
+      "bullets": [
+        "Before generation: the contract, exclusions, risks, and required evidence are visible.",
+        "Before merge: automated results and an independent falsification review are attached.",
+        "After the decision: implementation notes and durable learning preserve why the result can be trusted."
+      ],
+      "callout": "Human judgment is a control surface, not ceremonial approval. Consequential ambiguity returns to a named owner."
+    },
+    {
+      "title": "The Public Software Factory Model",
+      "kicker": "A truthful operating model, intentionally separated from private implementation topology.",
+      "image": "diagrams/merlin-factory-architecture-premium.png",
+      "bullets": [
+        "Intake becomes a bounded Work Order before agents act.",
+        "Preflight verifies context, permissions, risk, and readiness.",
+        "EXPRESS provides a fast path only when evidence supports the classification.",
+        "Generation and verification remain separate responsibilities.",
+        "Quality gates produce evidence; humans retain consequential decisions.",
+        "Learning improves durable context without permitting uncontrolled self-modification."
+      ],
+      "callout": "Public diagrams teach lifecycle, gates, memory, and judgment. Exact filenames, inventories, backend priorities, database internals, and deployment topology remain private."
+    },
+    {
+      "title": "Choose the Smallest Useful Artifact",
+      "kicker": "Start at the decision you need to make, not at the directory tree.",
+      "table": [
+        ["Need", "Start with", "Evidence of completion"],
+        ["Scope a change", "Work Order + SPEC", "Testable acceptance criteria and explicit exclusions"],
+        ["Generate safely", "Structured prompt", "Bounded output with assumptions and verification markers"],
+        ["Challenge a result", "Disprove-only review", "Concrete counterexamples or an evidence-backed pass"],
+        ["Handle a failed gate", "Escalation protocol", "Named owner, options, decision, and audit trail"],
+        ["Bootstrap a factory", "Factory workbook + worked example", "One end-to-end governed task, not an orchestration platform"],
+        ["Teach the lifecycle", "Teaching panels + study guides", "A learner can explain where gates and humans intervene"]
+      ],
+      "callout": "Copy the pattern, not the fictional domain. Replace every project fact, permission, threshold, and risk classification with evidence from your environment."
+    },
+    {
+      "title": "A Safe 30-Day Adoption Sequence",
+      "kicker": "Earn autonomy through evidence. Do not begin with a fleet.",
+      "steps": [
+        ["Week 1 - Baseline", "Choose one repository and low-risk task class. Record current lead time, rework, defects, and review load."],
+        ["Week 2 - Govern", "Add context, Work Orders, acceptance criteria, and existing CI gates. Run the session loop manually."],
+        ["Week 3 - Falsify", "Separate generation from review, capture escaped defects and false confidence, and tighten the weakest artifact."],
+        ["Week 4 - Decide", "Compare against baseline. Expand only if quality, control, and team comprehension improved together."]
+      ],
+      "bullets": [
+        "Stop if the team cannot explain why a gate exists.",
+        "Stop if approval lacks inspectable evidence.",
+        "Stop if private data or production authority exceeds the task's need.",
+        "Stop if speed rises while rework, incidents, or reviewer distrust also rises."
+      ],
+      "callout": "The goal is compounding engineering discipline: faster delivery because the system makes good decisions repeatable, visible, and correctable."
+    }
+  ],
+  "links": [
+    ["Companion repository", "https://github.com/bmozi/harnessing-the-horse-companion"],
+    ["Stable v2.0.0 release", "https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.0.0"],
+    ["Start Here", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.0.0/START-HERE.md"],
+    ["Errata", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.0.0/ERRATA.md"]
+  ]
+}

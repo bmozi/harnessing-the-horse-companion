@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use these materials in research or teaching, please cite them as follows."
+title: "Harnessing the Horse Companion Repository"
+type: software
+authors:
+  - family-names: Briggs
+    given-names: John
+version: 2.0.0
+date-released: 2026-08-16
+repository-code: "https://github.com/bmozi/harnessing-the-horse-companion"
+url: "https://github.com/bmozi/harnessing-the-horse-companion"
+abstract: "Reader-facing templates, prompts, tested examples, diagrams, exercises, and references for Harnessing the Horse."
+keywords:
+  - agentic engineering
+  - software engineering
+  - AI agents
+  - software factory
