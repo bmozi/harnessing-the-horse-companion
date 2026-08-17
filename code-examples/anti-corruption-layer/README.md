@@ -37,6 +37,10 @@ required.
 
 ## Trying it
 
+Run `npm ci && npm test` from the repository root to compile the port and
+adapters and execute their contract-focused test. The example below shows the
+same in-memory adapter in direct use.
+
 ```typescript
 import { InMemoryCRMAdapter } from './test.adapter';
 

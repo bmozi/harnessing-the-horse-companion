@@ -1,9 +1,9 @@
 # Code Examples
 
-Reference code from *Harnessing the Horse* — primarily Part III (the
-practice chapters) and Part IV (case studies). These examples are
-designed to be copied into a real project and adapted to its framework,
-database client, SDK types, and test harness.
+Runnable reference code from *Harnessing the Horse* — primarily Part III
+(the practice chapters) and Part IV (case studies). The examples compile and
+their structural properties are exercised by tests. They are still designed to
+be adapted to a real project's framework, database client, and SDK types.
 
 > These artifacts are companion materials for *Harnessing the Horse*.
 > The book provides the design rationale, failure modes, and case-study
@@ -25,6 +25,20 @@ database client, SDK types, and test harness.
 | [`transactional-outbox/`](transactional-outbox/) | ch11 — §11.5 | PostgreSQL outbox table schema + companion idempotency_keys table, plus a TypeScript agent-generated webhook handler showing the three-step template (idempotency / business write / outbox write) all in one transaction. |
 | [`mcp-tool-pattern/`](mcp-tool-pattern/) | ch13 — §13.1 | TypeScript MCP tool definition (`scheduleAppointment`) implementing the three-layer pattern: scope check → validate → dry-run gate. |
 
+## Verify the examples
+
+From the repository root:
+
+```bash
+npm ci
+npm run typecheck
+npm test
+```
+
+The tests prove the examples' teaching properties: domain isolation, webhook
+idempotency plus outbox intent, and dry-run-before-write behavior. They do not
+replace integration tests against your selected vendors or persistence layer.
+
 ## How to use
 
 Each example directory contains:
@@ -33,10 +47,10 @@ Each example directory contains:
 - Source code with one-line license headers
 - Notes on what to replace when adapting the example to a real system
 
-These examples intentionally avoid vendor credentials and full
-application scaffolding. Bring them into your own repository, wire them
-to your actual SDKs and persistence layer, and then add the project
-tests that prove the boundary still holds.
+These examples intentionally avoid vendor credentials and full application
+scaffolding. Bring them into your own repository, wire them to your actual SDKs
+and persistence layer, preserve or strengthen the included behavioral tests,
+and add integration tests that prove the boundary still holds.
 
 ## Asset map (book ↔ companion)
 

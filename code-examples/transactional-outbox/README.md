@@ -68,6 +68,14 @@ async function publishOutbox() {
 The publisher is **infrastructure**. It's deployed once and runs
 continuously. Agent sessions generating handlers don't touch it.
 
+## Run the example
+
+From the repository root, run `npm ci && npm test`. The in-memory test harness
+shows that one transaction receives the idempotency, business-state, and outbox
+writes, and that a repeated webhook does not create a second outbox record. A
+real integration must also test rollback and locking against its actual
+database client.
+
 ## Operational notes
 
 - The `outbox_unpublished_idx` partial index makes the publisher's

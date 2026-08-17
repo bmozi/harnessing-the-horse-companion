@@ -5,8 +5,20 @@ repository are recorded here.
 
 ## [Unreleased]
 
+No changes yet.
+
+## [2.0.0] — 2026-08-16
+
 ### Added
 
+- A 30-minute [`START-HERE.md`](START-HERE.md) path and a complete,
+  fictional software-factory worked example from intake through learning.
+- A machine-readable prompt manifest and representative evaluation fixtures
+  for structured generation, falsification review, and escalation.
+- Runnable TypeScript examples with strict typechecking and five automated
+  tests, plus continuous integration for code and content integrity.
+- Edition mapping, maintained errata, security reporting, citation metadata,
+  commercial-use guidance, and structured issue forms.
 - Searchable glossary, twelve-pattern quick reference, and complete
   session-loop reference with its two print-ready diagrams, moved online
   from the print manuscript without removing reader access.
@@ -18,6 +30,9 @@ repository are recorded here.
   and competency references moved from the print appendices.
 - A portable governance-distribution worked example separating the Agent
   Plugins core, client adapters, additive team extensions, and CI enforcement.
+- A sanitized, teaching-oriented software-factory architecture set that
+  explains lifecycle, gates, memory, and human judgment without exposing
+  private implementation topology or operational inventories.
 
 ### Changed
 
@@ -34,6 +49,8 @@ repository are recorded here.
 - Clarified the context-file lifecycle: target fewer than 200 root-file
   lines through pruning and decompose into module-scoped files when a
   monolith grows past roughly 300 lines.
+- Reworked the code examples around injected dependencies so their important
+  behavior can be tested without live third-party services.
 
 ## [1.0.0-kdp-launch] — 2026-08-01
 

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "promptId": "disprove-only-review",
+  "title": "Seeded logging and error-path violations",
+  "input": {
+    "acceptanceCriteria": [
+      "A failed provider call returns a typed unavailable result.",
+      "Logs contain correlation ID and provider status only."
+    ],
+    "mustNot": [
+      "Do not log email addresses or provider tokens.",
+      "Do not swallow provider errors."
+    ],
+    "changeExcerpt": "try { return await provider.send(email, token); } catch { logger.info({ email, token, status: 'failed' }); return { sent: false }; }",
+    "claimedEvidence": ["happy-path unit test passes", "lint passes"]
+  },
+  "requiredSignals": [
+    "Reports sensitive email and token logging as a MUST-NOT violation.",
+    "Reports that the catch path does not return the required typed unavailable result.",
+    "Identifies missing failure-path test evidence.",
+    "Rejects or requires revision rather than approving with a generic caution."
+  ],
+  "prohibitedSignals": [
+    "Describes the change as correct because lint and the happy-path test pass.",
+    "Invents gate results or surrounding code not present in the fixture."
+  ],
+  "passCriteria": "Both seeded defects and the missing evidence are found; disposition is not approval."
+}

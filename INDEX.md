@@ -11,15 +11,21 @@ chapter. Each row is a single artifact the book references by URL.
 
 | Asset | File |
 | --- | --- |
+| Reader start paths (30-minute orientation, one governed session, factory bootstrap) | [`START-HERE.md`](START-HERE.md) |
+| Printable Reader Quick Start | [`output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.0.0.pdf`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.0.0.pdf) |
+| Complete fictional software-factory golden path | [`factory-bootstrap/worked-example/`](factory-bootstrap/worked-example/) |
 | The Twelve Standards — single-page quick reference (tiers, gate classifications, key artifacts, Harness Framework mapping) | [`references/twelve-standards-quick-reference.md`](references/twelve-standards-quick-reference.md) |
 | Pattern quick reference | [`references/pattern-quick-reference.md`](references/pattern-quick-reference.md) |
 | Complete session loop | [`references/complete-session-loop.md`](references/complete-session-loop.md) |
 | Glossary and acronym reference | [`references/glossary.md`](references/glossary.md) |
 | Complete prompt library | [`prompts/complete-prompt-library.md`](prompts/complete-prompt-library.md) |
+| Machine-readable prompt manifest and evaluation fixtures | [`prompts/manifest.json`](prompts/manifest.json) and [`prompt-evals/`](prompt-evals/) |
 | Pipeline artifact reference | [`references/pipeline-artifact-reference.md`](references/pipeline-artifact-reference.md) |
 | Quality-gate configuration reference | [`references/quality-gate-configuration-reference.md`](references/quality-gate-configuration-reference.md) |
 | Tool-configuration reference | [`references/tool-configuration-reference.md`](references/tool-configuration-reference.md) |
 | Portable governance distribution example | [`governance-distribution/`](governance-distribution/) |
+| Edition mapping and current companion release | [`EDITION-MAP.md`](EDITION-MAP.md) |
+| Confirmed corrections | [`ERRATA.md`](ERRATA.md) |
 
 ## By Chapter
 
@@ -237,10 +243,11 @@ author.
 
 - **SPEC templates** ([`spec-templates/`](spec-templates/)) — 17 files
 - **Patterns** ([`patterns/`](patterns/)) — 8 reference cards + catalog index
-- **Prompts** ([`prompts/`](prompts/)) — 10 files
+- **Prompts** ([`prompts/`](prompts/)) — reusable prompt library plus a machine-readable manifest
 - **Checklists** ([`checklists/`](checklists/)) — 17 files
-- **Factory bootstrap** ([`factory-bootstrap/`](factory-bootstrap/)) — 8 files for building a minimum viable software factory
-- **References** ([`references/`](references/)) — 2 files (the Twelve Standards quick reference and compatibility pattern catalog)
+- **Prompt evaluations** ([`prompt-evals/`](prompt-evals/)) — representative structured-generation, falsification-review, and escalation fixtures
+- **Factory bootstrap** ([`factory-bootstrap/`](factory-bootstrap/)) — seven scaffolds plus a completed fictional golden path for building a minimum viable software factory
+- **References** ([`references/`](references/)) — standards, patterns, the complete session loop, glossary, pipeline artifacts, quality gates, and tool configuration
 - **Diagrams** ([`diagrams/`](diagrams/)) — canonical Mermaid/Markdown and
   HTML sources plus PNG, JPEG, WebP, and PDF exports for the baseline and
   Merlin Software Factory architecture sets
@@ -273,6 +280,6 @@ in the companion repository.
 ```
 
 ```markdown
-See [`prompts/disprove-only-review.md` in the v1.0 companion
-release](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v1.0-kdp-launch).
+See [`prompts/disprove-only-review.md` in the v2.0.0 companion
+release](https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.0.0/prompts/disprove-only-review.md).
 ```

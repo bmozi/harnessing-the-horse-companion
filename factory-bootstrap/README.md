@@ -11,6 +11,9 @@ This kit is intentionally not self-contained. It assumes you have read the book 
 
 The files here are scaffolds. They tell you what to fill out; the book explains how to decide what belongs in each field and which risks each field controls.
 
+If you want to see the artifacts working together before filling in your own,
+start with the completed, fictional [`worked-example/`](worked-example/).
+
 ## What You Are Building
 
 A minimum viable software factory is one governed delivery loop:
@@ -33,6 +36,7 @@ Do not start with multi-agent orchestration, autonomous improvement, or self-mod
 | `05-safety-rails-checklist.md` | Autonomy and self-improvement constraints | Chapter 16, Chapter 17 |
 | `06-metrics-baseline.md` | Baseline and first-30-days measurement | Chapter 18 |
 | `07-factory-readiness-review.md` | Decision to expand beyond the first repo | Chapter 19 |
+| `worked-example/` | One complete fictional delivery path from project context through metrics and learning | Read after the session-loop reference |
 
 ## Completion Rule
 

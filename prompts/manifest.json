@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "libraryVersion": "2.0.0",
+  "modelPolicy": "Use a frontier-capable reasoning or coding model and evaluate adaptations against repository-specific evidence.",
+  "prompts": [
+    {
+      "id": "structured-generation",
+      "file": "structured-prompt.md",
+      "purpose": "Generate a bounded change from explicit requirements, constraints, MUST-NOT rules, and review criteria.",
+      "riskLevel": "medium",
+      "inputs": ["task", "functional requirements", "constraints", "MUST-NOT list", "output format", "review criteria"],
+      "expectedOutput": ["scope restatement", "implementation", "verification evidence", "assumptions and limitations"],
+      "evaluationFixtures": ["../prompt-evals/structured-generation.json"]
+    },
+    {
+      "id": "quality-gate-configuration-review",
+      "file": "quality-gate-config-review.md",
+      "purpose": "Audit whether automated checks are classified and enforced according to consequence.",
+      "riskLevel": "medium",
+      "inputs": ["CI configuration", "branch protection policy", "project gate definitions"],
+      "expectedOutput": ["classification gaps", "enforcement gaps", "specific remediation"],
+      "evaluationFixtures": []
+    },
+    {
+      "id": "disprove-only-review",
+      "file": "disprove-only-review.md",
+      "purpose": "Challenge an implementation claim against gates, acceptance criteria, and failure dimensions.",
+      "riskLevel": "high",
+      "inputs": ["SPEC", "MUST-NOT list", "implementation", "test and gate evidence"],
+      "expectedOutput": ["gate status", "criterion traceability", "findings with evidence", "disposition"],
+      "evaluationFixtures": ["../prompt-evals/disprove-only-review.json"]
+    },
+    {
+      "id": "adversarial-validation",
+      "file": "adversarial-validation.md",
+      "purpose": "Run a fresh-context destructive review for high-risk changes.",
+      "riskLevel": "high",
+      "inputs": ["SPEC", "MUST-NOT list", "implementation", "approved interfaces"],
+      "expectedOutput": ["critical findings", "security findings", "verification-stance audit", "limitations"],
+      "evaluationFixtures": []
+    },
+    {
+      "id": "blast-radius-analysis",
+      "file": "blast-radius-analysis.md",
+      "purpose": "Estimate direct, dependency, data, external, and rollback impact for review calibration.",
+      "riskLevel": "medium",
+      "inputs": ["change description", "affected files", "dependency graph", "data and external interfaces"],
+      "expectedOutput": ["impact dimensions", "rollback assessment", "review-effort classification"],
+      "evaluationFixtures": []
+    },
+    {
+      "id": "escalation-protocol",
+      "file": "escalation-protocol.md",
+      "purpose": "Govern failed gates, overrides, and non-converging repair attempts.",
+      "riskLevel": "high",
+      "inputs": ["failed gate", "attempt history", "authority level", "requested exception"],
+      "expectedOutput": ["root cause", "thrashing decision", "authority decision", "escalation record"],
+      "evaluationFixtures": ["../prompt-evals/escalation-assessment.json"]
+    },
+    {
+      "id": "escalation-assessment",
+      "file": "escalation-assessment.md",
+      "purpose": "Provide the compact assessment form used inside the escalation protocol.",
+      "riskLevel": "high",
+      "inputs": ["gate failure details", "attempt history", "override request"],
+      "expectedOutput": ["failure classification", "decision", "owner and next action"],
+      "evaluationFixtures": []
+    },
+    {
+      "id": "subagent-challenge-clauses",
+      "file": "subagent-challenge-clauses.md",
+      "purpose": "Embed decision, error-path, uncertainty, and assumption challenges in another prompt.",
+      "riskLevel": "low",
+      "inputs": ["host prompt", "task risk"],
+      "expectedOutput": ["explicit rationale", "error-path evidence", "uncertainty markers"],
+      "evaluationFixtures": []
+    },
+    {
+      "id": "verification-stance-markers",
+      "file": "verification-stance-markers.md",
+      "purpose": "Separate verified facts from assumptions and unresolved verification work.",
+      "riskLevel": "low",
+      "inputs": ["claims and evidence"],
+      "expectedOutput": ["verified markers", "ASSUMPTION markers", "VERIFY actions"],
+      "evaluationFixtures": []
+    },
+    {
+      "id": "prompt-injection-defense",
+      "file": "prompt-injection-defense.md",
+      "purpose": "Constrain agents that process untrusted data through privilege, separation, validation, and approval layers.",
+      "riskLevel": "high",
+      "inputs": ["trusted task", "untrusted data", "permitted tools", "approval policy"],
+      "expectedOutput": ["bounded response", "rejected embedded instructions", "validated tool intent", "approval request when required"],
+      "evaluationFixtures": []
+    }
+  ]
+}

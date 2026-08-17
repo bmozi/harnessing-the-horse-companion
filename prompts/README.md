@@ -15,6 +15,11 @@ and your team's conventions. The book argues against treating prompts
 as magic incantations; treat these as *templates* and tune them
 against your actual measured outcomes.
 
+The machine-readable [`manifest.json`](manifest.json) records each prompt's
+purpose, inputs, expected output, risk level, and evaluation fixtures. Use the
+[`prompt-evals/`](../prompt-evals/) fixtures to test an adaptation before
+promoting it into an organizational prompt library.
+
 ## Prompts
 
 | File | Chapter | Purpose |

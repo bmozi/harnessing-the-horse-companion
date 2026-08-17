@@ -79,6 +79,24 @@ If your PR is accepted in principle (via the issue conversation):
 - For substantive additions: add a `CHANGELOG.md` entry under
   `## [Unreleased]`.
 
+Before opening the pull request, validate the complete public package:
+
+```bash
+npm ci
+npm run check
+```
+
+The check verifies local links, prompt metadata and evaluation fixtures,
+code license headers, release-version alignment, the public/private
+architecture boundary, strict TypeScript compilation, and example behavior.
+Also read new prose and rendered diagrams manually; passing automation is a
+floor, not an editorial or security approval.
+
+Classify additions before placing them. Executable implementations and test
+code belong in an MIT-covered code area. Prompts, templates, checklists,
+workbooks, diagrams, and explanatory prose remain written content even when
+they contain snippets, and belong under CC BY-NC-SA 4.0.
+
 We commit-squash on merge and rewrite the message to follow the
 repository's style. Your authorship is preserved via the GitHub PR
 attribution.

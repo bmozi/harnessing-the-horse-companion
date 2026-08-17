@@ -80,10 +80,16 @@ The prompt should explicitly require this two-step pattern. See
 [`../../prompts/structured-prompt.md`](../../prompts/structured-prompt.md)
 for the prompt template that enforces it.
 
+## Run the example
+
+From the repository root, run `npm ci && npm test`. The test suite verifies that
+the first call is a non-mutating preview and that an explicitly confirmed call
+executes once and leaves an audit record.
+
 ## Adapting to your MCP server
 
-The file uses type sketches (`MCPToolDefinition`, `MCPContext`) that
-you'll replace with your MCP SDK's actual types. The pattern is
+The file uses small, runnable boundary interfaces (`MCPToolDefinition`,
+`MCPContext`) that you will adapt to your MCP SDK's actual types. The pattern is
 independent of the SDK — the three layers (scope, validate,
 dry-run) are the structural property; the type names vary.
 
