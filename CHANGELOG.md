@@ -5,7 +5,9 @@ repository are recorded here.
 
 ## [Unreleased]
 
-No changes yet.
+### Added
+
+- Amazon purchase link for the Kindle edition.
 
 ## [2.0.0] — 2026-08-16
 
