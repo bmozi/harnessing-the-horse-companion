@@ -19,7 +19,7 @@ that precede any code generation.
 | [`claude-md-template.md`](claude-md-template.md) | ch04 — §4.1 (Context File) | The minimum viable project-root context file (CLAUDE.md / AGENTS.md) — Project Overview, Conventions, Constraints, Architecture Boundaries |
 | [`agents-md-template.md`](agents-md-template.md) | ch04 — §4.1 (Context File) / companion tool-configuration reference | The same context file under the vendor-neutral `AGENTS.md` filename, with tool-agnostic loading notes. Either filename works; pick the one your tools read. |
 | [`spec-md.md`](spec-md.md) | ch05 — Std 1 / ch04 — §4.6 | The SPEC.md document: what you're building and why |
-| [`design-md.md`](design-md.md) | ch04 — §4.6 | The DESIGN.md document: how you plan to build it — Approach, Module Boundaries, Data Model, API Contracts, Tradeoffs, Risks |
+| [`design-md.md`](design-md.md) | ch04 — §4.6 | Agent execution contract connecting every acceptance criterion to architecture and proof, with invariants, change surface, failure and rollback behavior, fixed decisions, permitted latitude, and human `VERIFY` items |
 | [`impl-notes-md.md`](impl-notes-md.md) | ch04 — §4.6 / ch09 — Std 10 | The IMPL_NOTES.md running log: what actually happened during implementation, plus the three-severity tech debt register |
 | [`review-md.md`](review-md.md) | ch04 — §4.6 | The REVIEW.md document: the reviewer's evidence-backed verdict, with Gate Status, Specification Compliance, MUST-NOT Compliance, Findings, Disposition, Sign-off |
 
@@ -31,7 +31,7 @@ that precede any code generation.
 | [`task-spec.md`](task-spec.md) | ch06 — Stds 2, 4–5 | Decomposing a SPEC.md into agent-sized tasks with explicit Interfaces Produced/Consumed, Dependencies, and Definition of Done |
 | [`interface-spec.md`](interface-spec.md) | ch06 — Std 4 | Detailed templates for REST endpoint, internal function, and event/message interface specifications |
 | [`blast-radius-template.md`](blast-radius-template.md) | ch05 — Std 3 | Pre-generation blast-radius estimation across five dimensions |
-| [`cagan-four-risk-assessment.md`](cagan-four-risk-assessment.md) | ch05 — Merlin Enhancement | Supplement for complex features: Value / Usability / Feasibility / Business Viability risk assessment |
+| [`cagan-four-risk-assessment.md`](cagan-four-risk-assessment.md) | ch05 — Merlin Enhancement | Four-Risk Evidence Contract: falsifiable Value / Usability / Feasibility / Business Viability claims with graded evidence, thresholds, owners, engineering constraints, and generation-gate dispositions |
 
 ### Architectural stewardship (ch09)
 
@@ -65,6 +65,8 @@ that precede any code generation.
    input.
 3. Commit it alongside the code change it scopes. The SPEC document
    and the code share git history.
+4. Delete any completed section that does not change a decision, constrain
+   generation, define evidence, or identify required human judgment.
 
 ## The flow
 
