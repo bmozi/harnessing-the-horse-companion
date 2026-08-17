@@ -1,0 +1,68 @@
+# Minimum viable quality gates.
+# Read Chapter 7 and the companion quality-gate configuration reference before adapting this skeleton.
+# Classify each gate before making it block. A noisy blocking gate trains teams to bypass the factory.
+# Replace the ./scripts/* commands with the actual project commands before enabling this workflow.
+
+name: Quality Gates
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  blocking-gates:
+    name: Blocking Gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        run: ./scripts/setup-ci.sh
+
+      - name: Lint
+        run: ./scripts/lint.sh
+
+      - name: Type check
+        run: ./scripts/type-check.sh
+
+      - name: Unit tests
+        run: ./scripts/test-unit.sh
+
+      - name: Secret scan
+        run: ./scripts/secret-scan.sh
+
+      - name: Architecture boundaries
+        run: ./scripts/architecture-check.sh
+
+  advisory-gates:
+    name: Advisory Gates
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Coverage delta
+        run: ./scripts/coverage-delta.sh
+
+      - name: Complexity check
+        run: ./scripts/complexity-check.sh
+
+  informational-gates:
+    name: Informational Gates
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Delivery metadata
+        run: ./scripts/delivery-metadata.sh
+
+  async-gates:
+    name: Async Gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Full integration suite
+        run: ./scripts/test-integration.sh

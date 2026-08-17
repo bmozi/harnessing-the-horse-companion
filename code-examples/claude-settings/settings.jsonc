@@ -1,0 +1,57 @@
+// .claude/settings.json
+//
+// Reference structural guardrails for Claude Code agent sessions.
+// Adapted from Chapter 4 of *Harnessing the Horse: Engineering
+// Discipline for Agentic Development* by John Briggs.
+//
+// This file is licensed under the MIT License (see ../../LICENSE-CODE).
+// Copy it into your project's .claude/ directory and adjust per
+// project. The annotations explain *why* each entry exists.
+{
+  "permissions": {
+    "allow": [
+      // READ operations: the agent needs to understand the codebase
+      "read",           // Read any file in the project
+      "inspect_git",    // View git status, log, diff — read-only git
+
+      // WRITE operations: the agent needs to produce code
+      "write",          // Create or modify files
+      "edit",           // Edit existing files (some tools distinguish
+                        //   write from edit)
+
+      // VERIFY operations: the agent needs to validate its output
+      "test",           // Run the project's test suite
+      "lint",           // Run linters and static analysis
+      "build",          // Compile or bundle the project
+      "type_check"      // Run type-checking (tsc, mypy, etc.)
+    ],
+
+    "deny": [
+      // DESTRUCTIVE operations: the agent must not destroy state
+      "rm -rf",         // Recursive force-delete. No legitimate
+                        //   agentic use case.
+      "git clean -fdx", // Deletes untracked files. Irreversible in
+                        //   the wrong context.
+
+      // PUBLICATION operations: the agent must not publish artifacts
+      "git push",       // Pushing is a human decision. The agent
+                        //   generates; the human publishes.
+      "git merge",      // Merging is a human decision. Separates
+                        //   generation from integration.
+      "npm publish",    // Publishing a package is irreversible.
+      "docker push",    // Publishing an image is irreversible.
+      "pip upload",     // Publishing to PyPI is irreversible.
+
+      // EXECUTION-FROM-UNTRUSTED-SOURCE operations
+      "curl | sh",      // Downloading and executing arbitrary scripts
+      "curl | bash",    //   from the internet is the canonical supply
+      "wget | sh",      //   chain attack vector.
+      "wget | bash",
+
+      // PRIVILEGE ESCALATION operations
+      "sudo",           // The agent should never need root privileges.
+      "chmod 777",      // World-writable permissions are never correct.
+      "chown"           // Ownership changes require human judgment.
+    ]
+  }
+}

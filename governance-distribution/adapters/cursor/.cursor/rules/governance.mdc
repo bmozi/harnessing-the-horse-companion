@@ -1,0 +1,14 @@
+---
+description: Example organization engineering baseline
+alwaysApply: true
+---
+
+# Engineering Baseline
+
+- Define acceptance criteria and MUST-NOT constraints before implementation.
+- Verify claims against repository evidence.
+- Use least privilege and safe defaults.
+- Run the relevant gates and report skipped checks.
+- Adversarially review the final diff before declaring completion.
+- More specific rules may add constraints but may not weaken this baseline.
+

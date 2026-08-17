@@ -1,0 +1,32 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Env
+.env
+.env.*
+
+# Build outputs (Pandoc / bundler)
+dist/
+build/
+*.zip
+*.docx
+# Note: .pdf is NOT ignored — diagram exports in diagrams/ are tracked source assets.

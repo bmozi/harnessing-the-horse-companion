@@ -1,0 +1,8 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "example-org-governance",
+  "version": "0.1.0",
+  "description": "Example portable engineering-governance workflow.",
+  "license": "CC-BY-NC-SA-4.0",
+  "keywords": ["governance", "engineering", "review"]
+}

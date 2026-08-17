@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<!-- Copyright 2026 John Briggs. Harnessing the Horse companion material. CC BY-NC-SA 4.0. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, initial-scale=1">
+<title>Merlin Software Factory Architecture</title>
+<style>
+  :root {
+    --ink: #172033;
+    --muted: #607087;
+    --line: #d7e0ea;
+    --paper: #f8fbff;
+    --panel: #ffffff;
+    --navy: #0d1528;
+    --green: #20b86b;
+    --blue: #3276ff;
+    --amber: #f3b426;
+    --orange: #f06f2f;
+    --purple: #8c5cf6;
+    --cyan: #12aeca;
+    --red: #e24b5b;
+    --slate: #66768d;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    width: 1920px;
+    height: 1280px;
+    overflow: hidden;
+    background: #0a1020;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color: var(--ink);
+  }
+
+  .canvas {
+    position: relative;
+    width: 1920px;
+    height: 1280px;
+    padding: 44px 56px 42px;
+    background:
+      radial-gradient(circle at 8% 10%, rgba(50,118,255,.16), transparent 30%),
+      radial-gradient(circle at 92% 2%, rgba(18,174,202,.13), transparent 32%),
+      linear-gradient(135deg, #0c1428 0%, #121b30 46%, #101827 100%);
+  }
+
+  .header {
+    height: 116px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    color: #fff;
+  }
+
+  .eyebrow {
+    color: #7dd3fc;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 3.8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 54px;
+    line-height: 1;
+    letter-spacing: 0;
+    font-weight: 850;
+  }
+
+  .subtitle {
+    margin-top: 12px;
+    color: #cbd7ea;
+    font-size: 22px;
+    font-weight: 520;
+  }
+
+  .version {
+    text-align: right;
+    color: #cbd7ea;
+    font-size: 17px;
+    line-height: 1.55;
+    padding-top: 8px;
+  }
+
+  .version strong {
+    display: block;
+    color: #fff;
+    font-size: 21px;
+    margin-bottom: 4px;
+  }
+
+  .board {
+    position: relative;
+    height: 1048px;
+    border-radius: 28px;
+    background: var(--paper);
+    box-shadow: 0 30px 80px rgba(0,0,0,.28);
+    border: 1px solid rgba(255,255,255,.18);
+    overflow: hidden;
+  }
+
+  .board:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(20,31,52,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,31,52,.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
+
+  .main-grid {
+    position: absolute;
+    inset: 34px 36px 120px;
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    gap: 26px;
+    min-height: 0;
+  }
+
+  .side-stack {
+    display: grid;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .flow {
+    display: grid;
+    grid-template-rows: 174px 156px 180px 154px 148px;
+    gap: 18px;
+    min-height: 0;
+  }
+
+  .card, .lane {
+    position: relative;
+    background: rgba(255,255,255,.95);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(24,39,75,.08);
+    overflow: hidden;
+  }
+
+  .card {
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .lane {
+    padding: 18px 20px 16px;
+  }
+
+  .accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+  }
+
+  .green { --c: var(--green); --soft: #eafaf2; }
+  .blue { --c: var(--blue); --soft: #edf4ff; }
+  .amber { --c: var(--amber); --soft: #fff8df; }
+  .orange { --c: var(--orange); --soft: #fff1e9; }
+  .purple { --c: var(--purple); --soft: #f4efff; }
+  .cyan { --c: var(--cyan); --soft: #e9fbff; }
+  .red { --c: var(--red); --soft: #fff0f2; }
+  .slate { --c: var(--slate); --soft: #f2f5f8; }
+
+  .accent { background: var(--c); }
+  .plane-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--c);
+    font-size: 15px;
+    font-weight: 850;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-bottom: 13px;
+  }
+
+  .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--c);
+    color: white;
+    font-size: 15px;
+    font-weight: 850;
+    letter-spacing: 0;
+  }
+
+  .card h2, .lane h2 {
+    margin: 0 0 10px;
+    color: #152033;
+    font-size: 24px;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .card p {
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.36;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: auto;
+  }
+
+  .chip {
+    padding: 6px 9px;
+    border-radius: 999px;
+    background: var(--soft);
+    color: color-mix(in srgb, var(--c) 76%, #111827);
+    border: 1px solid color-mix(in srgb, var(--c) 24%, #fff);
+    font-size: 12px;
+    font-weight: 760;
+    white-space: nowrap;
+  }
+
+  .node-row {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .node-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .node {
+    position: relative;
+    min-height: 78px;
+    padding: 13px 13px 12px;
+    border-radius: 14px;
+    background: #fff;
+    border: 1px solid #dbe4ee;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+  }
+
+  .node.soft {
+    background: var(--soft);
+    border-color: color-mix(in srgb, var(--c) 28%, #dbe4ee);
+  }
+
+  .node-title {
+    color: #18243a;
+    font-size: 18px;
+    font-weight: 840;
+    line-height: 1.12;
+    margin-bottom: 6px;
+  }
+
+  .node-meta {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.25;
+    font-weight: 520;
+  }
+
+  .mini-title {
+    color: #18243a;
+    font-size: 15px;
+    font-weight: 830;
+    margin-bottom: 5px;
+  }
+
+  .mini-meta {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.28;
+  }
+
+  .arrow {
+    width: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9aabba;
+    font-size: 30px;
+    font-weight: 600;
+    flex: 0 0 34px;
+  }
+
+  .gate-strip {
+    position: absolute;
+    right: 20px;
+    top: 18px;
+    display: flex;
+    gap: 7px;
+  }
+
+  .gate {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--c);
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(0,0,0,.14);
+    border: 3px solid #fff;
+    font-size: 14px;
+    font-weight: 900;
+  }
+
+  .stage {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 2px;
+  }
+
+  .stage .node {
+    min-height: 96px;
+  }
+
+  .stage.six {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+
+  .stage.six .node {
+    min-height: 96px;
+    padding: 11px 9px;
+  }
+
+  .stage.six .node-title {
+    font-size: 15px;
+  }
+
+  .stage.six .node-meta {
+    font-size: 11px;
+  }
+
+  .path-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding-right: 184px;
+  }
+
+  .path-title h2 {
+    margin: 0;
+  }
+
+  .path-title span {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 620;
+  }
+
+  .gates {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 9px;
+  }
+
+  .gate-card {
+    border-radius: 13px;
+    border: 1px solid #e2d29c;
+    background: linear-gradient(180deg, #fffdf2, #fff8df);
+    padding: 10px 10px 9px;
+    min-height: 68px;
+  }
+
+  .gate-card strong {
+    display: block;
+    color: #6f4d03;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .gate-card span {
+    color: #7f6b36;
+    font-size: 12px;
+    line-height: 1.22;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .metric {
+    background: #fff;
+    border: 1px solid #dbe4ee;
+    border-radius: 13px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+
+  .metric strong {
+    display: block;
+    color: #172033;
+    font-size: 23px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric span {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .runtime {
+    position: absolute;
+    left: 36px;
+    right: 36px;
+    bottom: 34px;
+    height: 72px;
+    display: grid;
+    grid-template-columns: 1.08fr 1.18fr 1fr 1fr 1.08fr 1.28fr;
+    gap: 12px;
+  }
+
+  .runtime .node {
+    min-height: 0;
+    padding: 11px 12px;
+  }
+
+  .runtime .node-title {
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+
+  .runtime .node-meta {
+    font-size: 11px;
+  }
+
+  .spine {
+    position: absolute;
+    left: 50%;
+    top: 156px;
+    bottom: 127px;
+    width: 3px;
+    background: linear-gradient(#c9d5e3 70%, transparent);
+    transform: translateX(-50%);
+    opacity: .7;
+  }
+
+  .spine:before,
+  .spine:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 12px solid #b9c7d8;
+  }
+
+  .spine:before { top: 120px; }
+  .spine:after { top: 528px; }
+
+  .connector {
+    position: absolute;
+    border-color: #b9c7d8;
+    opacity: .68;
+    pointer-events: none;
+  }
+
+  .loop-left {
+    left: 333px;
+    top: 199px;
+    width: 58px;
+    height: 545px;
+    border-left: 3px solid #b9c7d8;
+    border-bottom: 3px solid #b9c7d8;
+    border-top: 3px solid #b9c7d8;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .loop-right {
+    right: 333px;
+    top: 188px;
+    width: 58px;
+    height: 720px;
+    border-right: 3px solid #b9c7d8;
+    border-bottom: 3px solid #b9c7d8;
+    border-top: 3px solid #b9c7d8;
+    border-radius: 0 20px 20px 0;
+  }
+
+  .footer {
+    position: absolute;
+    left: 56px;
+    right: 56px;
+    bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #d8e4f2;
+    font-size: 14px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--c);
+  }
+</style>
+</head>
+<body>
+<main class="canvas">
+  <header class="header">
+    <div>
+      <div class="eyebrow">Public Teaching Architecture</div>
+      <h1>Merlin Software Factory</h1>
+      <div class="subtitle">One accountable delivery arc, surrounded by verification, memory, observability, and human judgment</div>
+    </div>
+    <div class="version">
+      <strong>Current Operating Model</strong>
+      EXPRESS is the primary delivery path<br>
+      Public teaching edition - implementation details intentionally abstracted
+    </div>
+  </header>
+
+  <section class="board">
+    <div class="spine"></div>
+    <div class="connector loop-left"></div>
+    <div class="connector loop-right"></div>
+
+    <div class="main-grid">
+      <aside class="side-stack">
+        <article class="card red">
+          <div class="accent"></div>
+          <div class="plane-label"><span class="num">C</span>Control</div>
+          <h2>Reconciler keeps work orders convergent</h2>
+          <p>A control loop compares desired and actual state, resumes interrupted work, and stops repeated failure safely.</p>
+          <div class="chips">
+            <span class="chip">crash recovery</span>
+            <span class="chip">bounded retry</span>
+            <span class="chip">safe halt</span>
+            <span class="chip">diagnostics</span>
+          </div>
+        </article>
+
+        <article class="card slate">
+          <div class="accent"></div>
+          <div class="plane-label"><span class="num">H</span>Human judgment</div>
+          <h2>Humans stay in the loop where judgment matters</h2>
+          <p>Operators see evidence, approve consequential decisions, and inherit a clean handoff when automation reaches its boundary.</p>
+          <div class="chips">
+            <span class="chip">approval</span>
+            <span class="chip">escalation</span>
+            <span class="chip">handoff</span>
+          </div>
+        </article>
+
+        <article class="card purple">
+          <div class="accent"></div>
+          <div class="plane-label"><span class="num">L</span>Learning</div>
+          <h2>Meta-harness searches for better factory behavior</h2>
+          <p>Measured evidence can propose prompt, tool, or process changes; controlled evaluation decides whether they earn promotion.</p>
+          <div class="chips">
+            <span class="chip">observe</span>
+            <span class="chip">evaluate</span>
+            <span class="chip">promote</span>
+            <span class="chip">rollback</span>
+          </div>
+        </article>
+      </aside>
+
+      <section class="flow">
+        <article class="lane green">
+          <div class="accent"></div>
+          <div class="gate-strip"><span class="gate">P</span></div>
+          <div class="path-title">
+            <h2>Product Framing: Evidence Before Build</h2>
+            <span>Proceed, pivot, or request human judgment</span>
+          </div>
+          <div class="node-row">
+            <div class="node soft" style="width: 172px;">
+              <div class="node-title">Work Order</div>
+              <div class="node-meta">A bounded problem, desired outcome, and acceptance evidence</div>
+            </div>
+            <div class="arrow">-></div>
+            <div class="node soft" style="flex: 1;">
+              <div class="node-title">Deterministic preflight</div>
+              <div class="node-meta">Scope, evidence quality, risk, workspace readiness, and cost boundaries</div>
+            </div>
+            <div class="arrow">-></div>
+            <div class="node soft" style="width: 190px;">
+              <div class="node-title">Decision</div>
+              <div class="node-meta">Run EXPRESS, narrow the work, or pause for review</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="lane blue">
+          <div class="accent"></div>
+          <div class="gate-strip"><span class="gate">1</span><span class="gate">A</span></div>
+          <div class="path-title">
+            <h2>Factory Plane: EXPRESS Single-Agent Delivery</h2>
+            <span>One accountable agent owns the complete arc</span>
+          </div>
+          <div class="stage six">
+            <div class="node soft">
+              <div class="node-title">Understand</div>
+              <div class="node-meta">Restate outcome and constraints</div>
+            </div>
+            <div class="node soft">
+              <div class="node-title">Investigate</div>
+              <div class="node-meta">Read evidence before changing code</div>
+            </div>
+            <div class="node soft">
+              <div class="node-title">Plan</div>
+              <div class="node-meta">Declare scope and proof strategy</div>
+            </div>
+            <div class="node soft">
+              <div class="node-title">Test</div>
+              <div class="node-meta">Make expected behavior executable</div>
+            </div>
+            <div class="node soft">
+              <div class="node-title">Implement</div>
+              <div class="node-meta">Change only the declared surface</div>
+            </div>
+            <div class="node soft">
+              <div class="node-title">Self-audit</div>
+              <div class="node-meta">Prove, repair, and prepare handoff</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="lane amber">
+          <div class="accent"></div>
+          <div class="gate-strip"><span class="gate">B</span><span class="gate">C</span><span class="gate">A</span></div>
+          <div class="path-title">
+            <h2>Governance Plane: Independent Proof</h2>
+            <span>Blocking, conditional, advisory, and asynchronous checks</span>
+          </div>
+          <div class="gates">
+            <div class="gate-card"><strong>Scope</strong><span>Change stays inside the declared boundary.</span></div>
+            <div class="gate-card"><strong>Executable proof</strong><span>Tests and static checks support the claim.</span></div>
+            <div class="gate-card"><strong>Security</strong><span>Critical safety failures stop the run.</span></div>
+            <div class="gate-card"><strong>Contextual quality</strong><span>UX and performance apply when relevant.</span></div>
+            <div class="gate-card"><strong>Independent read</strong><span>A separate pass challenges overclaims.</span></div>
+            <div class="gate-card"><strong>Human boundary</strong><span>Judgment is escalated, never fabricated.</span></div>
+          </div>
+        </article>
+
+        <article class="lane orange">
+          <div class="accent"></div>
+          <div class="path-title" style="padding-right:0;">
+            <h2>Observability Plane: Delivery, Cost, and Stability</h2>
+            <span>Operational evidence becomes governance input</span>
+          </div>
+          <div class="two-col">
+            <div class="node soft">
+              <div class="node-title">Governed model access</div>
+              <div class="node-meta">Policy, budget, audit, and failure controls surround every agent turn.</div>
+            </div>
+            <div class="node soft">
+              <div class="node-title">Release health</div>
+              <div class="node-meta">Delivery, quality, cost, recovery, and adoption signals reveal whether the change holds.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="lane purple">
+          <div class="accent"></div>
+          <div class="gate-strip"><span class="gate">A</span></div>
+          <div class="path-title">
+            <h2>Improvement Plane: Continuous Learning</h2>
+            <span>Every work order teaches the next one</span>
+          </div>
+          <div class="node-row">
+            <div class="node soft" style="flex: 1;">
+              <div class="node-title">Post-run reflection</div>
+              <div class="node-meta">Compare intended and actual outcomes, proof quality, cost, and rework.</div>
+            </div>
+            <div class="arrow">-></div>
+            <div class="node soft" style="width: 285px;">
+              <div class="node-title">Durable learning</div>
+              <div class="node-meta">Store verified lessons and improvement candidates without blocking delivery.</div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <aside class="side-stack">
+        <article class="card cyan">
+          <div class="accent"></div>
+          <div class="plane-label"><span class="num">M</span>Memory</div>
+          <h2>Relevant evidence reaches the next run</h2>
+          <p>Verified lessons are recalled with provenance and checked against the current codebase before use.</p>
+          <div class="chips">
+            <span class="chip">provenance</span>
+            <span class="chip">relevance</span>
+            <span class="chip">verification</span>
+            <span class="chip">calibration</span>
+          </div>
+        </article>
+
+        <article class="card blue">
+          <div class="accent"></div>
+          <div class="plane-label"><span class="num">E</span>Engine boundary</div>
+          <h2>Model capability stays behind one governed contract</h2>
+          <p>The factory depends on a reusable engine boundary for reasoning, tool use, session continuity, and permissions.</p>
+          <div class="chips">
+            <span class="chip">reasoning</span>
+            <span class="chip">tools</span>
+            <span class="chip">permissions</span>
+          </div>
+        </article>
+
+        <article class="card green">
+          <div class="accent"></div>
+          <div class="plane-label"><span class="num">O</span>Operator surface</div>
+          <h2>Evidence is visible before action is trusted</h2>
+          <p>Operators can inspect work, proof, cost, memory, failures, and handoffs without bypassing policy.</p>
+          <div class="chips">
+            <span class="chip">status</span>
+            <span class="chip">evidence</span>
+            <span class="chip">approvals</span>
+          </div>
+        </article>
+      </aside>
+    </div>
+
+    <div class="runtime">
+      <div class="node">
+        <div class="node-title">Isolated workspace</div>
+        <div class="node-meta">One bounded work area per work order</div>
+      </div>
+      <div class="node">
+        <div class="node-title">Durable state</div>
+        <div class="node-meta">Work survives process restarts and handoffs</div>
+      </div>
+      <div class="node">
+        <div class="node-title">Scoped model access</div>
+        <div class="node-meta">Capabilities selected by policy and context</div>
+      </div>
+      <div class="node">
+        <div class="node-title">Cost guardrails</div>
+        <div class="node-meta">Hard caps, no-progress stops, approval</div>
+      </div>
+      <div class="node">
+        <div class="node-title">Audit trail</div>
+        <div class="node-meta">Actions, evidence, decisions, and outcomes</div>
+      </div>
+      <div class="node">
+        <div class="node-title">Clean handoff</div>
+        <div class="node-meta">A person receives context, proof, and next action</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="legend">
+      <span class="legend-item green"><span class="swatch"></span>Product</span>
+      <span class="legend-item blue"><span class="swatch"></span>Factory + Engine</span>
+      <span class="legend-item amber"><span class="swatch"></span>Governance</span>
+      <span class="legend-item orange"><span class="swatch"></span>Observability</span>
+      <span class="legend-item purple"><span class="swatch"></span>Improvement</span>
+      <span class="legend-item cyan"><span class="swatch"></span>Memory</span>
+      <span class="legend-item red"><span class="swatch"></span>Control</span>
+    </div>
+    <div>Harnessing the Horse - public teaching edition</div>
+  </footer>
+</main>
+</body>
+</html>

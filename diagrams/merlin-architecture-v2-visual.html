@@ -1,0 +1,581 @@
+<!doctype html>
+<!-- Copyright 2026 John Briggs. Harnessing the Horse companion material. CC BY-NC-SA 4.0. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merlin Software Factory - Public Teaching Architecture</title>
+<style>
+  :root {
+    --ink: #13213a;
+    --muted: #5e6f86;
+    --paper: #f7f9fc;
+    --navy: #0f2038;
+    --navy-2: #18324f;
+    --line: #d7e0ea;
+    --blue: #2e6cf6;
+    --green: #18a86b;
+    --amber: #e2a514;
+    --orange: #ef6b35;
+    --purple: #7b55e7;
+    --cyan: #18a6bf;
+    --red: #df4f62;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    width: 827px;
+    background: #cbd5e1;
+    font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    color: var(--ink);
+  }
+
+  body { display: grid; gap: 24px; }
+
+  .page {
+    position: relative;
+    width: 827px;
+    height: 1169.5px;
+    overflow: hidden;
+    background: var(--paper);
+    page-break-after: always;
+  }
+
+  .page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(19,33,58,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(19,33,58,.035) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+  }
+
+  .masthead {
+    position: relative;
+    min-height: 202px;
+    padding: 48px 54px 38px 80px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-2));
+    color: white;
+  }
+
+  .masthead::after {
+    content: "";
+    position: absolute;
+    left: 44px;
+    bottom: -26px;
+    width: 10px;
+    height: 74px;
+    border-radius: 8px;
+    background: var(--accent, var(--blue));
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--accent, var(--blue)) 38%, transparent);
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+    color: #83d7ff;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+  }
+
+  .masthead h1 {
+    margin: 0;
+    max-width: 690px;
+    font-size: 42px;
+    line-height: 1.04;
+    letter-spacing: -1.4px;
+  }
+
+  .masthead p {
+    margin: 14px 0 0;
+    max-width: 680px;
+    color: #c7d6e6;
+    font-size: 17px;
+    line-height: 1.42;
+  }
+
+  .page-no {
+    position: absolute;
+    right: 44px;
+    top: 42px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255,255,255,.34);
+    border-radius: 50%;
+    color: white;
+    font-size: 13px;
+    font-weight: 850;
+  }
+
+  .content {
+    position: relative;
+    padding: 58px 54px 78px;
+  }
+
+  .section-kicker {
+    margin-bottom: 10px;
+    color: var(--accent, var(--blue));
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+  }
+
+  .lede {
+    margin: 0 0 28px;
+    max-width: 680px;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.52;
+  }
+
+  .card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 14px 34px rgba(24,50,79,.08);
+  }
+
+  .card h2, .card h3 { margin: 0; color: var(--ink); }
+  .card p { margin: 0; color: var(--muted); line-height: 1.42; }
+
+  .rail {
+    position: absolute;
+    left: 0;
+    top: 18px;
+    bottom: 18px;
+    width: 6px;
+    border-radius: 0 8px 8px 0;
+    background: var(--c, var(--blue));
+  }
+
+  .label {
+    color: var(--c, var(--blue));
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    padding: 6px 9px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--c, var(--blue)) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--c, var(--blue)) 24%, white);
+    color: color-mix(in srgb, var(--c, var(--blue)) 76%, var(--ink));
+    font-size: 11px;
+    font-weight: 760;
+  }
+
+  .footer {
+    position: absolute;
+    left: 54px;
+    right: 54px;
+    bottom: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid #d7e0ea;
+    color: #73849a;
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: .4px;
+  }
+
+  /* Page 1 */
+  .decision-flow {
+    display: grid;
+    grid-template-columns: 1fr 46px 1.18fr 46px 1fr;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .decision-flow .card { min-height: 184px; padding: 24px 20px 20px; }
+  .decision-flow h2 { margin: 8px 0 10px; font-size: 22px; line-height: 1.12; }
+  .decision-flow p { font-size: 14px; }
+  .arrow {
+    display: grid;
+    place-items: center;
+    color: #91a2b6;
+    font-size: 30px;
+    font-weight: 800;
+  }
+
+  .decision-band {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .decision-band .card { padding: 20px; min-height: 132px; }
+  .decision-band h3 { margin: 7px 0 8px; font-size: 18px; }
+  .decision-band p { font-size: 13px; }
+
+  .boundary-note {
+    margin-top: 24px;
+    padding: 22px 24px;
+    border-radius: 16px;
+    background: var(--navy);
+    color: white;
+  }
+  .boundary-note strong { display: block; margin-bottom: 7px; font-size: 17px; }
+  .boundary-note span { color: #c7d6e6; font-size: 14px; line-height: 1.45; }
+
+  /* Page 2 */
+  .arc {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 28px;
+    margin-top: 22px;
+  }
+
+  .arc::before {
+    content: "";
+    position: absolute;
+    left: calc(50% - 2px);
+    top: 52px;
+    bottom: 52px;
+    width: 4px;
+    border-radius: 4px;
+    background: linear-gradient(var(--blue), var(--purple));
+  }
+
+  .phase {
+    min-height: 154px;
+    padding: 22px 24px 20px 72px;
+  }
+
+  .phase:nth-child(even) { transform: translateY(34px); }
+  .phase .n {
+    position: absolute;
+    left: 20px;
+    top: 22px;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--c);
+    color: white;
+    font-size: 14px;
+    font-weight: 900;
+  }
+  .phase h2 { margin: 8px 0 8px; font-size: 21px; }
+  .phase p { font-size: 13px; }
+
+  .accountability {
+    margin-top: 58px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .accountability .card { min-height: 118px; padding: 20px 22px; }
+  .accountability h3 { margin-bottom: 8px; font-size: 18px; }
+  .accountability p { font-size: 13px; }
+
+  /* Page 3 */
+  .policy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 22px;
+  }
+  .policy { min-height: 196px; padding: 24px 24px 22px 30px; }
+  .policy h2 { margin: 9px 0 10px; font-size: 24px; }
+  .policy p { font-size: 14px; }
+  .policy .chip-row { margin-top: 15px; }
+
+  .proof-strip {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 16px;
+  }
+  .proof-strip .card { min-height: 162px; padding: 22px 24px; }
+  .proof-strip h3 { margin: 7px 0 9px; font-size: 20px; }
+  .proof-strip p { font-size: 13px; }
+
+  /* Page 4 */
+  .human-loop {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 26px;
+  }
+  .human-loop .card { min-height: 190px; padding: 20px 22px; }
+  .human-loop h2 { margin: 9px 0 10px; font-size: 22px; }
+  .human-loop p { font-size: 13px; }
+  .human-loop .chip-row { margin-top: 16px; }
+
+  .operator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .operator-grid .card { min-height: 130px; padding: 17px 22px; }
+  .operator-grid h3 { margin: 8px 0 9px; font-size: 19px; }
+  .operator-grid p { font-size: 13px; }
+
+  .success-note {
+    margin-top: 12px;
+    padding: 12px 22px;
+    border-left: 7px solid var(--green);
+    border-radius: 14px;
+    background: #eaf8f1;
+    color: #245b45;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.42;
+  }
+
+  /* Page 5 */
+  .learning-flow {
+    display: grid;
+    grid-template-columns: 1fr 34px 1fr 34px 1fr;
+    gap: 10px;
+    align-items: stretch;
+    margin-top: 22px;
+  }
+  .learning-flow .card { min-height: 184px; padding: 22px 20px; }
+  .learning-flow h2 { margin: 8px 0 9px; font-size: 20px; }
+  .learning-flow p { font-size: 13px; }
+
+  .evaluation {
+    margin-top: 22px;
+    padding: 24px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #172b48, #243d5e);
+    color: white;
+  }
+  .evaluation h2 { margin: 0 0 14px; font-size: 23px; }
+  .evaluation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .evaluation-grid div {
+    min-height: 105px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 13px;
+    background: rgba(255,255,255,.06);
+  }
+  .evaluation-grid strong { display: block; margin-bottom: 7px; font-size: 15px; }
+  .evaluation-grid span { color: #c8d6e7; font-size: 12px; line-height: 1.38; }
+
+  .copy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
+    margin-top: 24px;
+  }
+  .copy-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 13px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .copy-item b {
+    display: grid;
+    place-items: center;
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #eaf0ff;
+    color: var(--blue);
+    font-size: 12px;
+  }
+  .copy-item span { color: var(--muted); font-size: 13px; line-height: 1.38; }
+
+  @media print {
+    body { display: block; background: white; }
+    .page { margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<section class="page" style="--accent: var(--green)" aria-label="Panel 1: Evidence before build">
+  <header class="masthead">
+    <div class="eyebrow">Merlin Software Factory - Public Teaching Edition</div>
+    <h1>Evidence before build</h1>
+    <p>A work order earns an agent turn only after scope, evidence, safety, workspace, and cost boundaries are visible.</p>
+    <div class="page-no">1/5</div>
+  </header>
+  <main class="content">
+    <div class="section-kicker">The first decision is whether to automate</div>
+    <p class="lede">Preflight is deterministic wherever possible. It does not pretend that missing product judgment can be replaced by more agent activity.</p>
+
+    <div class="decision-flow">
+      <article class="card" style="--c: var(--green)">
+        <div class="rail"></div><div class="label">Input</div>
+        <h2>Bounded work order</h2>
+        <p>Problem, desired outcome, acceptance evidence, and a clear change boundary.</p>
+      </article>
+      <div class="arrow">-&gt;</div>
+      <article class="card" style="--c: var(--amber)">
+        <div class="rail"></div><div class="label">Preflight</div>
+        <h2>Evidence and safety check</h2>
+        <p>Scope, consequence, workspace readiness, proof strategy, and approved cost envelope.</p>
+      </article>
+      <div class="arrow">-&gt;</div>
+      <article class="card" style="--c: var(--blue)">
+        <div class="rail"></div><div class="label">Decision</div>
+        <h2>Run, narrow, or pause</h2>
+        <p>Proceed to EXPRESS, reduce the task, or request explicit human judgment.</p>
+      </article>
+    </div>
+
+    <div class="decision-band">
+      <article class="card" style="--c: var(--green)"><div class="rail"></div><div class="label">Ready</div><h3>Proceed</h3><p>The work is bounded and the proof path is credible.</p></article>
+      <article class="card" style="--c: var(--orange)"><div class="rail"></div><div class="label">Too broad</div><h3>Narrow</h3><p>Split or restate the work before spending an agent turn.</p></article>
+      <article class="card" style="--c: var(--purple)"><div class="rail"></div><div class="label">Judgment</div><h3>Human review</h3><p>Ask a person when evidence cannot settle the decision.</p></article>
+    </div>
+
+    <div class="boundary-note">
+      <strong>The work order is the accountability boundary.</strong>
+      <span>It carries intent into execution and carries evidence, limitations, cost, and next action back out.</span>
+    </div>
+  </main>
+  <footer class="footer"><span>Harnessing the Horse</span><span>Public architecture - implementation details abstracted</span></footer>
+</section>
+
+<section class="page" style="--accent: var(--blue)" aria-label="Panel 2: The EXPRESS delivery arc">
+  <header class="masthead">
+    <div class="eyebrow">The EXPRESS Delivery Arc</div>
+    <h1>One agent. Six disciplined phases.</h1>
+    <p>Continuity preserves intent: the same accountable agent investigates, plans, proves, changes, and audits the work.</p>
+    <div class="page-no">2/5</div>
+  </header>
+  <main class="content">
+    <div class="section-kicker">A reasoning arc, not six agent handoffs</div>
+    <p class="lede">Each phase produces evidence for the next. Ownership stays continuous while independent controls remain outside the agent's self-assessment.</p>
+
+    <div class="arc">
+      <article class="card phase" style="--c: var(--green)"><span class="n">1</span><div class="label">Intent</div><h2>Understand</h2><p>Restate the outcome, constraints, and acceptance conditions.</p></article>
+      <article class="card phase" style="--c: var(--cyan)"><span class="n">2</span><div class="label">Evidence</div><h2>Investigate</h2><p>Read the relevant system before proposing a change.</p></article>
+      <article class="card phase" style="--c: var(--blue)"><span class="n">3</span><div class="label">Boundary</div><h2>Plan</h2><p>Declare the change surface, risks, and proof strategy.</p></article>
+      <article class="card phase" style="--c: var(--amber)"><span class="n">4</span><div class="label">Proof first</div><h2>Test</h2><p>Make expected behavior executable where the work allows it.</p></article>
+      <article class="card phase" style="--c: var(--orange)"><span class="n">5</span><div class="label">Change</div><h2>Implement</h2><p>Make the smallest coherent change inside the declared scope.</p></article>
+      <article class="card phase" style="--c: var(--purple)"><span class="n">6</span><div class="label">Challenge</div><h2>Self-audit</h2><p>Test the claim, record limitations, and prepare a clean handoff.</p></article>
+    </div>
+
+    <div class="accountability">
+      <article class="card" style="--c: var(--blue)"><div class="rail"></div><h3>What continuity protects</h3><p>Design intent, test reasoning, local context, and responsibility for the final claim.</p></article>
+      <article class="card" style="--c: var(--purple)"><div class="rail"></div><h3>What continuity does not replace</h3><p>Deterministic checks, independent verification, cost boundaries, or human judgment.</p></article>
+    </div>
+  </main>
+  <footer class="footer"><span>Harnessing the Horse</span><span>One accountable delivery arc</span></footer>
+</section>
+
+<section class="page" style="--accent: var(--amber)" aria-label="Panel 3: Verification policy">
+  <header class="masthead">
+    <div class="eyebrow">Verification by Consequence</div>
+    <h1>Proof is not one undifferentiated gate</h1>
+    <p>The factory classifies checks by consequence so rigor increases trust without turning every signal into critical-path ceremony.</p>
+    <div class="page-no">3/5</div>
+  </header>
+  <main class="content">
+    <div class="section-kicker">The policy decides what failure means</div>
+    <p class="lede">Classification keeps safety strict, context honest, and learning out of the delivery bottleneck.</p>
+
+    <div class="policy-grid">
+      <article class="card policy" style="--c: var(--red)"><div class="rail"></div><div class="label">Stop</div><h2>Blocking</h2><p>Failure makes the result unsafe or untrustworthy. Stop the run or enter bounded repair.</p><div class="chip-row"><span class="chip">executable proof</span><span class="chip">critical security</span><span class="chip">repository integrity</span></div></article>
+      <article class="card policy" style="--c: var(--amber)"><div class="rail"></div><div class="label">When applicable</div><h2>Conditional</h2><p>The check becomes blocking when the work declares that concern or touches that surface.</p><div class="chip-row"><span class="chip">user experience</span><span class="chip">performance</span><span class="chip">declared constraints</span></div></article>
+      <article class="card policy" style="--c: var(--blue)"><div class="rail"></div><div class="label">Inform judgment</div><h2>Advisory</h2><p>The signal improves review and calibration without manufacturing unnecessary delivery friction.</p><div class="chip-row"><span class="chip">risk framing</span><span class="chip">telemetry quality</span><span class="chip">documentation</span></div></article>
+      <article class="card policy" style="--c: var(--purple)"><div class="rail"></div><div class="label">After delivery</div><h2>Asynchronous</h2><p>The work improves future runs but should not hold the current result hostage.</p><div class="chip-row"><span class="chip">retrospective</span><span class="chip">memory</span><span class="chip">improvement</span></div></article>
+    </div>
+
+    <div class="proof-strip">
+      <article class="card" style="--c: var(--green)"><div class="rail"></div><div class="label">Independent challenge</div><h3>The implementer is not the only judge</h3><p>Deterministic evidence and a separate reading challenge overclaims before trust is granted.</p></article>
+      <article class="card" style="--c: var(--orange)"><div class="rail"></div><div class="label">Bounded repair</div><h3>Failure has a ceiling</h3><p>Repair loops stop when progress stalls, cost rises, or judgment becomes necessary.</p></article>
+    </div>
+  </main>
+  <footer class="footer"><span>Harnessing the Horse</span><span>Rigor matched to consequence</span></footer>
+</section>
+
+<section class="page" style="--accent: var(--orange)" aria-label="Panel 4: Human judgment and operations">
+  <header class="masthead">
+    <div class="eyebrow">Operations and Human Judgment</div>
+    <h1>Automation earns trust by showing its work</h1>
+    <p>State, evidence, cost, failures, and next actions stay visible so a person can intervene without reconstructing the run.</p>
+    <div class="page-no">4/5</div>
+  </header>
+  <main class="content">
+    <div class="section-kicker">Human review is an architectural outcome</div>
+    <p class="lede">The system does not hide uncertainty behind a success label. It turns unresolved judgment into a clean, evidence-rich handoff.</p>
+
+    <div class="human-loop">
+      <article class="card" style="--c: var(--blue)"><div class="rail"></div><div class="label">Agent</div><h2>Produce evidence</h2><p>Scope, changes, tests, limitations, and the claimed outcome travel together.</p><div class="chip-row"><span class="chip">intent</span><span class="chip">proof</span><span class="chip">limits</span></div></article>
+      <article class="card" style="--c: var(--amber)"><div class="rail"></div><div class="label">Control</div><h2>Keep state convergent</h2><p>Resume recoverable work, detect repeated failure, and halt safely at explicit boundaries.</p><div class="chip-row"><span class="chip">recovery</span><span class="chip">caps</span><span class="chip">diagnosis</span></div></article>
+      <article class="card" style="--c: var(--purple)"><div class="rail"></div><div class="label">Operator</div><h2>Decide with context</h2><p>Approve, reject, narrow, or continue with the evidence and next action already assembled.</p><div class="chip-row"><span class="chip">review</span><span class="chip">approval</span><span class="chip">handoff</span></div></article>
+    </div>
+
+    <div class="operator-grid">
+      <article class="card" style="--c: var(--green)"><div class="rail"></div><div class="label">Durable state</div><h3>Work survives process boundaries</h3><p>The work order, not an agent's private memory, remains the source of truth.</p></article>
+      <article class="card" style="--c: var(--cyan)"><div class="rail"></div><div class="label">Observability</div><h3>Outcome beats activity</h3><p>Delivery, quality, cost, recovery, and adoption show whether the work actually holds.</p></article>
+      <article class="card" style="--c: var(--red)"><div class="rail"></div><div class="label">Cost safety</div><h3>No invisible runaway</h3><p>Hard caps, no-progress detection, and approval boundaries stop unattended escalation.</p></article>
+      <article class="card" style="--c: var(--orange)"><div class="rail"></div><div class="label">Workspace safety</div><h3>One bounded place to act</h3><p>Each work order receives an isolated change surface and a recoverable trail.</p></article>
+    </div>
+
+    <div class="success-note">A clean human handoff is a successful terminal state when product, risk, or operational judgment exceeds automation.</div>
+  </main>
+  <footer class="footer"><span>Harnessing the Horse</span><span>Visibility turns automation into governable work</span></footer>
+</section>
+
+<section class="page" style="--accent: var(--purple)" aria-label="Panel 5: Memory and improvement">
+  <header class="masthead">
+    <div class="eyebrow">Memory and Continuous Improvement</div>
+    <h1>Every run can improve the next</h1>
+    <p>Learning compounds only when it is verified, traceable, measured, and kept outside the critical delivery path whenever possible.</p>
+    <div class="page-no">5/5</div>
+  </header>
+  <main class="content">
+    <div class="section-kicker">Learning follows evidence</div>
+    <p class="lede">The factory records what happened, preserves provenance, checks remembered claims against current reality, and tests proposed improvements before promotion.</p>
+
+    <div class="learning-flow">
+      <article class="card" style="--c: var(--orange)"><div class="rail"></div><div class="label">Observe</div><h2>Outcome signals</h2><p>Compare intended and actual results, proof quality, cost, recovery, and rework.</p></article>
+      <div class="arrow">-&gt;</div>
+      <article class="card" style="--c: var(--cyan)"><div class="rail"></div><div class="label">Remember</div><h2>Verified memory</h2><p>Store useful lessons with provenance, relevance, uncertainty, and a reason to retrieve them.</p></article>
+      <div class="arrow">-&gt;</div>
+      <article class="card" style="--c: var(--purple)"><div class="rail"></div><div class="label">Improve</div><h2>Measured candidate</h2><p>Propose a bounded change to prompts, tools, policy, or process.</p></article>
+    </div>
+
+    <section class="evaluation">
+      <h2>Improvement must earn promotion</h2>
+      <div class="evaluation-grid">
+        <div><strong>Evaluate</strong><span>Test against representative work with explicit success and regression criteria.</span></div>
+        <div><strong>Promote</strong><span>Adopt only when measured evidence shows a durable gain.</span></div>
+        <div><strong>Discard or roll back</strong><span>Reject variants that add risk, cost, or complexity without enough value.</span></div>
+      </div>
+    </section>
+
+    <div class="copy-grid">
+      <div class="copy-item"><b>1</b><span>Bound the work before execution.</span></div>
+      <div class="copy-item"><b>2</b><span>Keep one agent accountable for the arc.</span></div>
+      <div class="copy-item"><b>3</b><span>Classify proof by consequence.</span></div>
+      <div class="copy-item"><b>4</b><span>Escalate judgment instead of inventing certainty.</span></div>
+      <div class="copy-item"><b>5</b><span>Make state, cost, and recovery observable.</span></div>
+      <div class="copy-item"><b>6</b><span>Promote learning only after measured evidence.</span></div>
+    </div>
+  </main>
+  <footer class="footer"><span>Harnessing the Horse</span><span>Public teaching architecture - not an implementation specification</span></footer>
+</section>
+
+</body>
+</html>

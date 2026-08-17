@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=2400, initial-scale=1">
+<title>Merlin Software Factory Promo</title>
+<style>
+  :root {
+    --navy: #07111f;
+    --ink: #0d1728;
+    --panel: #f7fbff;
+    --steel: #9fb1c8;
+    --line: #22344c;
+    --cyan: #38d5e8;
+    --green: #41d982;
+    --amber: #f0bf4c;
+    --red: #f15d6d;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    width: 2400px;
+    height: 1350px;
+    overflow: hidden;
+    background: var(--navy);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+
+  .canvas {
+    position: relative;
+    width: 2400px;
+    height: 1350px;
+    color: white;
+    background:
+      radial-gradient(circle at 78% 20%, rgba(56,213,232,.20), transparent 30%),
+      radial-gradient(circle at 22% 18%, rgba(65,217,130,.14), transparent 34%),
+      linear-gradient(135deg, #07111f 0%, #0e1d34 56%, #091321 100%);
+  }
+
+  .canvas:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  }
+
+  .copy {
+    position: absolute;
+    left: 118px;
+    top: 92px;
+    width: 910px;
+    z-index: 10;
+  }
+
+  .eyebrow {
+    color: #78e7f4;
+    font-size: 25px;
+    line-height: 1;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 118px;
+    line-height: .94;
+    letter-spacing: 0;
+    font-weight: 920;
+  }
+
+  .lede {
+    margin-top: 32px;
+    max-width: 850px;
+    color: #d4e2f2;
+    font-size: 33px;
+    line-height: 1.28;
+    font-weight: 570;
+  }
+
+  .proof {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 44px;
+    width: 830px;
+  }
+
+  .proof div {
+    min-height: 118px;
+    padding: 21px 22px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.075);
+    border: 1px solid rgba(255,255,255,.13);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  }
+
+  .proof strong {
+    display: block;
+    font-size: 29px;
+    line-height: 1;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .proof span {
+    color: #b8c8dc;
+    font-size: 18px;
+    line-height: 1.28;
+    font-weight: 650;
+  }
+
+  .factory {
+    position: absolute;
+    right: 86px;
+    bottom: 84px;
+    width: 1410px;
+    height: 930px;
+  }
+
+  .floor {
+    position: absolute;
+    left: 40px;
+    right: 0;
+    bottom: 0;
+    height: 192px;
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
+    border: 1px solid rgba(255,255,255,.12);
+    transform: skewX(-8deg);
+  }
+
+  .rail {
+    position: absolute;
+    left: 86px;
+    right: 140px;
+    bottom: 236px;
+    height: 72px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(56,213,232,.10), rgba(65,217,130,.20), rgba(240,191,76,.12));
+    border: 2px solid rgba(142,218,235,.35);
+    box-shadow: 0 0 38px rgba(56,213,232,.24);
+  }
+
+  .rail:before,
+  .rail:after {
+    content: "";
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 24px, transparent 24px 44px);
+  }
+
+  .rail:before { top: 19px; }
+  .rail:after { bottom: 19px; }
+
+  .station {
+    position: absolute;
+    width: 198px;
+    height: 214px;
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(247,251,255,.98), rgba(212,227,242,.92));
+    border: 1px solid rgba(255,255,255,.72);
+    box-shadow: 0 28px 54px rgba(0,0,0,.28), 0 0 0 1px rgba(20,42,67,.22);
+    color: var(--ink);
+    padding: 24px 23px;
+  }
+
+  .station:before {
+    content: "";
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: -94px;
+    height: 94px;
+    background: linear-gradient(180deg, rgba(190,205,221,.55), rgba(190,205,221,.08));
+    clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
+  }
+
+  .station .icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 18px;
+    background: var(--accent);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  .station h3 {
+    margin: 0 0 11px;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 920;
+  }
+
+  .station p {
+    margin: 0;
+    color: #4e6078;
+    font-size: 16px;
+    line-height: 1.28;
+    font-weight: 700;
+  }
+
+  .s1 { --accent: var(--green); left: 82px; bottom: 270px; }
+  .s2 { --accent: var(--cyan); left: 318px; bottom: 438px; }
+  .s3 { --accent: #5c8cff; left: 560px; bottom: 270px; }
+  .s4 { --accent: var(--amber); left: 800px; bottom: 438px; }
+  .s5 { --accent: var(--red); left: 1038px; bottom: 270px; }
+
+  .memory-core {
+    position: absolute;
+    left: 506px;
+    top: 54px;
+    width: 430px;
+    height: 430px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, rgba(255,255,255,.96) 0 7%, rgba(56,213,232,.42) 8% 13%, transparent 14%),
+      radial-gradient(circle at center, rgba(65,217,130,.24), rgba(56,213,232,.10) 34%, transparent 64%);
+    border: 2px solid rgba(129,234,249,.45);
+    box-shadow: 0 0 80px rgba(56,213,232,.24), inset 0 0 44px rgba(255,255,255,.12);
+  }
+
+  .memory-core svg {
+    position: absolute;
+    inset: 26px;
+    overflow: visible;
+  }
+
+  .core-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 230px;
+    color: white;
+    text-shadow: 0 2px 14px rgba(0,0,0,.65);
+  }
+
+  .core-label strong {
+    display: block;
+    font-size: 31px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .core-label span {
+    display: block;
+    margin-top: 6px;
+    color: #c9fbff;
+    font-size: 17px;
+    font-weight: 760;
+  }
+
+  .gate-ring {
+    position: absolute;
+    left: 94px;
+    right: 90px;
+    bottom: 220px;
+    height: 328px;
+    pointer-events: none;
+  }
+
+  .gate-ring svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .control-room {
+    position: absolute;
+    right: 10px;
+    top: 106px;
+    width: 382px;
+    height: 252px;
+    border-radius: 28px;
+    padding: 26px;
+    background: linear-gradient(180deg, rgba(238,247,255,.95), rgba(181,205,229,.82));
+    border: 1px solid rgba(255,255,255,.75);
+    color: var(--ink);
+    box-shadow: 0 30px 64px rgba(0,0,0,.30);
+  }
+
+  .control-room h3 {
+    margin: 0 0 17px;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 920;
+  }
+
+  .dash {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .dash span {
+    height: 58px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #0f2741, #122f4f);
+    border: 1px solid rgba(56,213,232,.35);
+    box-shadow: inset 0 0 22px rgba(56,213,232,.14);
+  }
+
+  .ship {
+    position: absolute;
+    right: 6px;
+    bottom: 512px;
+    width: 280px;
+    height: 104px;
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #eafff2, #bff0d3);
+    color: #0d3721;
+    border: 1px solid rgba(255,255,255,.84);
+    box-shadow: 0 26px 54px rgba(0,0,0,.26), 0 0 40px rgba(65,217,130,.22);
+    font-size: 28px;
+    font-weight: 920;
+    letter-spacing: 1px;
+  }
+
+  .loop {
+    position: absolute;
+    left: 770px;
+    top: 214px;
+    width: 490px;
+    height: 520px;
+    border: 4px solid rgba(65,217,130,.38);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    transform: rotate(22deg);
+  }
+
+  .loop:after {
+    content: "";
+    position: absolute;
+    right: 37px;
+    bottom: 53px;
+    width: 0;
+    height: 0;
+    border-left: 22px solid rgba(65,217,130,.78);
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    transform: rotate(42deg);
+  }
+
+  .caption {
+    position: absolute;
+    left: 118px;
+    bottom: 74px;
+    color: #9fb4ca;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+  }
+</style>
+</head>
+<body>
+<main class="canvas">
+  <section class="copy">
+    <div class="eyebrow">Harnessing the Horse</div>
+    <h1>Merlin Software Factory</h1>
+    <div class="lede">Production software built through disciplined agents, executable governance, memory, observability, and a factory that improves itself.</div>
+    <div class="proof">
+      <div><strong>Gates</strong><span>Quality is enforced in the path, not remembered after the fact.</span></div>
+      <div><strong>Memory</strong><span>Every work order teaches the next run through graph-backed learning.</span></div>
+      <div><strong>Control</strong><span>Operators steer outcomes through visible, auditable infrastructure.</span></div>
+    </div>
+  </section>
+
+  <section class="factory" aria-label="Merlin software factory visual">
+    <div class="floor"></div>
+    <div class="memory-core">
+      <svg viewBox="0 0 380 380">
+        <g fill="none" stroke="rgba(215,253,255,.58)" stroke-width="2.5">
+          <path d="M52 188 L118 84 L210 58 L306 132 L326 248 L238 326 L112 304 Z"/>
+          <path d="M118 84 L238 326 M210 58 L112 304 M52 188 L326 248 M306 132 L112 304"/>
+          <path d="M118 84 L306 132 L238 326 L52 188 Z"/>
+        </g>
+        <g fill="#dffcff">
+          <circle cx="52" cy="188" r="10"/><circle cx="118" cy="84" r="10"/><circle cx="210" cy="58" r="10"/>
+          <circle cx="306" cy="132" r="10"/><circle cx="326" cy="248" r="10"/><circle cx="238" cy="326" r="10"/><circle cx="112" cy="304" r="10"/>
+        </g>
+        <g fill="#41d982">
+          <circle cx="170" cy="184" r="7"/><circle cx="252" cy="190" r="7"/><circle cx="190" cy="250" r="7"/>
+        </g>
+      </svg>
+      <div class="core-label"><strong>Memory</strong><span>patterns, mistakes, calibration</span></div>
+    </div>
+
+    <div class="gate-ring">
+      <svg viewBox="0 0 1210 328">
+        <path d="M42 248 C210 36, 460 22, 602 162 C734 292, 946 312, 1164 76" fill="none" stroke="rgba(56,213,232,.32)" stroke-width="5"/>
+        <path d="M42 248 C210 36, 460 22, 602 162 C734 292, 946 312, 1164 76" fill="none" stroke="rgba(255,255,255,.52)" stroke-width="2" stroke-dasharray="18 22"/>
+      </svg>
+    </div>
+
+    <div class="rail"></div>
+    <article class="station s1"><div class="icon">1</div><h3>Discover</h3><p>Four-risk evidence before generation.</p></article>
+    <article class="station s2"><div class="icon">2</div><h3>Design</h3><p>Architecture, threat model, telemetry.</p></article>
+    <article class="station s3"><div class="icon">3</div><h3>Build</h3><p>Scoped agent implementation.</p></article>
+    <article class="station s4"><div class="icon">4</div><h3>Verify</h3><p>Tests, gates, review, blast radius.</p></article>
+    <article class="station s5"><div class="icon">5</div><h3>Observe</h3><p>DORA, traces, cost, rollback.</p></article>
+
+    <div class="control-room">
+      <h3>Operator Bridge</h3>
+      <div class="dash"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="loop"></div>
+    <div class="ship">SOFTWARE OUT</div>
+  </section>
+
+  <div class="caption">A production system for agentic development: specify, constrain, verify, remember, improve.</div>
+</main>
+</body>
+</html>

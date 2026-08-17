@@ -1,0 +1,19 @@
+# MIT-licensed example. Replace every placeholder before use.
+name: governance-quality-gate
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace with repository checks
+        run: |
+          echo "Configure lint, tests, build, secret scanning, and policy checks."
+          echo "Do not mark this required until placeholder commands are replaced."
+          exit 1
