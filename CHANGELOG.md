@@ -5,9 +5,16 @@ repository are recorded here.
 
 ## [Unreleased]
 
+No changes yet.
+
+## [2.1.0] — 2026-08-16
+
 ### Added
 
 - Amazon purchase link for the Kindle edition.
+- A completed Four-Risk Evidence Contract in the fictional golden path,
+  demonstrating how evidence can authorize a reversible phase while keeping a
+  later migration gate blocked.
 
 ### Changed
 

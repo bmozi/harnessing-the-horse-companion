@@ -12,7 +12,7 @@ chapter. Each row is a single artifact the book references by URL.
 | Asset | File |
 | --- | --- |
 | Reader start paths (30-minute orientation, one governed session, factory bootstrap) | [`START-HERE.md`](START-HERE.md) |
-| Printable Reader Quick Start | [`output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.0.0.pdf`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.0.0.pdf) |
+| Printable Reader Quick Start | [`output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf) |
 | Complete fictional software-factory golden path | [`factory-bootstrap/worked-example/`](factory-bootstrap/worked-example/) |
 | The Twelve Standards — single-page quick reference (tiers, gate classifications, key artifacts, Harness Framework mapping) | [`references/twelve-standards-quick-reference.md`](references/twelve-standards-quick-reference.md) |
 | Pattern quick reference | [`references/pattern-quick-reference.md`](references/pattern-quick-reference.md) |
@@ -280,6 +280,6 @@ in the companion repository.
 ```
 
 ```markdown
-See [`prompts/disprove-only-review.md` in the v2.0.0 companion
-release](https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.0.0/prompts/disprove-only-review.md).
+See [`prompts/disprove-only-review.md` in the v2.1.0 companion
+release](https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.0/prompts/disprove-only-review.md).
 ```
