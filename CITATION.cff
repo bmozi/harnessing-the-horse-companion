@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Briggs
     given-names: John
-version: 2.0.0
+version: 2.1.0
 date-released: 2026-08-16
 repository-code: "https://github.com/bmozi/harnessing-the-horse-companion"
 url: "https://github.com/bmozi/harnessing-the-horse-companion"

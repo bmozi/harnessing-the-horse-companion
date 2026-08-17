@@ -5,7 +5,7 @@ The generated PDF lives in [`output/pdf/`](../output/pdf/).
 
 | Source | Output | Purpose |
 | --- | --- | --- |
-| `reader-quick-start.json` | `Harnessing-the-Horse-Reader-Quick-Start-v2.0.0.pdf` | A concise path from opening the companion to completing one governed delivery loop |
+| `reader-quick-start.json` | `Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf` | A concise path from opening the companion to completing one governed delivery loop |
 
 Rebuild the PDF from the repository root:
 
