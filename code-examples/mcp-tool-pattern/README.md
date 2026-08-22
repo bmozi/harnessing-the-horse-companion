@@ -58,8 +58,10 @@ message.
 ### Without dry-run default
 An agent that misinterprets the user's request executes immediately.
 Wrong customer ID → wrong appointment booked. Wrong date → customer
-loses their slot. **The dry-run gate ensures the agent's first
-action is always read-only and reversible.**
+loses their slot. The dry-run gate makes the normal first operation a preview.
+The preview still requires authorization and may consume quota or reveal data;
+for high-impact execution, `confirm: true` must be paired with independent
+approval rather than treated as approval itself.
 
 ### Without audit log
 The successful action is invisible. When something goes wrong, there

@@ -22,7 +22,7 @@ checklists, examples, and quick references without retyping them.
 
 New to the companion? Follow [`START-HERE.md`](START-HERE.md) for a
 30-minute orientation, one complete governed agent session, or a practical
-software-factory bootstrap path.
+governed-delivery-loop bootstrap path.
 
 For a stable classroom or team baseline, use the
 [`v2.1.0` release](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.0).
@@ -41,7 +41,7 @@ turns the core path into a six-page handout.
 | `prompts/` | Prompt library — reusable system, review, and harness prompts plus a machine-readable manifest. |
 | `prompt-evals/` | Small, inspectable fixtures that test the expected behavior of representative prompts. |
 | `checklists/` | Human-facing review checklists across the lifecycle — pre-generation, architectural stewardship, pre-merge / pre-deploy, closing the loop, and migration phase gates. |
-| `factory-bootstrap/` | Minimum viable software factory workbook plus a completed fictional golden path from intake through learning. |
+| `factory-bootstrap/` | Minimum governed delivery loop workbook plus a completed fictional golden path from intake through learning; a Book 2 prerequisite, not a complete multi-team production factory. |
 | `code-examples/` | Runnable, tested MIT-licensed code from Part III patterns — `.claude/settings.json`, Anti-Corruption Layer / Hexagonal port-adapter, Transactional Outbox (SQL + TypeScript), MCP tool pattern. |
 | [`diagrams/`](diagrams/) | Architecture diagrams used in the book — four baseline diagrams (Ch4) and a guided set of conceptual, overview, teaching-panel, and print-friendly Merlin Software Factory views (Ch16). |
 | `exercises/` | Hands-on exercises — Case Study Analysis Framework, Maturity Assessment. Student-facing material from the instructor package, suitable for self-study or classroom use. |

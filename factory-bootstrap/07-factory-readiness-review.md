@@ -1,6 +1,9 @@
-# Factory Readiness Review
+# Governed Delivery Loop Readiness Review
 
-Read Chapter 19 before using this review. This is the expansion gate after the first repository has run the minimum viable factory.
+Read Chapter 19 before using this review. This is the expansion gate after one
+repository has run the minimum governed delivery loop. It establishes Book 2
+prerequisites; it does not certify the multi-team production operating system
+developed in Book 3.
 
 ## Repository
 
@@ -13,7 +16,7 @@ Read Chapter 19 before using this review. This is the expansion gate after the f
 
 - [ ] Context file exists.
 - [ ] Context file has been updated from real session learnings.
-- [ ] Pre-commit hooks or equivalent guardrails block on the repository.
+- [ ] Local hooks provide fast feedback, and protected CI or an equivalent independent gate blocks merge on the repository.
 - [ ] Specifications exist for at least 80% of non-trivial agent-generated changes.
 - [ ] Practices have been used for at least two sprints.
 - [ ] Metrics baseline exists.

@@ -11,7 +11,7 @@ Student and self-study material moved from Chapter 11 so the book's main reading
 3. Construct a port-and-adapter boundary in which agent-generated business logic targets ports, never adapters, and remains testable without vendor access.
 4. Select the appropriate messaging pattern — Message Bus, Idempotent Receiver, Dead Letter Channel, or Content-Based Router — for a given composition or failure-handling problem.
 5. Analyze an agent-generated vendor integration for retry-storm and shared-rate-budget failure modes, and contain them with the Circuit Breaker and Centrifuge patterns.
-6. Evaluate whether a webhook or event handler achieves exactly-once side effects, and apply the Transactional Outbox where it does not.
+6. Distinguish atomic local commit, at-least-once delivery, idempotent processing, and effectively-once business outcomes; apply the Transactional Outbox to the local dual-write problem.
 
 ## Key Terms
 
@@ -20,7 +20,7 @@ Student and self-study material moved from Chapter 11 so the book's main reading
 - **Port** — In Hexagonal Architecture, an interface defined in the application's own terms; the contract agent-generated code targets.
 - **Adapter** — The implementation of a port for a specific external technology; the containment boundary for vendor specificity.
 - **Circuit Breaker** — Resilience pattern (Nygard, 2007) that stops calling a failing service and fails fast, periodically probing for recovery.
-- **Transactional Outbox** — Pattern that pairs a database write with message publication in one transaction, solving the dual-write problem without distributed transactions.
+- **Transactional Outbox** — Pattern that commits a database write and notification intent in one local transaction; a separate relay normally delivers at least once, so consumers still need idempotency.
 - **Idempotency** — The property that processing the same request multiple times produces the same result as processing it once.
 - **Blast radius** — The set of components, services, and users that could be affected if a change contains a defect; distinct from scope.
 - **Trust boundary** — A point where your code interacts with a system you do not control.
@@ -30,7 +30,7 @@ Student and self-study material moved from Chapter 11 so the book's main reading
 1. The chapter identifies exactly two strategies for handling vendor corruption when agents generate integration code. What are they, and why does the chapter argue that only one of them scales?
 2. In the CRM Hub example, why is the port named `CRMPort` rather than `HubSpotPort`, and what does that naming decision protect when a session generates new business logic?
 3. What operational failure mode does the Centrifuge pattern address that a basic circuit breaker does not?
-4. What is the dual-write problem, and how does the Transactional Outbox make correct behavior structural rather than dependent on the agent's awareness?
+4. What is the dual-write problem, what does the Transactional Outbox make locally atomic, and why do relay delivery and consumer processing still require separate guarantees?
 5. Why does the chapter's operational discipline treat dead-letter channel contents as test cases rather than as messages to patch and replay?
 
 ## Discussion Questions
@@ -55,4 +55,4 @@ Student and self-study material moved from Chapter 11 so the book's main reading
 
 **Exercise 11.4 (Challenge) — Attack your own outbox.** Implement (or design on paper, with pseudocode) a webhook handler following the three-step outbox template in Section 11.5. Then switch roles: enumerate every failure window (crash between idempotency insert and business write, between business write and outbox insert, between commit and publisher pickup, publisher crash after publish before marking published) and demonstrate for each that the system converges to a consistent state — or document the window where it does not. *(~4 h+)*
 *Deliverable:* The handler plus a REVIEW.md recording each failure window as a disprove-only finding with verification stance markers (`verified` / `ASSUMPTION` / `VERIFY`).
-*Assessment:* Standard 7 (Falsification Review) using the companion repository's REVIEW.md template and `examples/transactional-outbox.sql`; pass requires at least one finding the happy-path reading would have missed.
+*Assessment:* Standard 7 (Falsification Review) using the companion repository's REVIEW.md template and `examples/transactional-outbox.sql`; pass requires identifying publish-then-crash redelivery, naming the relay as at least once, and showing how a stable event ID plus idempotent consumption yields an effectively-once business outcome.

@@ -124,7 +124,7 @@ databases, learning repositories):
 - [ ] **Memory isolation:** Different agent contexts have
       isolated memory stores. Billing-context agent does not load
       learnings from UI-component agent. Bounded-context
-      discipline (Appendix D) applies to memory as directly as to
+      discipline (Appendix B) applies to memory as directly as to
       code.
 
 ## MCP Server Supply-Chain Defense

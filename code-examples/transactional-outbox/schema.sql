@@ -2,7 +2,8 @@
 --
 -- The outbox table is written in the SAME database transaction as
 -- the business state. A separate publisher process reads the
--- outbox and delivers to the message bus. This means an
+-- outbox and delivers to the message bus at least once. Consumers use
+-- the stable outbox ID for deduplication. This means an
 -- agent-generated handler does not need to reason about
 -- distributed transactions or dual-write failure modes.
 --

@@ -39,12 +39,12 @@ Each pattern reference card follows the same structure:
 | Dry-Run-Default on Write Tools | This book (2026) | [`dry-run-default.md`](dry-run-default.md) |
 | Scoped Authorization Token | Saltzer & Schroeder (1975) / OAuth 2.0 RFC 6749 (2012) | [`scoped-authorization-token.md`](scoped-authorization-token.md) |
 
-### Case-study-grounded patterns (Part IV and Appendix D)
+### Case-study-grounded patterns (Part IV and Appendix B)
 
 | Pattern | Origin | Card |
 | --- | --- | --- |
 | CAS-Guarded Distributed Commit | Herlihy (1991) — applied to distributed commit in Ch15 | [`cas-guarded-distributed-commit.md`](cas-guarded-distributed-commit.md) |
-| Event Sourcing | Greg Young (2006) — design study in Appendix D | [`event-sourcing.md`](event-sourcing.md) |
+| Event Sourcing | Greg Young (2006) — design study in Appendix B | [`event-sourcing.md`](event-sourcing.md) |
 | Express Arc | This book (2026) — emerged in Ch16 Merlin Software Factory | [`express-arc.md`](express-arc.md) |
 
 ## Patterns Referenced in the Book (No Reference Card Yet)

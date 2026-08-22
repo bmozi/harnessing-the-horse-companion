@@ -8,7 +8,7 @@ Student and self-study material moved from Chapter 13 so the book's main reading
 
 1. Explain why AI agents constitute a third consumer category and what that implies for response verbosity, error detail, discovery, and batch design.
 2. Construct a capability-partitioned MCP tool set applying domain naming, dry-run-default on write tools, and per-tool RBAC with scoped tokens.
-3. Apply composite-key idempotency stores and CAS-guarded commits to achieve exactly-once semantics over non-idempotent downstream systems.
+3. Apply composite-key idempotency stores and CAS-guarded commits to serialize local work, then design reconciliation for ambiguous non-idempotent downstream outcomes.
 4. Design observability for agent-driven systems keyed on session correlation, so every operation traces from agent intent to system effect.
 5. Evaluate the single-agent versus multi-agent orchestration decision for a given scale, and identify handoff fidelity as the governing constraint.
 6. Analyze whether a deployment topology requires per-task execution isolation, and select the appropriate isolation phase if it does.
@@ -16,9 +16,9 @@ Student and self-study material moved from Chapter 13 so the book's main reading
 ## Key Terms
 
 - **MCP (Model Context Protocol)** — Open standard (Anthropic, 2024) for connecting LLM agents to external tools and data sources.
-- **Dry-Run-Default on Write Tools** — Design pattern requiring every agent-facing write tool to default to a read-only preview; execution requires an explicit `confirm: true`.
+- **Dry-Run-Default on Write Tools** — Design pattern requiring agent-facing write tools to preview before execution by default. The preview is evidence for review, not approval by itself; explicit authorization and an execution gate remain necessary.
 - **Scoped Authorization Token** — Least privilege (Saltzer & Schroeder, 1975) applied at the session level: each agent session's token specifies which tools it may invoke.
-- **CAS-Guarded Distributed Commit** — Pattern combining an atomic compare-and-swap state guard with per-step idempotency checkpoints for exactly-once semantics across non-idempotent calls.
+- **CAS-Guarded Distributed Commit** — Pattern combining an atomic local ownership guard with durable checkpoints. Known outcomes can be retried safely; a lost response from a non-idempotent provider requires idempotency, reconciliation, or human disposition.
 - **Agent gateway** — An infrastructure layer that mediates agent traffic behind a governed protocol; the term covers two distinct layers — agent-to-tool gateways (the Solo.io/Istio layer in Section 13.6's landscape note) and agent-to-LLM gateways that route, audit, and fail over model backends.
 - **Express Arc** — A single primary agent owning the entire delivery sequence without handoffs; quality gates fire as inline self-checks.
 - **Software Factory** — A continuous, instrumented loop turning external signals into reviewed, secured, shipped, monitored code; this book's contribution is the agentic variant.
@@ -27,7 +27,7 @@ Student and self-study material moved from Chapter 13 so the book's main reading
 ## Review Questions
 
 1. What four benefits does the capability partition provide that a monolithic "god server" does not?
-2. What must every write tool do under dry-run-default, which tools are exempt, and why does the pattern eliminate the highest-risk failure mode of agent-operated infrastructure?
+2. What must a write tool do under dry-run-default, when is an exception justified, and which risks remain because a preview is neither authorization nor proof that execution will match it?
 3. Why does the chapter argue that agents should compose multi-step flows from individual tools — and what is the one situation where wrapping the orchestration is the correct choice?
 4. What five things must agent-consumed infrastructure log, and why is session correlation rather than log volume the design center of agent observability?
 5. In the Fieldstone server, what changed when sparse tool descriptions were expanded, what were the reported figures, and what is their stated evidentiary status?
@@ -48,9 +48,9 @@ Student and self-study material moved from Chapter 13 so the book's main reading
 *Deliverable:* The five descriptions plus the three-task selection analysis.
 *Assessment:* Peer or instructor review against Section 13.6's finding: a description passes if a reader who has never seen the server can state what the tool accepts, what it validates, and which tool to call first.
 
-**Exercise 13.3 (Core) — Give a multi-step workflow exactly-once semantics.** An agent-operated workflow performs four steps across two vendors, neither of which supports idempotency keys: reserve inventory, charge a card, create a shipment, send a confirmation. Design the idempotency machinery. *(~2 h)*
-*Deliverable:* The composite-key idempotency store schema, the CAS-guarded state machine (states, allowed transitions, stale-window handling), and checkpoint ordering notes justifying which step receives the strongest guarantee and why.
-*Assessment:* Judged against Section 13.3 and the CAS-Guarded Distributed Commit card in `references/pattern-quick-reference.md` §8: a reviewer must be able to trace any single-point crash or agent retry to a converged, single-charge outcome.
+**Exercise 13.3 (Core) — Contain ambiguity in a multi-step workflow.** An agent-operated workflow performs four steps across two vendors, neither of which supports idempotency keys: reserve inventory, charge a card, create a shipment, send a confirmation. Design the local retry machinery and the operational handling for a lost provider response. *(~2 h)*
+*Deliverable:* The composite-key store schema, CAS-guarded state machine (including an `INDETERMINATE` state), checkpoint ordering, correlation identifiers and reconciliation queries, and the manual disposition rule when the provider cannot be queried.
+*Assessment:* Judged against Section 13.3 and the CAS-Guarded Distributed Commit card in `references/pattern-quick-reference.md` §8: a reviewer must be able to trace a crash before a call, a known response, and a response lost after provider acceptance. Any design that automatically retries the ambiguous charge or claims exactly-once execution across the vendors fails.
 
 **Exercise 13.4 (Challenge) — Write the orchestration ADR twice.** Write an architecture decision record choosing single-agent or multi-agent orchestration for each of two organizations: (a) a six-person team shipping roughly twenty work orders a week, and (b) a platform business processing two thousand work orders a day across many tenants. Each ADR must state the decision, the alternatives, the consequences, and — critically — the measured signals (handoff failure rate, per-work-order cost, wall-clock throughput) that would trigger reversal. *(~4 h+)*
 *Deliverable:* Two ADRs with an "Agent Implications" section each.

@@ -11,7 +11,7 @@ chapter. Each row is a single artifact the book references by URL.
 
 | Asset | File |
 | --- | --- |
-| Reader start paths (30-minute orientation, one governed session, factory bootstrap) | [`START-HERE.md`](START-HERE.md) |
+| Reader start paths (30-minute orientation, one governed session, governed-loop bootstrap) | [`START-HERE.md`](START-HERE.md) |
 | Printable Reader Quick Start | [`output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf) |
 | Complete fictional software-factory golden path | [`factory-bootstrap/worked-example/`](factory-bootstrap/worked-example/) |
 | The Twelve Standards — single-page quick reference (tiers, gate classifications, key artifacts, Harness Framework mapping) | [`references/twelve-standards-quick-reference.md`](references/twelve-standards-quick-reference.md) |
@@ -165,7 +165,7 @@ Foundation material; assets begin in Part II.
 | STRATEGIC_PIVOT.md template | [`spec-templates/strategic-pivot-template.md`](spec-templates/strategic-pivot-template.md) |
 | Iteration caps checklist (bounded iteration discipline) | [`checklists/iteration-caps.md`](checklists/iteration-caps.md) |
 | Self-improvement safety rails | [`checklists/self-improvement-safety-rails.md`](checklists/self-improvement-safety-rails.md) |
-| Minimum viable software factory bootstrap kit | [`factory-bootstrap/`](factory-bootstrap/) |
+| Minimum governed delivery loop bootstrap kit | [`factory-bootstrap/`](factory-bootstrap/) |
 | Public teaching architecture (current operating model) | [`diagrams/merlin-architecture-v2.md`](diagrams/merlin-architecture-v2.md) |
 | Premium architecture overview (recommended first view) | [`diagrams/merlin-factory-architecture-premium.png`](diagrams/merlin-factory-architecture-premium.png) |
 | Software-factory conceptual and presentation visual | [`diagrams/merlin-software-factory-promo.png`](diagrams/merlin-software-factory-promo.png) |
@@ -199,7 +199,7 @@ Foundation material; assets begin in Part II.
 | §19.1 / §19.5 / §19.6 Crawl + 30 Days + Anti-Patterns | Week-by-week 30-day Crawl-stage roadmap with three anti-patterns | [`exercises/30-day-transformation-roadmap.md`](exercises/30-day-transformation-roadmap.md) |
 | §19.1 Expertise Levels and Their Traps | Beginner / Mid-level / Senior / Principal framework with trap and countermeasure per level | [`exercises/expertise-traps.md`](exercises/expertise-traps.md) |
 | §19.1 Maturity progression | Existing companion asset | [`exercises/maturity-assessment.md`](exercises/maturity-assessment.md) |
-| §19.1 / §19.2 First factory setup | Minimum viable software factory bootstrap kit | [`factory-bootstrap/`](factory-bootstrap/) |
+| §19.1 / §19.2 First governed loop | Minimum governed delivery loop bootstrap kit | [`factory-bootstrap/`](factory-bootstrap/) |
 
 ### Chapter 20 — The Road Ahead
 
@@ -210,20 +210,20 @@ covered by existing companion content:
 | --- | --- | --- |
 | §20.4 Recursive Dark Code / Self-Improvement Governance | Existing companion asset | [`checklists/self-improvement-safety-rails.md`](checklists/self-improvement-safety-rails.md) |
 | §20.6 Discipline Dividend / Institutional Capital | Existing companion asset | [`exercises/maturity-assessment.md`](exercises/maturity-assessment.md) |
-| §20.9 Artifact path | Minimum viable software factory bootstrap kit | [`factory-bootstrap/`](factory-bootstrap/) |
+| §20.9 Artifact path | Minimum governed delivery loop bootstrap kit | [`factory-bootstrap/`](factory-bootstrap/) |
 
-### Appendix D — Design Study: Platform Modernization (FieldstoneOS)
+### Appendix B — Design Study: Platform Modernization (FieldstoneOS)
 
 A documented architecture and migration plan, none of it yet built.
 
 | Section | Asset | File |
 | --- | --- | --- |
-| Design study walkthrough | [`exercises/case-study-walkthroughs.md`](exercises/case-study-walkthroughs.md#appendix-d--design-study-platform-modernization-fieldstoneos) |
-| §D.2 Event-Sourced Architecture | Event Sourcing pattern reference card | [`patterns/event-sourcing.md`](patterns/event-sourcing.md) |
-| §D.3 Migration Plan | Migration plan template | [`spec-templates/migration-plan-template.md`](spec-templates/migration-plan-template.md) |
-| §D.3 Phase Gates | Migration phase gate checklist | [`checklists/migration-phase-gate.md`](checklists/migration-phase-gate.md) |
-| §D.4 Testing a Migration | Equivalence test checklist (three test categories) | [`checklists/equivalence-test-checklist.md`](checklists/equivalence-test-checklist.md) |
-| §D.2 UCO Event Publication | Transactional Outbox pattern reference card | [`patterns/transactional-outbox.md`](patterns/transactional-outbox.md) |
+| Design study walkthrough | [`exercises/case-study-walkthroughs.md`](exercises/case-study-walkthroughs.md#appendix-b--design-study-platform-modernization-fieldstoneos) |
+| §B.2 Event-Sourced Architecture | Event Sourcing pattern reference card | [`patterns/event-sourcing.md`](patterns/event-sourcing.md) |
+| §B.3 Migration Plan | Migration plan template | [`spec-templates/migration-plan-template.md`](spec-templates/migration-plan-template.md) |
+| §B.3 Phase Gates | Migration phase gate checklist | [`checklists/migration-phase-gate.md`](checklists/migration-phase-gate.md) |
+| §B.4 Testing a Migration | Equivalence test checklist (three test categories) | [`checklists/equivalence-test-checklist.md`](checklists/equivalence-test-checklist.md) |
+| §B.2 UCO Event Publication | Transactional Outbox pattern reference card | [`patterns/transactional-outbox.md`](patterns/transactional-outbox.md) |
 
 ### Academic / Instructor / Student
 
@@ -246,7 +246,7 @@ author.
 - **Prompts** ([`prompts/`](prompts/)) — reusable prompt library plus a machine-readable manifest
 - **Checklists** ([`checklists/`](checklists/)) — 17 files
 - **Prompt evaluations** ([`prompt-evals/`](prompt-evals/)) — representative structured-generation, falsification-review, and escalation fixtures
-- **Factory bootstrap** ([`factory-bootstrap/`](factory-bootstrap/)) — seven scaffolds plus a completed fictional golden path for building a minimum viable software factory
+- **Governed loop bootstrap** ([`factory-bootstrap/`](factory-bootstrap/)) — seven scaffolds plus a completed fictional golden path for building Book 2's minimum governed delivery loop
 - **References** ([`references/`](references/)) — standards, patterns, the complete session loop, glossary, pipeline artifacts, quality gates, and tool configuration
 - **Diagrams** ([`diagrams/`](diagrams/)) — canonical Mermaid/Markdown and
   HTML sources plus PNG, JPEG, WebP, and PDF exports for the baseline and

@@ -69,7 +69,7 @@ would not belong in a public technical-book companion repository.
 spec-templates/    # specification + pipeline-artifact scaffolds (Part II)
 prompts/           # prompt library (cross-chapter)
 code-examples/     # runnable code (Part III + case studies)
-factory-bootstrap/ # minimum viable software factory workbook
+factory-bootstrap/ # minimum governed delivery loop workbook
 prompt-evals/      # compact fixtures for reusable prompt behavior
 diagrams/          # architecture diagrams
 exercises/         # hands-on practice problems

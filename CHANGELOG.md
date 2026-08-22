@@ -5,7 +5,11 @@ repository are recorded here.
 
 ## [Unreleased]
 
-No changes yet.
+### Changed
+
+- Relettered the platform-modernization design study and its companion
+  references from Appendix D to Appendix B so the current two-appendix reader
+  edition runs consecutively from A to B.
 
 ## [2.1.0] — 2026-08-16
 

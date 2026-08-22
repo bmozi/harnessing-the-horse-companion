@@ -47,13 +47,13 @@ agent-generated change.
 | --- | --- | --- |
 | [`definition-of-done.md`](definition-of-done.md) | ch10 — §10.4 | Before any agent-generated change is merged: the seven-item DN1–DN7 checklist with four BLOCKING items |
 
-### Migration discipline (ch12 / Appendix D)
+### Migration discipline (ch12 / Appendix B)
 
 | File | Chapter | Run when |
 | --- | --- | --- |
 | [`migration-phase-gate.md`](migration-phase-gate.md) | ch12 — §12.2 | Before transitioning between migration phases: pre-conditions, acceptance criteria, rollback triggers, sign-off |
 | [`oss-license-triage.md`](oss-license-triage.md) | ch12 — §12.3 | Before accepting any AI-recommended open-source dependency: five license classes (Permissive / Weak copyleft / Strong copyleft / Source-available / No license) with per-dependency triage worksheet |
-| [`equivalence-test-checklist.md`](equivalence-test-checklist.md) | Appendix D — §D.4 | Multi-system migration: three test categories (equivalence, temporal replay, migration regression) for asserting the new system produces the same results as the old |
+| [`equivalence-test-checklist.md`](equivalence-test-checklist.md) | Appendix B — §B.4 | Multi-system migration: three test categories (equivalence, temporal replay, migration regression) for asserting the new system produces the same results as the old |
 
 ### Autonomous-system governance (ch16)
 

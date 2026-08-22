@@ -12,8 +12,8 @@ Distributed Transactions" (CIDR, 2007).
 
 ## Intent
 
-**Atomically update a database and publish a message without using
-distributed transactions.**
+**Atomically update local business state and record the intent to publish a
+message, without using distributed transactions.**
 
 The problem: a service that writes to its database and then publishes
 an event can fail between the two operations — the database write
@@ -52,9 +52,12 @@ same transaction. The outbox publisher handles the delivery.
 - If the processing fails → no outbox row is written, no notification
   is sent.
 
-**The atomicity is structural, not cognitive.** It does not require
-the agent to reason about failure boundaries because the architecture
-makes the wrong behavior impossible.
+**The local atomicity is structural, not cognitive.** It closes the dual-write
+window between business state and notification intent. It does not make broker
+delivery exactly once: the relay normally delivers at least once, so consumers
+must deduplicate by a stable event ID or make processing naturally idempotent.
+That composition can produce an effectively-once business outcome even though
+the transport may deliver duplicates.
 
 ## Worked Application: Fieldstone CRM Hub
 
@@ -90,9 +93,10 @@ See [`../code-examples/transactional-outbox/`](../code-examples/transactional-ou
   the three-step template: check idempotency → write business state
   → write to outbox, all in one transaction
 
-The agent that generates the handler follows a three-step template
-without needing to understand distributed transactions. **The
-architecture makes exactly-once semantics the default path.**
+The agent that generates the handler follows a three-step template without
+needing to implement a distributed transaction. The architecture makes atomic
+local state plus notification intent the default path; at-least-once delivery
+and idempotent consumption remain separate responsibilities.
 
 ## Pitfalls
 
@@ -100,12 +104,12 @@ architecture makes exactly-once semantics the default path.**
   rows. Nobody publishes them. Six months later, nothing has been
   notified. Always deploy the publisher with the outbox; treat them
   as one unit.
-- **The publisher without idempotency.** The publisher reads a row,
-  publishes the event, and fails before marking the row published.
-  The next read republishes. Either the consumer must be idempotent
-  (see [`anti-corruption-layer.md`](anti-corruption-layer.md) for the
-  Idempotent Receiver companion) or the publisher must use exactly-
-  once delivery semantics on the message bus.
+- **The publisher without idempotency.** The publisher reads a row, publishes
+  the event, and fails before marking the row published. The next read
+  republishes. The consumer must deduplicate a stable event ID or make the
+  business operation naturally idempotent. A broker's exactly-once feature, if
+  available, is bounded by that broker's documented scope; it does not make an
+  uncontrolled downstream side effect exactly once.
 - **The retention discipline that isn't.** Published rows accumulate
   forever. The table grows. Index performance degrades. Implement a
   retention policy (typically delete after publication confirmed AND

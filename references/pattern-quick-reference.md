@@ -139,8 +139,9 @@ treatment: Chris Richardson, *Microservices Patterns: With
 Examples in Java*, Manning, 2018, ISBN 978-1617294549. Full
 citation discipline appears in Chapter 11 §11.5.
 
-**Intent.** Atomically update a database and publish a
-message without using distributed transactions.
+**Intent.** Atomically update local business state and record
+notification intent without using distributed transactions;
+publish later through an at-least-once relay.
 
 **Application in agentic development.** Agent-generated
 code is particularly vulnerable to the dual-write problem
@@ -150,7 +151,9 @@ solution that does not depend on the agent's awareness: the
 generated code writes its business state and its
 notification intent in the same transaction; the outbox
 publisher handles delivery. Atomicity becomes
-architectural, not cognitive. See Chapter 11 §11.5;
+architectural, not cognitive. Relay delivery is normally at
+least once; stable event IDs plus idempotent consumers provide
+effectively-once business outcomes. See Chapter 11 §11.5;
 companion `patterns/transactional-outbox.md` and
 `code-examples/transactional-outbox/`.
 
@@ -175,7 +178,7 @@ remains a human judgment task. Teams should plan for
 verification time at 2–5× generation time (author's
 planning heuristic). See Chapter 12
 §12.1; the Fieldstone CRM Hub (Chapter 14) and the FieldstoneOS
-platform modernization design study (Appendix D) are worked
+platform modernization design study (Appendix B) are worked
 examples at 6-month and 5-year scales.
 
 ---
@@ -210,22 +213,22 @@ and Chapter 15 (customer-facing transaction safety).
 1991 (CAS primitive). Application to distributed workflow
 coordination: this book, Chapter 15.
 
-**Intent.** Implement exactly-once semantics for a sequence
-of non-idempotent calls across services that do not
-cooperate on idempotency, using an atomic compare-and-swap
-on entry and per-step checkpoints.
+**Intent.** Serialize local workflow ownership and prevent
+replay of durably checkpointed steps, while containing the
+ambiguous outcome of non-idempotent calls with provider
+idempotency or reconciliation.
 
 **Application in agentic development.** The state machine
-prevents concurrent retries from re-executing. The per-step
-checkpoints ensure that a retry after partial completion
-skips already-completed steps. The architecture makes the
-most dangerous operation (the charge) the one with the
-strongest idempotency guarantee — eliminating
-double-charges by construction. Agent-generated code does
-not need to reason about failure boundaries; the
-architecture makes the wrong behavior impossible. See
-Chapter 13 §13.3 (multi-step agent workflows) and Chapter
-15 (booking-flow case study).
+prevents concurrent retries from taking local ownership. The
+per-step checkpoints let a retry skip outcomes already
+persisted. If a provider accepts a charge but its response is
+lost before the checkpoint, however, the outcome is
+indeterminate. A stable provider idempotency key or
+correlation-based lookup and reconciliation is required; if
+neither exists, stop for manual disposition. Together these
+controls can deliver an effectively-once business outcome,
+not exactly-once execution across an uncontrolled provider.
+See Chapter 13 §13.3 and Chapter 15.
 
 ---
 
@@ -243,7 +246,7 @@ change carries actor metadata including agent session ID;
 (2) temporal queries for migration validation — replay
 events to time T and compare; (3) projection-based read
 models that give MCP servers sub-second access to rich
-historical context. See Appendix D; the FieldstoneOS
+historical context. See Appendix B; the FieldstoneOS
 Unified Customer Object is the design-study example.
 
 ---
@@ -280,17 +283,19 @@ as a design discipline. Applies long-standing CLI dry-run
 mode (`rsync --dry-run`, `terraform plan`) as the
 *default* for any agent-facing tool that modifies state.
 
-**Intent.** Make the agent's first invocation of any write
-tool read-only and reversible; require an explicit
+**Intent.** Make the normal first invocation of an
+agent-facing write tool a preview; require explicit
 `confirm: true` for actual execution.
 
 **Application in agentic development.** Agents make
 mistakes that are difficult to reverse. Dry-run-default
-ensures that the agent's first action is always safe. The
-destructive action requires a deliberate second step. The
+separates preview from execution, but a preview can still
+expose data, consume quota, or create validation side
+effects. It requires authorization and bounds; high-impact
+execution also requires independent approval. The
 pattern composes with Scoped Authorization Token (Pattern
 10) — the scope check runs before the dry-run gate, the
-dry-run gate runs before any side effect. See Chapter 13
+dry-run gate runs before the intended write. See Chapter 13
 §13.1; companion `patterns/dry-run-default.md` and
 `code-examples/mcp-tool-pattern/`.
 

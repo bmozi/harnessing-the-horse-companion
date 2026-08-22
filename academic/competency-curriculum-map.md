@@ -145,7 +145,7 @@ The tables below condense the chapter-by-chapter mapping in the Academic Supplem
 | 18 | SE: Project Management (measurement) |
 | 19 | SE: Project Management (adoption); SEP |
 | 20 | SE: Process; SEP (evidence, professional judgment) |
-| Appendix D | SE: Design; SE: Evolution |
+| Appendix B | SE: Design; SE: Evolution |
 
 ### Table 2 — Chapters to SWEBOK v4 Knowledge Areas
 
@@ -171,7 +171,7 @@ The tables below condense the chapter-by-chapter mapping in the Academic Supplem
 | 18 | Software Engineering Management; Software Quality |
 | 19 | Software Engineering Management; Software Engineering Process; Professional Practice |
 | 20 | Professional Practice; Software Engineering Process |
-| Appendix D | Software Architecture; Software Maintenance |
+| Appendix B | Software Architecture; Software Maintenance |
 
 ---
 

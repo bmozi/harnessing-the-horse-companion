@@ -338,9 +338,10 @@ context file tells the agent what to do; the permission
 policy constrains what it *can* do; the CI/CD pipeline
 verifies the result. Each layer compensates for the
 others' weaknesses. The context file's compliance is
-statistical (~70%, author's estimate from practice); the
-hooks and gates are deterministic (100%). Defense in depth
-is the design.
+statistical (~70%, author's estimate from practice). Hooks
+are deterministic when invoked but can be bypassed locally;
+protected CI and repository permissions supply independent
+merge enforcement. Defense in depth is the design.
 
 For the companion repository's annotated version of
 `.claude/settings.json` with OWASP Agentic Top 10 mapping,

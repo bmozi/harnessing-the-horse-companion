@@ -1,6 +1,6 @@
 # Case Study Walkthroughs
 
-> **Chapters:** ch14–ch16 (Part IV — Practice), plus the Appendix D
+> **Chapters:** ch14–ch16 (Part IV — Practice), plus the Appendix B
 > design study and the Chapter 13 MCP-fleet implementation notes
 > **Last revised:** 2026-06-16
 > **Use this for:** A structured exploration of each case study in
@@ -132,9 +132,9 @@ money moves.
 
 ---
 
-## Appendix D — Design Study: Platform Modernization (FieldstoneOS)
+## Appendix B — Design Study: Platform Modernization (FieldstoneOS)
 
-A design study, not a case study: Appendix D documents an
+A design study, not a case study: Appendix B documents an
 architecture and migration plan for replacing a vendor platform,
 none of it yet built. Analyze it with Section 7's status-honesty
 lens active throughout.
@@ -160,7 +160,7 @@ assumptions stated in the appendix.
   survive team turnover.
 - **Section 4 (Quality Gate Analysis)** — The plan specifies
   equivalence tests running continuously through the parallel-run
-  phase (§D.4). See
+  phase (§B.4). See
   [`../checklists/equivalence-test-checklist.md`](../checklists/equivalence-test-checklist.md).
 
 ### Companion artifacts grounding this case
@@ -178,7 +178,7 @@ assumptions stated in the appendix.
 
 **"The Strangler Fig at platform scale is the same pattern as at
 integration scale — the difference is duration, not discipline."**
-Compare Ch14 (CRM Hub, 6 months) and Appendix D (FieldstoneOS, 5
+Compare Ch14 (CRM Hub, 6 months) and Appendix B (FieldstoneOS, 5
 planned years). What changes when the same pattern scales by 10×?
 And what can a design study establish that only execution can
 confirm?
@@ -301,7 +301,7 @@ institutional learning without runaway modification.
 The case studies reward comparative analysis. Three particularly
 productive comparisons:
 
-### CRM Hub (Ch14) vs. FieldstoneOS (Appendix D)
+### CRM Hub (Ch14) vs. FieldstoneOS (Appendix B)
 
 **Same pattern, different scale.** Strangler Fig migration over
 6 months vs. 5 planned years. What changes when discipline must

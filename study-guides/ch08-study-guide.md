@@ -35,7 +35,7 @@ Student and self-study material moved from Chapter 8 so the book's main reading 
 
 1. An error budget structurally slows agent-generated deployments once the quarter's budget is spent — regardless of what the business wants shipped. Is a constraint that cannot be negotiated better than one that can? What failure mode does each version produce?
 2. The chapter prescribes tighter monitoring for agent-generated code "until the review process earns confidence," which requires tracking agent and human code as separate classes. What are the costs of a two-class system, and what evidence should retire the distinction?
-3. "The cost of an unnecessary rollback is always lower than the cost of an extended incident." Construct the strongest counterexamples — consider rollbacks that lose data or re-trigger external side effects — and restate the rule with the qualifications it actually needs.
+3. Rollback is the default response when it is tested, reversible, and keyed to a trusted signal. Apply the exception-and-proof test to counterexamples where rollback can lose data or re-trigger an external side effect: what containment, roll-forward, or reconciliation plan would be safer, and what evidence justifies departing from the default?
 
 ## Exercises
 
@@ -58,4 +58,3 @@ Student and self-study material moved from Chapter 8 so the book's main reading 
 **Exercise 8.5 (Challenge) — Run the 2 AM tabletop.** *(~3 h)* Incident brief: an agent-generated change deployed Friday at 4:10 PM included a schema migration and the serialization change from Exercise 8.1(c). At 6:20 PM the error rate reaches 2.4x baseline; the on-call engineer is not the change's author; the author is unreachable. On paper, execute the response: determine the rollback classification, write the runbook as the on-call engineer would execute it (order of operations, data correction, validation), and identify where the response is impossible because a required artifact was never produced. Then write the postmortem's process findings: which failure modes from §8.2 occurred, and the three specific pipeline or policy changes that would prevent recurrence.
 *Deliverable:* An incident timeline, the executed runbook, and the three-change postmortem.
 *Assessment:* Judged against the rollback protocol and the §8.2 failure-mode catalog: the Friday-afternoon deploy, the untested rollback, and the orphaned-migration risk must all be identified; each proposed change maps to a named mechanism in this chapter (scheduling policy, tested down migration, rollback owner) rather than to "be more careful."
-

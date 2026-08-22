@@ -6,8 +6,9 @@
 //   3. Write to outbox
 // All in ONE database transaction.
 //
-// The architecture makes exactly-once semantics the default path.
-// The agent does not need to reason about distributed transactions.
+// The transaction atomically commits local business state and notification
+// intent. A relay may deliver at least once; consumers still need stable-ID
+// deduplication or naturally idempotent processing.
 //
 // Adapted from Chapter 11 of *Harnessing the Horse* by John Briggs.
 // © 2026 John Briggs — MIT licensed (see ../../LICENSE-CODE)

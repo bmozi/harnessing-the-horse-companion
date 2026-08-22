@@ -11,7 +11,7 @@ Student and self-study material moved from Chapter 20 so the book's main reading
 3. Classify a chapter's claims across the descriptive, practiced-but-unmeasured, and prescriptive evidence categories.
 4. Construct a study design capable of falsifying the book's central hypothesis — that discipline is the differentiator.
 5. Evaluate the chapter's labeled bets against evidence available at the time of reading.
-6. Explain the recursive dark code problem and the governance principle that self-improving systems optimize within a harness they cannot modify.
+6. Explain the recursive dark code problem and the defense-in-depth principle: self-improvement is confined by application rails, while approval and enforcement authority remain outside the writable process.
 
 ## Key Terms
 
@@ -58,4 +58,3 @@ Student and self-study material moved from Chapter 20 so the book's main reading
 
 *Deliverable:* A review protocol document.
 *Assessment:* Judged against Section 20.2: mechanical verification delegated, alignment judgments reserved, and every assignment justified by the can/cannot analysis rather than by convenience. A protocol that delegates specification-fitness judgment to the agent fails.
-

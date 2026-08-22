@@ -9,7 +9,7 @@ The main book is organized for uninterrupted practitioner reading. This director
 - all 91 exercises;
 - the deliverable and assessment criteria for every exercise.
 
-Each chapter file stands on its own and points back to the corresponding chapter. The design-study exercises appear in `appendix-d-study-guide.md`.
+Each chapter file stands on its own and points back to the corresponding chapter. The design-study exercises appear in `appendix-b-study-guide.md`.
 
 ## Chapter Guides
 
@@ -35,7 +35,7 @@ Each chapter file stands on its own and points back to the corresponding chapter
 | Chapter 18 — Measuring What Matters | [`ch18-study-guide.md`](ch18-study-guide.md) |
 | Chapter 19 — Team Transformation | [`ch19-study-guide.md`](ch19-study-guide.md) |
 | Chapter 20 — The Road Ahead | [`ch20-study-guide.md`](ch20-study-guide.md) |
-| Appendix D — Platform Modernization Design Study | [`appendix-d-study-guide.md`](appendix-d-study-guide.md) |
+| Appendix B — Platform Modernization Design Study | [`appendix-b-study-guide.md`](appendix-b-study-guide.md) |
 
 ## For Instructors
 

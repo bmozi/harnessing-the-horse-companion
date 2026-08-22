@@ -11,8 +11,12 @@ primitive applied to distributed workflow coordination.
 
 ## Intent
 
-**Implement exactly-once semantics for a sequence of non-idempotent
-calls across services that do not cooperate on idempotency.**
+**Serialize local workflow ownership and make retries safe after outcomes have
+been durably observed, while explicitly containing ambiguous outcomes from
+non-idempotent services.**
+
+Despite the pattern's name, this is not a distributed transaction and does not
+make the cross-service sequence atomic.
 
 Two patterns interleaved in a single API route:
 
@@ -35,13 +39,13 @@ When you have:
 
 ## The State Machine
 
-The aggregate row (the entity carrying the commit) has a status
-field that transitions through **four states**:
+The aggregate row (the entity carrying the commit) has a status field that
+transitions through **five states**:
 
 ```
 IDLE → SUBMITTING → SUBMITTED
-        ↓
-       FAILED → SUBMITTING (retry)
+        ├─ known failure → FAILED → SUBMITTING (retry)
+        └─ unknown outcome → INDETERMINATE → reconcile or human disposition
 ```
 
 Transition from `IDLE` or `FAILED` to `SUBMITTING` is an **atomic
@@ -53,9 +57,10 @@ concurrent retry sees the `SUBMITTING` state and backs off.
 ### The stale window
 
 A **5-minute stale window** prevents a crashed-in-flight commit from
-permanently locking the aggregate. If the row has been in
-`SUBMITTING` for more than 5 minutes, a retry treats it as stale and
-re-claims it.
+permanently locking the aggregate. If the row has been in `SUBMITTING` for more
+than 5 minutes, a retry may re-claim it only when the last durable checkpoint
+proves the next step safe. A timeout alone does not prove that an external call
+failed.
 
 This handles the container-restart scenario: the original request
 crashed mid-commit, the customer waits a few minutes, and the retry
@@ -75,10 +80,18 @@ row before starting the next.**
 5. appointmentCreate() → persist appointmentID
 ```
 
-Each step reads its ID from the aggregate at the start and **skips
-if present**. A retry after step 4 fails sees the saved `paymentID`,
-skips the charge step, and jumps straight to subscription creation.
-**The card is not charged again.**
+Each step reads its ID from the aggregate at the start and **skips if present**.
+A retry after step 4 fails sees the saved `paymentID`, skips the charge step,
+and jumps straight to subscription creation. The persisted checkpoint prevents
+a known-successful charge from being repeated.
+
+There is still an **ambiguity window**: the payment provider may accept the
+charge and the response may be lost before `paymentID` is persisted. CAS and a
+local checkpoint cannot determine what happened inside an uncontrolled
+provider. Close that window with a provider idempotency key or a stable
+correlation ID plus a provider lookup/reconciliation operation. If neither is
+available, move the workflow to an explicit `INDETERMINATE` state and require
+manual disposition before retrying the charge.
 
 ## The Critical Checkpoint
 
@@ -86,13 +99,13 @@ In any multi-step commit, identify the **one step where the failure
 mode is unrecoverable** — the charge, the notification, the
 external-system mutation that cannot be undone.
 
-That step is the critical checkpoint. **The architecture makes the
-most dangerous operation the one with the strongest idempotency
-guarantee**: if its ID is already persisted, the step is skipped on
-retry, unconditionally.
+That step is the critical checkpoint. The architecture gives the most
+dangerous operation the strongest locally enforceable retry guard: if its ID is
+already persisted, the step is skipped on retry. This is not an idempotency
+guarantee for the provider call itself.
 
-The remaining steps after the critical checkpoint can fail and be
-retried without further harm.
+Later steps follow the same rule: retry a known failure; reconcile an unknown
+provider outcome before deciding whether a replay is safe.
 
 ## Worked Example: Fieldstone Booking Flow
 
@@ -103,8 +116,9 @@ From the booking-wizard case study (Ch15):
 - The five-write sequence: `customerID` → `paymentProfileID` →
   **`crmSubscriptionPaymentId`** (critical) → `subscriptionID` →
   appointment
-- Once `crmSubscriptionPaymentId` is persisted, the charge step is
-  skipped on retry — **zero double-charges by construction**
+- Once `crmSubscriptionPaymentId` is persisted, the charge step is skipped on
+  retry; lost-response cases enter reconciliation rather than automatically
+  charging again
 - Projected impact: ~$5,500/year support labor + ~$7,000/year
   avoided chargebacks at 100 bookings/day
 
@@ -119,11 +133,12 @@ The agent does not naturally reason about:
 - Which steps must be skipped on retry
 - Where the critical checkpoint is
 
-This pattern provides **structural exactly-once semantics** that
-does not depend on the agent's awareness of failure modes. The
-review prompt should require this pattern (or a documented
-alternative) for any multi-step commit across services that do not
-cooperate on idempotency.
+This pattern structurally serializes local ownership and prevents replay of
+durably checkpointed steps. With provider idempotency or reconciliation, it can
+produce an **effectively-once business outcome** despite retries. It cannot
+promise exactly-once execution across a provider that offers neither. The
+review prompt should require these controls, an explicit ambiguity state, or a
+documented alternative for any multi-step commit across services.
 
 ## Pitfalls
 
@@ -137,6 +152,10 @@ cooperate on idempotency.
 - **The checkpoint without persistence.** Persisting the intermediate
   ID to an in-memory cache or to the request context is not a
   checkpoint — it must survive a crash.
+- **The lost response treated as failure.** A timeout after a non-idempotent
+  provider call is an unknown outcome, not proof that nothing happened. Query
+  by a stable correlation ID, reconcile externally, or stop for human
+  disposition before retrying.
 - **The wrong critical checkpoint.** If you treat "appointment
   creation" as critical but "payment charge" as recoverable, you
   have inverted the priority. Identify the unrecoverable step

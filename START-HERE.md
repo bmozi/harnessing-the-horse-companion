@@ -39,23 +39,25 @@ before filling the blank artifacts if this is your first session.
 **Outcome:** a reviewable change whose scope, evidence, limitations, and learning
 survive the chat session that produced it.
 
-## I Want to Bootstrap a Software Factory
+## I Want to Bootstrap a Governed Delivery Loop
 
-A minimum viable software factory is one governed delivery loop, not a fleet of
-agents. Work through these resources in order:
+Book 2's minimum is one governed delivery loop, not a fleet of agents or a
+complete multi-team factory. Work through these resources in order:
 
-1. [Minimum viable factory bootstrap](factory-bootstrap/README.md)
+1. [Minimum governed delivery loop bootstrap](factory-bootstrap/README.md)
 2. [Completed fictional factory example](factory-bootstrap/worked-example/README.md)
 3. [Quality-gate classification](references/quality-gate-configuration-reference.md)
 4. [Tool and context configuration](references/tool-configuration-reference.md)
 5. [30-day transformation roadmap](exercises/30-day-transformation-roadmap.md)
-6. [Factory readiness review](factory-bootstrap/07-factory-readiness-review.md)
+6. [Governed delivery loop readiness review](factory-bootstrap/07-factory-readiness-review.md)
 
 Do not automate a loop that your team cannot yet run manually. Earn additional
 autonomy with gate reliability, review quality, and measured outcomes.
 
-**Outcome:** a crawl-stage factory operating on one repository with explicit
-work intake, a bounded session loop, enforced checks, and a learning record.
+**Outcome:** a crawl-stage governed loop operating on one repository with
+explicit work intake, a bounded session loop, enforced checks, and a learning
+record. Book 3 expands those prerequisites into an accountable production
+system across teams.
 
 ## I Need a Specific Resource
 

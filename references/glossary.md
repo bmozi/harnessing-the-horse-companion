@@ -162,7 +162,7 @@ domain model applies (Eric Evans, *Domain-Driven Design*,
 2003). In agentic development, bounded contexts are
 structural requirements, not organizational tools — they
 constrain the vocabulary the agent uses, preventing
-semantic confusion at context boundaries. See Appendix D.
+semantic confusion at context boundaries. See Appendix B.
 
 **Bounded iteration** — A hard ceiling on automated fix
 loops: after a fixed number of attempts against a failing
@@ -192,12 +192,14 @@ true) from "AI makes developers capable of previously
 impossible tasks" (consistently true when discipline is
 present). See Chapter 15.
 
-**CAS-Guarded Distributed Commit (this book)** — Pattern
-applying Maurice Herlihy's compare-and-swap primitive
-(1991) to distributed workflow coordination. Combines an
-atomic state-machine guard with per-step idempotency
-checkpoints to achieve exactly-once semantics across
-non-idempotent calls. See Chapter 15, companion pattern quick reference §8.
+**CAS-Guarded Distributed Commit (this book)** — Pattern applying Maurice
+Herlihy's compare-and-swap primitive (1991) to distributed workflow
+coordination. Combines an atomic local state-machine guard with durable
+per-step checkpoints. Known outcomes can be retried safely; lost responses from
+non-idempotent providers require provider idempotency, reconciliation, or human
+disposition. The composed goal is an effectively-once business outcome, not an
+exactly-once claim across an uncontrolled provider. See Chapter 15, companion
+pattern quick reference §8.
 
 **Centrifuge** — Rate-fairness pattern (Segment, 2018):
 per-source virtual queues with isolated token-bucket rate
@@ -263,7 +265,7 @@ session needs to know. See Chapter 4 and the companion tool-configuration refere
 Architectural pattern (Greg Young, 2010) that separates the
 write path (commands producing events) from the read path
 (projections optimized for queries). Frequently paired with
-Event Sourcing. See Appendix D.
+Event Sourcing. See Appendix B.
 
 **Crawl-walk-run** — The adoption model of Chapter 19: three
 stages with explicit entry criteria, exit criteria, and the
@@ -416,7 +418,7 @@ event; current state is a projection. Three properties
 matter for agentic development: audit trail by
 construction, temporal queries for migration validation,
 projection-based read models for sub-second agent access.
-See Appendix D and companion pattern quick reference §9.
+See Appendix B and companion pattern quick reference §9.
 
 **Expand-Migrate-Contract** — Database refactoring pattern,
 also called Expand-Contract or Parallel Change (Scott Ambler
@@ -897,12 +899,12 @@ statement opening each case-study chapter, declaring exactly
 what is deployed, what is measured, what is projected, and
 what the reader cannot verify. The mechanism by which no
 case in this book claims a production status it does not
-have. See Chapters 14–16 and Appendix D.
+have. See Chapters 14–16 and Appendix B.
 
 **Strangler Fig** — Migration pattern (Martin Fowler, 2004)
 that incrementally builds new components alongside the
 legacy system and gradually routes traffic from old to
-new. See Chapter 12, Chapter 14, and Appendix D.
+new. See Chapter 12, Chapter 14, and Appendix B.
 
 **STRATEGIC_PIVOT.md** — Document recording a significant
 architectural course correction. Larger in scope than an

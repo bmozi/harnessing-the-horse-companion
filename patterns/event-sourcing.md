@@ -1,7 +1,7 @@
 # Event Sourcing
 
-> **Chapter:** appendix-d — Design Study: Platform Modernization
-> (Section D.2)
+> **Chapter:** appendix-b — Design Study: Platform Modernization
+> (Section B.2)
 > **Last revised:** 2026-06-16
 
 ## Origin
@@ -130,7 +130,7 @@ Weak indicators (probably not worth it):
 
 ## Worked Example: FieldstoneOS Unified Customer Object
 
-From the platform modernization design study (Appendix D), a
+From the platform modernization design study (Appendix B), a
 documented architecture and migration plan:
 
 - Per-aggregate topics: `uco.customer.events`,
@@ -164,8 +164,8 @@ documented architecture and migration plan:
 
 ## Related
 
-- [`transactional-outbox.md`](transactional-outbox.md) — companion
-  pattern for atomic event publication
+- [`transactional-outbox.md`](transactional-outbox.md) — companion pattern for
+  atomically recording event-publication intent with local state
 - [`../checklists/equivalence-test-checklist.md`](../checklists/equivalence-test-checklist.md)
   — testing discipline for migrations that depend on event
   sourcing's temporal-query capability

@@ -1,7 +1,7 @@
 # Equivalence Test Checklist
 
-> **Chapter:** Appendix D — Design Study: Platform Modernization
-> (Section D.4, "Testing a Migration Rather Than a System")
+> **Chapter:** Appendix B — Design Study: Platform Modernization
+> (Section B.4, "Testing a Migration Rather Than a System")
 > **Last revised:** 2026-06-16
 > **Run when:** Multi-system migration where the assertion is "the
 > new system produces the same results as the old system."
@@ -156,7 +156,7 @@ Continuous equivalence testing catches this on Day 1.
 
 ## Worked Example: FieldstoneOS Migration
 
-From the platform modernization design study (Appendix D) — a
+From the platform modernization design study (Appendix B) — a
 documented architecture and migration plan, not yet built. The plan
 specifies:
 
@@ -191,7 +191,7 @@ specifies:
 
 ## Provenance
 
-Adapted from Appendix D of *Harnessing the Horse*, Section D.4.
+Adapted from Appendix B of *Harnessing the Horse*, Section B.4.
 The three test categories (equivalence, temporal replay, migration
 regression) are the planned testing strategy for the FieldstoneOS
 migration design study.

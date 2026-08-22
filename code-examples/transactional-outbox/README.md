@@ -26,8 +26,9 @@ intermediate state where one happened without the other.
 
 A separate publisher process reads unpublished outbox rows and
 delivers them to the message bus, marking them published on success.
-If the publisher dies mid-deliver, the row stays unpublished and
-will be retried. The consumer must be idempotent (see the
+If the publisher dies after delivery but before marking the row, the event may
+be delivered again: the relay is at least once. The consumer must deduplicate a
+stable event ID or make processing naturally idempotent (see the
 [Idempotent Receiver pattern](../../patterns/transactional-outbox.md#related)).
 
 ## Why this matters for agent-generated code
@@ -40,10 +41,11 @@ template:
 2. `tx.contacts.upsert` (or whatever business write)
 3. `tx.outbox.create`
 
-If the agent gets the three steps in order inside `db.transaction`,
-the result is correct. The architecture makes exactly-once semantics
-the **default path** — not something the agent has to reason its way
-into.
+If the agent gets the three steps in order inside `db.transaction`, the local
+business state and notification intent commit atomically. That closes the local
+dual-write window; it does not make asynchronous delivery exactly once.
+At-least-once relay delivery plus idempotent consumption can produce an
+effectively-once business outcome.
 
 ## What the agent **doesn't** generate
 
@@ -59,7 +61,8 @@ async function publishOutbox() {
     LIMIT 100
   `);
   for (const row of rows) {
-    await messageBus.publish(row.topic, row.payload);
+    // Reuse the outbox row ID on every attempt so consumers can deduplicate.
+    await messageBus.publish(row.topic, { eventId: row.id, payload: row.payload });
     await db.query(`UPDATE outbox SET published_at = now() WHERE id = $1`, [row.id]);
   }
 }
@@ -67,6 +70,8 @@ async function publishOutbox() {
 
 The publisher is **infrastructure**. It's deployed once and runs
 continuously. Agent sessions generating handlers don't touch it.
+If publication succeeds but the final `UPDATE` fails, the next attempt sends
+the same `eventId`; consumers use it to make duplicate delivery harmless.
 
 ## Run the example
 

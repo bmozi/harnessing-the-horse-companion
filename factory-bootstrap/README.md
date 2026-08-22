@@ -1,4 +1,4 @@
-# Minimum Viable Software Factory Bootstrap
+# Minimum Governed Delivery Loop Bootstrap
 
 This kit is intentionally not self-contained. It assumes you have read the book sections that teach the judgment behind each artifact:
 
@@ -16,14 +16,19 @@ start with the completed, fictional [`worked-example/`](worked-example/).
 
 ## What You Are Building
 
-A minimum viable software factory is one governed delivery loop:
+This `factory-bootstrap/` directory builds the minimum governed delivery loop
+that Book 2 requires before broader factory adoption:
 
 1. A context layer that tells agents how this project works.
 2. A Work Order layer that scopes non-trivial changes before generation.
 3. A gate layer that enforces the checks humans skip under pressure.
 4. A learning layer that records what happened and improves the next run.
 
-Do not start with multi-agent orchestration, autonomous improvement, or self-modifying prompts. Those are run-stage practices. Start with one active repository, one pilot task, one manual session loop, and one honest metrics baseline.
+Do not start with multi-agent orchestration, autonomous improvement, or
+self-modifying prompts. Start with one active repository, one pilot task, one
+manual session loop, and one honest metrics baseline. These are prerequisites,
+not a complete multi-team production operating system; Book 3 takes up that
+larger accountability boundary.
 
 ## Files
 
@@ -35,7 +40,7 @@ Do not start with multi-agent orchestration, autonomous improvement, or self-mod
 | `04-session-loop-runbook.md` | Manual execution of the first full loop | Companion Complete Session Loop |
 | `05-safety-rails-checklist.md` | Autonomy and self-improvement constraints | Chapter 16, Chapter 17 |
 | `06-metrics-baseline.md` | Baseline and first-30-days measurement | Chapter 18 |
-| `07-factory-readiness-review.md` | Decision to expand beyond the first repo | Chapter 19 |
+| `07-factory-readiness-review.md` | Decision to expand beyond the first governed loop | Chapter 19 |
 | `worked-example/` | One complete fictional delivery path from project context through metrics and learning | Read after the session-loop reference |
 
 ## Completion Rule

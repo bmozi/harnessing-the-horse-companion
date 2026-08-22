@@ -1,6 +1,6 @@
 # Work Order: [short title]
 
-Read Chapter 16 Section 16.8 and the companion pipeline-artifact reference before filling this out.
+Read Chapter 16 Section 16.7 and the companion pipeline-artifact reference before filling this out.
 
 ## Status
 

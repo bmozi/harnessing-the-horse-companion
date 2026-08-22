@@ -8,13 +8,13 @@ Student and self-study material moved from Chapter 15 so the book's main reading
 
 1. Distinguish the capability multiplier from the speed multiplier, and explain what the chapter's line counts can and cannot evidence.
 2. Analyze the recursive specification pattern's strengths and its blind spot — whatever the specification omits, the amplification omits at scale.
-3. Construct exactly-once semantics across non-idempotent vendor writes using a CAS-guarded state machine and per-step idempotency checkpoints.
+3. Use a CAS-guarded state machine and durable checkpoints to prevent concurrent local execution, and design reconciliation for ambiguous non-idempotent vendor writes.
 4. Apply default-safe configuration design — sandbox-by-default, session pinning, explicit production opt-in — to systems with production side effects.
 5. Evaluate the chapter's economic projections against their stated assumptions and identify which assumption each figure is most sensitive to.
 
 ## Key Terms
 
-- **CAS-Guarded Distributed Commit** — Combining an atomic compare-and-swap state guard with per-step idempotency checkpoints for exactly-once semantics across non-idempotent calls; this checkout is the pattern's origin case.
+- **CAS-Guarded Distributed Commit** — Combining an atomic local ownership guard with durable checkpoints. It prevents replay after known outcomes; vendor idempotency or reconciliation is required for an effectively-once outcome when a response is lost.
 - **Saga** — Multi-step transaction coordination pattern composing forward steps with compensating transactions; the checkout's per-step checkpoints are its close relative.
 - **Idempotency** — The property that processing the same request multiple times produces the same result as processing it once.
 - **Scoped Authorization Token** — Least privilege applied at the session level; the management-hub token authorizes exactly one subscription.
@@ -24,8 +24,8 @@ Student and self-study material moved from Chapter 15 so the book's main reading
 
 ## Review Questions
 
-1. Why does the checkout need its own exactly-once machinery — what specifically do Braintree and FieldRoutes fail to provide, and why is a distributed transaction unavailable?
-2. Trace a retry after `createSubscription` fails: which steps are skipped, which are re-executed, and why is the card charged exactly once?
+1. Why does the checkout need its own retry and reconciliation machinery — what specifically do Braintree and FieldRoutes fail to provide, and why is a distributed transaction unavailable?
+2. Trace a retry after `createSubscription` fails in two cases: the failure is known before the call succeeds, and the provider accepts the call but its response is lost. Which steps may be skipped, retried, reconciled, or stopped for human disposition?
 3. What three design decisions make sandbox-by-default safe, and what failure class does each one close?
 4. The chapter calls the ATTOM layer an Anti-Corruption Layer against data quality rather than wire format. What three defenses implement it, and what mispricing does each prevent?
 5. According to Section 15.4, what is the root cause of the 1:61 test-to-code ratio, and what is the structural fix?
@@ -47,9 +47,9 @@ Student and self-study material moved from Chapter 15 so the book's main reading
 *Assessment:* Judged on honest-evidence criteria: correct classification, sensitivity analysis that identifies the retention-lift assumption as load-sensitive or argues otherwise, and falsifiable checks rather than vanity metrics (Chapter 18's measurement discipline).
 
 **Exercise 15.3 (Core) — Design a CAS-guarded commit for a different domain.** An event-ticketing checkout performs five steps: vault the card, reserve the seat (reservations auto-expire in 10 minutes), charge the card, issue the ticket, send the confirmation email. The seat-reservation and charge endpoints are non-idempotent; the vendor systems share no transaction boundary. Design the commit machinery. *(~2 h)*
-*Deliverable:* The state machine (states, CAS transition, stale-window duration with justification), the per-step checkpoint order, and notes on which step gets the strongest guarantee — noting that this domain has two dangerous operations, the charge and the expiring reservation, and defending how you ordered them.
-*Assessment:* Judged against Section 15.7 and the CAS-Guarded Distributed Commit card in `references/pattern-quick-reference.md` §8: a reviewer must be able to crash the sequence after any step, retry, and reach a single-charge, single-seat outcome — or find your documented residual window.
+*Deliverable:* The state machine (states, CAS transition, stale-window duration with justification, and an `INDETERMINATE` state), per-step checkpoint order, provider correlation and lookup plan, and manual disposition rule. Defend how you order the charge and expiring reservation.
+*Assessment:* Judged against Section 15.7 and the CAS-Guarded Distributed Commit card in `references/pattern-quick-reference.md` §8: known outcomes must converge safely, while a lost response after provider acceptance must enter reconciliation rather than automatic retry. Document any residual window that the providers make impossible to close.
 
 **Exercise 15.4 (Challenge) — Specify the missing end-to-end suite.** Write the SPEC.md the platform never had: an automated E2E test suite for the eight-step booking wizard's critical path, including partial-failure injection at each of the five FieldRoutes writes, sandbox-tenant enforcement, and TCPA consent verification. *(~4 h+)*
 *Deliverable:* A SPEC.md (companion repository template) with machine-readable acceptance criteria and a test-case table mapping each wizard step and each injected failure to an expected observable outcome.
-*Assessment:* The pre-generation gate for Standard 1 plus Standard 8 (Integration Verification): pass requires that every non-idempotent write has at least one injected-failure case asserting single execution, and that no test case requires the production tenant.
+*Assessment:* The pre-generation gate for Standard 1 plus Standard 8 (Integration Verification): pass requires pre-call, known-failure, and lost-response injection for every non-idempotent write; tests must assert either a verified single business outcome or an `INDETERMINATE` stop awaiting reconciliation, and no test may require the production tenant.

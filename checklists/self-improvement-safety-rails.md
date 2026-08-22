@@ -4,15 +4,20 @@
 > (Section 16.3, "The Safety Rails", and Section 16.4)
 > **Last revised:** 2026-06-16
 > **Use this for:** Designing or auditing a system that
-> autonomously improves itself. The four non-negotiable
-> constraints that distinguish productive self-improvement from
-> unconstrained self-modification.
+> autonomously proposes improvements. Four application controls, plus the
+> independent approval and enforcement boundary needed to make them credible.
 
 **Self-improvement without governance is self-destruction.**
 
-The Merlin Software Factory's improvement system enforces four
-non-negotiable constraints through a `SafetyRails` class whose
-design is **intentionally resistant to relaxation**.
+The Merlin Software Factory's improvement system implements four controls in a
+`SafetyRails` class. They harden the normal proposal path, but code cannot make
+itself immutable to a privileged maintainer or another process with write
+access. Treat them as application-layer defense in depth.
+
+For a production design, keep approval identity, repository permissions,
+protected CI, and any signed policy or artifact verification outside the
+process that proposes improvements. The application can request authority; it
+must not be able to mint or rewrite it.
 
 These four rails answer the question every architect should ask
 when designing a self-modifying system:
@@ -20,9 +25,9 @@ when designing a self-modifying system:
 > **What happens when the system decides to improve the part of
 > itself that decides what to improve?**
 
-In Merlin, the answer is: **nothing**. That path is structurally
-blocked. The system improves within the harness; it does not
-modify the harness.
+On Merlin's normal path, proposals targeting this surface are blocked and
+logged. Independent controls must prove that the proposing process cannot
+bypass that path or modify the enforcement boundary.
 
 ---
 
@@ -52,18 +57,16 @@ modify the harness.
 
 ---
 
-## Rail 2: Permanent Human Approval
+## Rail 2: Human Approval on the Normal Path
 
-- [ ] `REQUIRE_HUMAN_APPROVAL` is a **class-level constant**, not
-      a configuration setting
-- [ ] It is set to `True` and **cannot be overridden** by
-      environment variable, constructor argument, or runtime
-      monkey-patching
-- [ ] The code contains a **defensive guard**: even if the constant
-      were somehow mutated at runtime, the check would fail and
-      block the proposal
-- [ ] Every improvement proposal is a **Work Order dict**, not a
-      persisted ORM object, until a human explicitly approves it
+- [ ] `REQUIRE_HUMAN_APPROVAL` is a **class-level default**, not a runtime
+      feature flag on the normal path
+- [ ] Environment variables and constructor arguments cannot disable it
+- [ ] The code contains a defensive guard that fails closed on the normal path
+- [ ] A separately authenticated approval record is verified before persistence
+      or execution; the proposing process cannot mint that record
+- [ ] Every improvement proposal remains an unprivileged draft until that
+      approval is verified
 
 **Why this matters:**
 
@@ -71,31 +74,34 @@ The approval step is the point where human judgment evaluates
 whether a proposed change is aligned with the system's goals —
 the **"should we?"** question that agents cannot answer.
 
-A configuration setting can be flipped under pressure. A
-class-level constant requires a code change, a review, and a
-deploy. That friction is the feature.
+A runtime flag can be flipped under pressure. A class-level default adds useful
+friction, but only protected review, repository permissions, and independent
+approval verification prevent the proposing process from granting itself
+authority.
 
 ---
 
 ## Rail 3: Forbidden Paths
 
-- [ ] The safety module maintains a **list of file paths** that
-      improvement proposals must not reference
-- [ ] The list **starts with the safety module itself** (e.g.,
-      `safety.py`) — the system cannot propose modifications to
-      its own safety constraints
+- [ ] The safety module maintains a **list of file paths** that the normal
+      proposal path must reject
+- [ ] The list **starts with the safety module itself** (e.g., `safety.py`)
 - [ ] The list includes any **meta-improvement** modules (e.g.,
       `harness/meta_improvement.py`)
 - [ ] When an improvement proposal is evaluated, the `SafetyRails`
       class **scans every string value in the proposal dict
       recursively** (depth-limited to 5 levels) for any mention of
       a forbidden path
-- [ ] A match **blocks the proposal immediately**
+- [ ] A match blocks and logs the proposal on the normal path
+- [ ] Repository permissions and protected CI independently reject changes to
+      the protected surface from the proposing identity
 
 **Why this matters:**
 
-The system can improve its prompts, its agent configurations, its
-pipeline parameters — **but it cannot weaken its own guardrails**.
+The application check rejects direct attempts to weaken its guardrails. It is
+not sufficient by itself: aliases, generated paths, encoding, or another
+writable process can bypass string matching, so independent path protection is
+required.
 
 Recursive depth-limited scanning catches the case where a
 forbidden path is embedded inside a nested structure, not just at
@@ -112,7 +118,7 @@ self-referential structures.
   - `improvement_observer`
   - `improvement/proposer`
   - `merlin.improvement` (or your equivalent namespace)
-- [ ] A match **blocks the proposal**
+- [ ] A match blocks and logs the proposal on the normal path
 
 **Why this matters:**
 
@@ -122,8 +128,9 @@ create a recursive loop:
 - The observer proposes changes to the observer
 - The proposer proposes changes to the proposer
 
-The system can observe everything and improve almost everything —
-**except itself**.
+This heuristic catches named forms of self-reference. It does not prove the
+absence of indirect or novel references; pair it with protected ownership and
+CI controls over the improvement implementation.
 
 This is distinct from Rail 3 (forbidden paths). Rail 3 blocks
 modifications to the safety module by path. Rail 4 blocks the
@@ -135,19 +142,19 @@ the safety module.
 
 ## The Distinction This Enforces
 
-These four rails are the governance model for **autonomous
-self-improvement**. They make the distinction — enforced in code,
-not just stated in documentation — between:
+These four application rails are one layer in the governance model for
+autonomous improvement. With independent approval and enforcement, they make
+the following distinction operational rather than merely documented:
 
 | Self-improvement (productive) | Self-modification (runaway) |
 | --- | --- |
 | The system observes its work, generates proposals, and waits for human approval | The system modifies itself without bounded review |
 | Improvements affect prompts, configurations, pipeline parameters | Improvements affect safety constraints, decision logic, or the improvement system itself |
 | Daily caps and forbidden paths constrain scope | No bounds on what can be proposed or how often |
-| Every proposal is observable, attributable, and reversible | Proposals compound silently |
+| Every proposal is observable and attributable; reversibility is proved or an exception plan is approved | Proposals compound silently |
 
-The system improves **within** the harness. It does not modify the
-harness.
+The intended operating rule is that the system proposes improvements within the
+harness. Independent authority must enforce changes to the harness itself.
 
 ## When to Use This Framework
 
@@ -173,18 +180,22 @@ When auditing an existing autonomous-improvement system, ask:
       configuration setting, not a rail.)
 - [ ] **Where is the human-approval requirement enforced?** (Find
       the actual guard, not just the documented intent.)
-- [ ] **Is the approval requirement a class-level constant?** (If
-      it's a config flag, it can be flipped.)
+- [ ] **Who can mint and verify approval?** (The proposing process must not
+      control both.)
 - [ ] **Where is the forbidden-paths list?** (Find it, read it,
       verify it contains the safety module itself.)
 - [ ] **How are paths scanned?** (Recursive with depth limit? Top
       level only? Any chance of bypass via nested structure?)
 - [ ] **Where is self-referential detection?** (Find the actual
       check, with the actual marker list.)
+- [ ] **Which independent control protects these mechanisms?** (Verify
+      repository ownership, protected CI, execution identity, and override
+      audit rather than trusting application checks alone.)
 
-If any of these questions cannot be answered by pointing to a
-specific code path, the system **does not have these rails**, even
-if the documentation says it does.
+If any application question cannot be answered by pointing to a specific code
+path, the system does not have that application rail. If the independent-control
+question has no answer, the rails are bypassable defense in depth rather than a
+security boundary.
 
 ## Worked Example: Merlin Improvement Plane
 
@@ -206,8 +217,9 @@ From the Merlin Software Factory (ch16):
 - `PlaybookEvolution` applies validated improvements to agent
   prompts
 
-The system improves itself daily, demonstrably, **without ever
-having modified its own safety constraints**.
+The reported operating history had not modified its own safety constraints as
+of the case-study observation. That observation does not prove the application
+controls are immutable or unbypassable.
 
 ## Pitfalls
 
@@ -215,9 +227,9 @@ having modified its own safety constraints**.
   raise the cap temporarily?" If the cap has an override flag,
   it's not a rail. Genuine rails require a code change and a
   deploy to relax.
-- **The rail that exists only in documentation.** Stating "the
-  system requires human approval" in the README without enforcing
-  it in code is theater. Every rail must be enforced in code.
+- **The rail that exists only in documentation.** Stating "the system requires
+  human approval" in the README without enforcement is theater. Application
+  checks need code; authority-bearing controls need an independent boundary.
 - **The forbidden-paths list that nobody updates.** When a new
   safety-critical module is added, it must be added to the
   forbidden-paths list at the same time. CI should check this.

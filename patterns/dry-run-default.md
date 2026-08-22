@@ -20,11 +20,11 @@ validates the inputs, verifies permissions, and returns what *would*
 happen if the operation were executed, **without actually executing
 it**.
 
-The agent sees the dry-run result and can verify that the intended
-operation is correct before requesting actual execution. **The
-actual execution requires an explicit `confirm: true` parameter** (or
-a separate confirmation tool invocation) that signals deliberate
-intent.
+The agent and reviewer can inspect the dry-run result before requesting actual
+execution. The actual execution requires an explicit `confirm: true` parameter
+(or a separate confirmation tool invocation). That flag separates preview from
+execution; it is not human approval unless an independently authenticated
+approval record gates it.
 
 ## Application in Agentic Development
 
@@ -37,9 +37,11 @@ difficult to reverse**.
 - An agent that sends a notification to the wrong distribution list
   has caused a communication incident.
 
-Dry-run-default ensures that **the agent's first action is always
-read-only and reversible**. The destructive action requires a
-deliberate second step.
+Dry-run-default makes the first operation a preview on the normal path. Even a
+preview can expose sensitive data, consume quota, or create validation/audit
+side effects, so it still needs authorization, redaction, rate limits, and cost
+bounds. Irreversible execution requires a deliberate second step and, where
+risk warrants, independent approval.
 
 ## Concrete Example
 
@@ -106,16 +108,16 @@ four disciplines:
 
 - **Scope** check constrains the action surface
 - **Prove** through validation
-- **Enforce** human review through dry-run default
+- **Enforce** preview-before-execute separation through dry-run default
 - **Communicate** the action through audit logging
 
 ## Pitfalls
 
-- **The "always confirm" agent.** The agent learns that every call
-  needs `confirm: true` and starts setting it automatically. The
-  defense: confirmation should require a *justified* reason at the
-  prompt level (the agent prompt requires "first call without
-  confirm, verify the dry-run, then call again with confirm").
+- **The "always confirm" agent.** The agent learns that every call needs
+  `confirm: true` and starts setting it automatically. Prompt instructions can
+  improve the normal path but are not an authorization boundary. For
+  high-impact writes, require a separately authenticated approval token or
+  protected workflow transition that the calling process cannot mint.
 - **The validation-only "dry run."** A dry run that doesn't actually
   simulate the operation provides a false sense of safety. The
   dry-run output must include exactly what would be created /
