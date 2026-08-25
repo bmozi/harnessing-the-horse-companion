@@ -1,11 +1,21 @@
-# Start Here
+# Start Here: One Production-Readiness Journey
 
 Prefer a printable orientation? Download the six-page
 [`Reader Quick Start`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf).
 
 This companion is a working kit for applying the engineering discipline in
 *Harnessing the Horse*. Choose the path that matches the outcome you want. You
-do not need to read every directory before using one resource.
+do not need to read every directory before using one resource, but the book is
+the operating guide for deciding what belongs in the artifacts and whether the
+evidence is enough.
+
+The shortest complete path is:
+
+`REQUEST → SPECIFY → BOUND → BUILD → CHALLENGE → PROVE → SHIP / REVISE / STOP`
+
+The repository lets you practice that path once. The book teaches the Twelve
+Standards, architecture, failure modes, security boundaries, measurement, and
+adoption judgment needed to make the path a trustworthy engineering practice.
 
 ## I Have 30 Minutes
 
@@ -32,12 +42,13 @@ Use this path for a real, bounded change in an existing repository:
 5. Generate with the [structured prompt](prompts/structured-prompt.md).
 6. Review with the [disprove-only prompt](prompts/disprove-only-review.md).
 7. Record evidence and learning before declaring the session complete.
+8. Make and record one explicit **SHIP**, **REVISE**, or **STOP** decision.
 
 Read the [completed fictional example](factory-bootstrap/worked-example/README.md)
 before filling the blank artifacts if this is your first session.
 
-**Outcome:** a reviewable change whose scope, evidence, limitations, and learning
-survive the chat session that produced it.
+**Outcome:** a reviewable change whose scope, evidence, limitations, decision,
+and learning survive the chat session that produced it.
 
 ## I Want to Bootstrap a Governed Delivery Loop
 
@@ -45,7 +56,7 @@ Book 2's minimum is one governed delivery loop, not a fleet of agents or a
 complete multi-team factory. Work through these resources in order:
 
 1. [Minimum governed delivery loop bootstrap](factory-bootstrap/README.md)
-2. [Completed fictional factory example](factory-bootstrap/worked-example/README.md)
+2. [Completed fictional governed-loop example](factory-bootstrap/worked-example/README.md)
 3. [Quality-gate classification](references/quality-gate-configuration-reference.md)
 4. [Tool and context configuration](references/tool-configuration-reference.md)
 5. [30-day transformation roadmap](exercises/30-day-transformation-roadmap.md)
@@ -59,6 +70,23 @@ explicit work intake, a bounded session loop, enforced checks, and a learning
 record. Book 3 expands those prerequisites into an accountable production
 system across teams.
 
+## What the Repository Cannot Decide for You
+
+A passing test is evidence, not permission. A completed checklist is a record,
+not judgment. Before treating the result as production-ready, use the book to
+answer the questions the templates intentionally cannot answer on their own:
+
+- Is the requirement actually the right outcome?
+- Is the remaining uncertainty proportionate to the consequence?
+- Did the review challenge the most dangerous claim or merely confirm the
+  easiest behavior?
+- Does the person approving the change have the competence and authority to
+  accept the risk?
+- What evidence would force the team to revise, stop, or roll back?
+
+If those answers are unclear, the toolkit has surfaced the next reading and
+decision—not granted permission to ship.
+
 ## I Need a Specific Resource
 
 | Need | Start with |
@@ -71,6 +99,8 @@ system across teams.
 | Copy executable reference code | [Runnable code examples](code-examples/README.md) |
 | Teach or study a chapter | [Study guides](study-guides/README.md) |
 | Find every book-linked asset | [Chapter-by-chapter index](INDEX.md) |
+| Pair practice with book reasoning | [Book-to-toolkit map](BOOK-TO-TOOLKIT-MAP.md) |
+| Understand the four-book learning path | [Series progression](SERIES-PROGRESSION.md) |
 
 ## Definition of a Successful First Use
 
@@ -85,6 +115,14 @@ Your first use is successful when all of the following are true:
 
 The goal is not more generated code. The goal is a result you can explain,
 verify, operate, and improve.
+
+## When to Continue to Book 3
+
+Stay with Book 2 until one team can run this loop honestly on one repository.
+Continue to *The Accountable AI Software Factory* when the problem crosses
+teams, repositories, agents, durable queues, release authorities, or outcome
+owners. The [Book 3 laboratory](https://github.com/bmozi/accountable-ai-software-factory-companion)
+begins where an individual governed session stops being the whole system.
 
 ## Downloads and Versions
 

@@ -1,4 +1,4 @@
-# Completed Factory Bootstrap Example
+# Completed Governed Delivery Loop Example
 
 This fictional example shows one small change moving through the complete
 governed-delivery loop. It demonstrates artifact quality and evidence flow; it

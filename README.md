@@ -1,13 +1,29 @@
 # Harnessing the Horse — Companion Repository
 
-Reader-facing, downloadable materials for *Harnessing the Horse* (John
-Briggs, 2026): a book on agentic engineering — how senior practitioners
-ship production software with AI agents as collaborators rather than
-autocomplete.
+## AI Coding Agent Production-Readiness Toolkit
 
-This is the **public companion repository** for the book. The book stands
-alone; this repository exists so readers can copy the templates, prompts,
-checklists, examples, and quick references without retyping them.
+Take one AI-assisted software change from a vague request to an evidence-backed
+**SHIP**, **REVISE**, or **STOP** decision. The repository supplies copyable
+specifications, scope controls, prompts, quality gates, review checks, and a
+worked fictional delivery loop. It helps a reader practice the mechanics; it
+does not certify that a change or organization is production-ready.
+
+This is the reader-facing, downloadable companion for *Harnessing the Horse*
+(John Briggs, 2026), a book about how senior practitioners ship production
+software with AI agents as collaborators rather than autocomplete.
+
+### The book-and-toolkit contract
+
+The book stands alone. The toolkit extends it without reproducing it:
+
+- **The toolkit provides the moves:** reusable artifacts, runnable examples,
+  and one bounded path readers can practice immediately.
+- **The book provides the judgment:** why the moves exist, how they fit
+  together, which tradeoffs and failure modes matter, how the case evidence
+  changes the guidance, and how a team earns greater autonomy.
+- **The complete practice requires both:** copying a checklist is not the same
+  as knowing when its evidence is sufficient or when the responsible decision
+  is to stop.
 
 > **Book:** *Harnessing the Horse: Engineering Discipline for Agentic
 > Development*
@@ -21,8 +37,12 @@ checklists, examples, and quick references without retyping them.
 ## Start Here
 
 New to the companion? Follow [`START-HERE.md`](START-HERE.md) for a
-30-minute orientation, one complete governed agent session, or a practical
-governed-delivery-loop bootstrap path.
+30-minute orientation or one complete production-readiness journey:
+
+`REQUEST → SPECIFY → BOUND → BUILD → CHALLENGE → PROVE → SHIP / REVISE / STOP`
+
+The journey produces a useful first result. The book supplies the integrated
+engineering system needed to repeat and adapt it responsibly.
 
 For a stable classroom or team baseline, use the
 [`v2.1.0` release](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.0).
@@ -41,7 +61,7 @@ turns the core path into a six-page handout.
 | `prompts/` | Prompt library — reusable system, review, and harness prompts plus a machine-readable manifest. |
 | `prompt-evals/` | Small, inspectable fixtures that test the expected behavior of representative prompts. |
 | `checklists/` | Human-facing review checklists across the lifecycle — pre-generation, architectural stewardship, pre-merge / pre-deploy, closing the loop, and migration phase gates. |
-| `factory-bootstrap/` | Minimum governed delivery loop workbook plus a completed fictional golden path from intake through learning; a Book 2 prerequisite, not a complete multi-team production factory. |
+| `factory-bootstrap/` | Minimum governed delivery loop workbook plus a completed fictional golden path from intake through learning; the Book 2 production-readiness path, not a complete multi-team production factory. The published path remains unchanged. |
 | `code-examples/` | Runnable, tested MIT-licensed code from Part III patterns — `.claude/settings.json`, Anti-Corruption Layer / Hexagonal port-adapter, Transactional Outbox (SQL + TypeScript), MCP tool pattern. |
 | [`diagrams/`](diagrams/) | Architecture diagrams used in the book — four baseline diagrams (Ch4) and a guided set of conceptual, overview, teaching-panel, and print-friendly Merlin Software Factory views (Ch16). |
 | `exercises/` | Hands-on exercises — Case Study Analysis Framework, Maturity Assessment. Student-facing material from the instructor package, suitable for self-study or classroom use. |
@@ -54,14 +74,19 @@ Each directory has its own `README.md` explaining what's inside and
 how it maps to the book.
 
 For a complete chapter-by-chapter asset map, see [`INDEX.md`](INDEX.md).
+Use the [`BOOK-TO-TOOLKIT-MAP.md`](BOOK-TO-TOOLKIT-MAP.md) to pair each
+practice step with the book reasoning needed to complete it. See
+[`SERIES-PROGRESSION.md`](SERIES-PROGRESSION.md) for the role of all four books
+and the handoff from one governed change to an accountable software factory.
 For the change log, see [`CHANGELOG.md`](CHANGELOG.md). For the
 contribution policy, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## How to use this repo
 
-You do not need the book to use the materials. Each asset is annotated
-with the chapter it appears in, so if you're reading along, you can clone
-this repo and follow the examples in your own editor.
+You can inspect or run an individual asset without the book. To apply the
+materials as a coherent production practice, pair them with the relevant book
+chapters. Each asset identifies its chapter so the reasoning and the reusable
+artifact stay connected.
 
 ```bash
 git clone https://github.com/bmozi/harnessing-the-horse-companion.git
@@ -124,5 +149,9 @@ Report suspected vulnerabilities privately as described in
 *Harnessing the Horse* is a practitioner book on engineering discipline
 for agentic development: standards, architecture, verification, security,
 measurement, and team adoption for production AI-generated code.
+
+When one team's governed delivery loop becomes a multi-team production-system
+problem, continue with *The Accountable AI Software Factory* and its
+[runnable laboratory](https://github.com/bmozi/accountable-ai-software-factory-companion).
 
 — John Briggs

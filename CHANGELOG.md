@@ -5,8 +5,19 @@ repository are recorded here.
 
 ## [Unreleased]
 
+### Added
+
+- Added a book-to-toolkit practice map and a four-book progression so readers
+  can see what to practice in the repository, what judgment remains in the
+  book, and when one governed session becomes a factory-scale problem.
+
 ### Changed
 
+- Positioned the unchanged published companion as an AI coding-agent
+  production-readiness toolkit with an explicit request-to-decision journey.
+- Clarified that the repository delivers a complete bounded first result while
+  the book remains the source of the integrated reasoning, tradeoffs, case
+  evidence, and judgment required for responsible application.
 - Relettered the platform-modernization design study and its companion
   references from Appendix D to Appendix B so the current two-appendix reader
   edition runs consecutively from A to B.

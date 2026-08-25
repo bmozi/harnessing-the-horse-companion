@@ -12,8 +12,10 @@ chapter. Each row is a single artifact the book references by URL.
 | Asset | File |
 | --- | --- |
 | Reader start paths (30-minute orientation, one governed session, governed-loop bootstrap) | [`START-HERE.md`](START-HERE.md) |
+| Book-to-toolkit practice map | [`BOOK-TO-TOOLKIT-MAP.md`](BOOK-TO-TOOLKIT-MAP.md) |
+| Four-book learning progression and Book 2-to-Book 3 handoff | [`SERIES-PROGRESSION.md`](SERIES-PROGRESSION.md) |
 | Printable Reader Quick Start | [`output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf) |
-| Complete fictional software-factory golden path | [`factory-bootstrap/worked-example/`](factory-bootstrap/worked-example/) |
+| Complete fictional governed-delivery-loop path | [`factory-bootstrap/worked-example/`](factory-bootstrap/worked-example/) |
 | The Twelve Standards — single-page quick reference (tiers, gate classifications, key artifacts, Harness Framework mapping) | [`references/twelve-standards-quick-reference.md`](references/twelve-standards-quick-reference.md) |
 | Pattern quick reference | [`references/pattern-quick-reference.md`](references/pattern-quick-reference.md) |
 | Complete session loop | [`references/complete-session-loop.md`](references/complete-session-loop.md) |
