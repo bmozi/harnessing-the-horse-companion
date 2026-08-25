@@ -45,11 +45,11 @@ The journey produces a useful first result. The book supplies the integrated
 engineering system needed to repeat and adapt it responsibly.
 
 For a stable classroom or team baseline, use the
-[`v2.1.0` release](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.0).
+[`v2.1.1` release](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.1).
 Match it to your book format in [`EDITION-MAP.md`](EDITION-MAP.md), and
 check [`ERRATA.md`](ERRATA.md) for confirmed corrections.
 The printable
-[`Reader Quick Start`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf)
+[`Reader Quick Start`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.1.pdf)
 turns the core path into a six-page handout.
 
 ## What's here

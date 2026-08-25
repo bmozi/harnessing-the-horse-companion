@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "libraryVersion": "2.1.0",
+  "libraryVersion": "2.1.1",
   "modelPolicy": "Use a frontier-capable reasoning or coding model and evaluate adaptations against repository-specific evidence.",
   "prompts": [
     {

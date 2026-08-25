@@ -1,7 +1,7 @@
 # Start Here: One Production-Readiness Journey
 
 Prefer a printable orientation? Download the six-page
-[`Reader Quick Start`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf).
+[`Reader Quick Start`](output/pdf/Harnessing-the-Horse-Reader-Quick-Start-v2.1.1.pdf).
 
 This companion is a working kit for applying the engineering discipline in
 *Harnessing the Horse*. Choose the path that matches the outcome you want. You

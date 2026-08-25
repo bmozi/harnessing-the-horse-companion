@@ -1,8 +1,8 @@
 {
-  "version": "2.1.0",
+  "version": "2.1.1",
   "title": "Harnessing the Horse",
   "subtitle": "Reader Quick Start",
-  "promise": "Move from reading to one governed delivery loop - with artifacts, gates, evidence, and human judgment intact.",
+  "promise": "Move from a request to an evidence-backed SHIP, REVISE, or STOP decision - with scope, gates, evidence, and human judgment intact.",
   "pages": [
     {
       "title": "Your 30-Minute Orientation",
@@ -26,7 +26,7 @@
         ["3. Design", "Define interfaces, blast radius, risks, and rollback expectations."],
         ["4. Generate", "Give the agent a bounded contract and require explicit assumptions and verification markers."],
         ["5. Falsify", "Run automated gates, then use a fresh review pass to try to disprove correctness."],
-        ["6. Decide and learn", "A human accepts, revises, or rejects the change; durable lessons update project memory."]
+        ["6. Decide and learn", "A human records SHIP, REVISE, or STOP; durable lessons update project memory."]
       ],
       "bullets": [
         "Before generation: the contract, exclusions, risks, and required evidence are visible.",
@@ -36,8 +36,8 @@
       "callout": "Human judgment is a control surface, not ceremonial approval. Consequential ambiguity returns to a named owner."
     },
     {
-      "title": "The Public Software Factory Model",
-      "kicker": "A truthful operating model, intentionally separated from private implementation topology.",
+      "title": "From a Governed Loop Toward a Factory",
+      "kicker": "Book 2 establishes one trustworthy delivery loop. Book 3 takes up durable accountability across teams and systems.",
       "image": "diagrams/merlin-factory-architecture-premium.png",
       "bullets": [
         "Intake becomes a bounded Work Order before agents act.",
@@ -58,7 +58,7 @@
         ["Generate safely", "Structured prompt", "Bounded output with assumptions and verification markers"],
         ["Challenge a result", "Disprove-only review", "Concrete counterexamples or an evidence-backed pass"],
         ["Handle a failed gate", "Escalation protocol", "Named owner, options, decision, and audit trail"],
-        ["Bootstrap a factory", "Factory workbook + worked example", "One end-to-end governed task, not an orchestration platform"],
+        ["Bootstrap a governed loop", "Delivery-loop workbook + worked example", "One end-to-end governed task, not an orchestration platform"],
         ["Teach the lifecycle", "Teaching panels + study guides", "A learner can explain where gates and humans intervene"]
       ],
       "callout": "Copy the pattern, not the fictional domain. Replace every project fact, permission, threshold, and risk classification with evidence from your environment."
@@ -83,8 +83,8 @@
   ],
   "links": [
     ["Companion repository", "https://github.com/bmozi/harnessing-the-horse-companion"],
-    ["Stable v2.1.0 release", "https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.0"],
-    ["Start Here", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.0/START-HERE.md"],
-    ["Errata", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.0/ERRATA.md"]
+    ["Stable v2.1.1 release", "https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.1"],
+    ["Start Here", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.1/START-HERE.md"],
+    ["Errata", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.1/ERRATA.md"]
   ]
 }

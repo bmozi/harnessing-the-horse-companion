@@ -5,18 +5,21 @@ companion materials that belong with it.
 
 | Book format | Edition cues | Companion release |
 | --- | --- | --- |
-| Kindle | Revised first edition; Twelve Standards; EXPRESS software-factory path | [`v2.1.0`](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.0) |
-| Paperback | Revised first edition; Twelve Standards; EXPRESS software-factory path | [`v2.1.0`](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.0) |
-| Hardcover | Revised first edition; Twelve Standards; EXPRESS software-factory path | [`v2.1.0`](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.0) |
+| Kindle | Revised first edition; Twelve Standards; EXPRESS software-factory path | [`v2.1.1`](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.1) |
+| Paperback | Revised first edition; Twelve Standards; EXPRESS software-factory path | [`v2.1.1`](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.1) |
+| Hardcover | Revised first edition; Twelve Standards; EXPRESS software-factory path | [`v2.1.1`](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.1) |
 
 The [Kindle edition is available on Amazon](https://www.amazon.com/dp/B0HCR9KHMB).
 
 ## Current Release
 
-The canonical companion for the revised first edition is **v2.1.0**,
-released August 16, 2026. The files on the `main` branch may receive later
+The canonical companion for the revised first edition is **v2.1.1**,
+released August 24, 2026. The files on the `main` branch may receive later
 corrections; use the tagged release when you need a stable classroom or
 team reference.
+
+The [v2.1.0 release](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.0)
+remains available as the evidence-contract baseline.
 
 The [v2.0.0 release](https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.0.0)
 remains available as the original reader-ready baseline.

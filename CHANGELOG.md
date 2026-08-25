@@ -5,6 +5,8 @@ repository are recorded here.
 
 ## [Unreleased]
 
+## [2.1.1] — 2026-08-24
+
 ### Added
 
 - Added a book-to-toolkit practice map and a four-book progression so readers

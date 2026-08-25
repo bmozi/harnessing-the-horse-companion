@@ -199,7 +199,7 @@ def build() -> Path:
                   ("BOTTOMPADDING", (0, 0), (-1, -1), 18),
               ]), hAlign="CENTER"),
         Spacer(1, 1.18 * inch),
-        Paragraph(f"Companion release v{version} | August 16, 2026", st["cover_subtitle"]),
+        Paragraph(f"Companion release v{version} | August 24, 2026", st["cover_subtitle"]),
         Paragraph("John Briggs", st["cover_promise"]),
         PageBreak(),
     ]

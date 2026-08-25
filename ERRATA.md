@@ -5,7 +5,7 @@ public companion materials.
 
 ## Current Status
 
-There are no confirmed errata for companion release **v2.1.0**.
+There are no confirmed errata for companion release **v2.1.1**.
 
 | Confirmed | Affects | Location | Correction | Resolved in |
 | --- | --- | --- | --- | --- |
