@@ -3,7 +3,11 @@
 All notable public changes to the *Harnessing the Horse* companion
 repository are recorded here.
 
-## [Unreleased]
+## [Unreleased (main; not yet tagged)]
+
+- Maintains post-v2.1.2 reader-usability and governed-session documentation
+  changes on the main branch. The tagged `v2.1.2` bundle remains the latest
+  stable release.
 
 ## [2.1.2] — 2026-08-29
 
