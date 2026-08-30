@@ -272,13 +272,10 @@ references and the failure scenario.
 with disposition: FIXED / ACCEPTED / FALSE POSITIVE / DEFERRED]
 
 ## Disposition
-- [ ] APPROVED — all acceptance criteria satisfied, no
-      CRITICAL findings, all MUST-NOT items compliant
-- [ ] APPROVED WITH CONDITIONS — approved pending [specific
-      remediation before merge]
-- [ ] REVISE — [specific revisions required; return to
-      generation]
-- [ ] REJECTED — [reason; return to design or spec phase]
+- [ ] RECOMMEND_SHIP — requirements and MUST-NOT controls pass for this run
+      (the accountable decision owner records the final outcome)
+- [ ] RECOMMEND_REVISE — [specific revisions required; return to generation]
+- [ ] RECOMMEND_STOP — [reason; return to design or spec phase]
 
 ## Sign-off
 [Reviewer name, date]

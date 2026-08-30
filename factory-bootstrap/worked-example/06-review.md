@@ -38,9 +38,14 @@
 3. **VERIFY, resolved:** adapter eligibility was initially inferred from domain
    tests; the async integration test supplied direct evidence.
 
-## Disposition
+## Disposition Recommendation
 
-Approved for the expand/backfill phase. Switching reads and removing the legacy
-field require separate evidence and Work Orders.
+- [ ] RECOMMEND_SHIP
+- [ ] RECOMMEND_REVISE
+- [ ] RECOMMEND_STOP
+
+- Final recommendation: **RECOMMEND_REVISE** for expand/backfill phase safety.
+  Switching reads and removing the legacy field require separate evidence and
+  Work Orders.
 
 Reviewer: Independent senior engineer

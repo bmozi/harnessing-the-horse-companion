@@ -32,6 +32,12 @@ Use this path to understand the operating model and choose a first action:
 
 Use this path for a real, bounded change in an existing repository:
 
+For a small, local change, start with the compact
+[`Small Change Session`](factory-bootstrap/small-change-session.md). It keeps
+the same accountability boundary while combining the records that do not need
+to be separate. Use the full path below when the change crosses an interface,
+data boundary, dependency, deployment track, or material consequence.
+
 1. Create or improve the project context file with the
    [context checklist](factory-bootstrap/01-context-file-checklist.md).
 2. Define the change with the
@@ -42,10 +48,14 @@ Use this path for a real, bounded change in an existing repository:
 5. Generate with the [structured prompt](prompts/structured-prompt.md).
 6. Review with the [disprove-only prompt](prompts/disprove-only-review.md).
 7. Record evidence and learning before declaring the session complete.
-8. Make and record one explicit **SHIP**, **REVISE**, or **STOP** decision.
+8. Make and record one explicit **SHIP**, **REVISE**, or **STOP** decision using the
+   [`SESSION_DECISION.md`](factory-bootstrap/SESSION_DECISION.md).
 
 Read the [completed fictional example](factory-bootstrap/worked-example/README.md)
 before filling the blank artifacts if this is your first session.
+
+The ordered [governed-session pack](factory-bootstrap/governed-session-pack/README.md)
+places each blank artifact beside the matching stage of the worked example.
 
 **Outcome:** a reviewable change whose scope, evidence, limitations, decision,
 and learning survive the chat session that produced it.

@@ -62,13 +62,11 @@ For each item in the MUST-NOT list:
 FIXED / ACCEPTED / FALSE POSITIVE / DEFERRED]
 
 ## Disposition
-- [ ] APPROVED — all requirements satisfied, no critical
-      findings, all MUST-NOT items compliant
-- [ ] APPROVED WITH CONDITIONS — approved pending [specific
-      remediation before merge]
-- [ ] REVISE — [specific revisions required; return to
+- [ ] RECOMMEND_SHIP — requirements and MUST-NOT controls pass for this run
+      (final decision remains in `factory-bootstrap/SESSION_DECISION.md`)
+- [ ] RECOMMEND_REVISE — [specific revisions required; return to
       generation]
-- [ ] REJECTED — [reason; return to design or spec phase]
+- [ ] RECOMMEND_STOP — [reason; return to design or spec phase]
 
 ## Sign-off
 [Reviewer name, date]

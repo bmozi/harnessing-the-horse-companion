@@ -33,6 +33,7 @@ Read the [complete session loop](../references/complete-session-loop.md) before 
   - [ ] MUST-NOT verification
 - [ ] Automated gates run.
 - [ ] REVIEW is written by someone other than the generator, or by a fresh adversarial agent when no second human is available.
+- [ ] [`SESSION_DECISION.md`](SESSION_DECISION.md) is completed as **SHIP**, **REVISE**, or **STOP** with reasons.
 - [ ] Findings have dispositions.
 - [ ] Merge and deploy follow the assigned pipeline track.
 

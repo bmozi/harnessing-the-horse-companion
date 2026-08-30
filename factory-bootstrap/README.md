@@ -41,6 +41,9 @@ larger accountability boundary.
 | `05-safety-rails-checklist.md` | Autonomy and self-improvement constraints | Chapter 16, Chapter 17 |
 | `06-metrics-baseline.md` | Baseline and first-30-days measurement | Chapter 18 |
 | `07-factory-readiness-review.md` | Decision to expand beyond the first governed loop | Chapter 19 |
+| `governed-session-pack/` | Ordered blank artifact chain for one full governed session | Start here for a first full session |
+| `small-change-session.md` | Compact scaffold for a local, reversible change | Use only when its stated boundaries hold |
+| `SESSION_DECISION.md` | Final **SHIP/REVISE/STOP** decision for one loop | Chapter 16, companion complete session loop |
 | `worked-example/` | One complete fictional delivery path from project context through metrics and learning | Read after the session-loop reference |
 
 ## Completion Rule

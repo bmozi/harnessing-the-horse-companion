@@ -29,6 +29,7 @@ services, or self-improvement infrastructure.
 | 5 | [`05-impl-notes.md`](05-impl-notes.md) | What happened, changed, or remained uncertain? |
 | 6 | [`06-review.md`](06-review.md) | What independent evidence supports the decision? |
 | 7 | [`07-metrics-and-learning.md`](07-metrics-and-learning.md) | What outcome and learning feed the next run? |
+| 8 | [`08-session-decision.md`](../SESSION_DECISION.md) | What is the final **SHIP**, **REVISE**, or **STOP** outcome and why? |
 
 ## How to Use the Example
 
@@ -36,7 +37,7 @@ services, or self-improvement infrastructure.
 2. Compare each completed section with its blank companion template.
 3. Copy the blank templates into your own repository.
 4. Replace every fictional fact with evidence from your project.
-5. Delete any section that does not apply only after recording why.
+5. Complete the decision record in [`../SESSION_DECISION.md`](../SESSION_DECISION.md).
 
 Do not copy the example's architecture, thresholds, or test commands blindly.
 The reusable property is the chain of accountability from intent to evidence,
