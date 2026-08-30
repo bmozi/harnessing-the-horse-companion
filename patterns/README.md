@@ -47,11 +47,11 @@ Each pattern reference card follows the same structure:
 | Event Sourcing | Greg Young (2006) — design study in Appendix B | [`event-sourcing.md`](event-sourcing.md) |
 | Express Arc | This book (2026) — emerged in Ch16 Merlin Software Factory | [`express-arc.md`](express-arc.md) |
 
-## Patterns Referenced in the Book (No Reference Card Yet)
+## Patterns Referenced in the Book (Prose Coverage)
 
-These patterns are named and discussed in the book but do not yet
-have a standalone reference card. Each cites the original work and
-is treated in prose in the relevant chapter section.
+These patterns are intentionally covered in the book rather than duplicated as
+standalone companion cards. Each cites the original work and is treated in
+prose in the relevant chapter section.
 
 ### Enterprise Integration Patterns (Hohpe & Woolf, 2003)
 

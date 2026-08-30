@@ -5,6 +5,21 @@ repository are recorded here.
 
 ## [Unreleased]
 
+## [2.1.2] — 2026-08-29
+
+### Added
+
+- Added editable DOCX editions of the Reader Quick Start and five Software
+  Factory Teaching Panels.
+- Added a repeatable reader-usability protocol and structured feedback form.
+
+### Changed
+
+- Rebuilt both release PDFs from semantic Word sources so the PDFs are tagged,
+  searchable, keyboard-readable, and accompanied by equivalent text for every
+  visual.
+- Added CI checks that rebuild the reader documents and reject untagged PDFs.
+
 ## [2.1.1] — 2026-08-24
 
 ### Added

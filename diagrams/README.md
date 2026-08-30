@@ -43,7 +43,7 @@ improvement. Use the following sequence:
 | Conceptual explanation or presentation | [`merlin-software-factory-promo.png`](merlin-software-factory-promo.png) ([HTML source](merlin-software-factory-promo.html)) | Explains the Discover-Design-Build-Verify-Observe arc and the role of gates, memory, and control loops without implementation density. |
 | Reader-facing architecture narrative | [`merlin-architecture-v2.md`](merlin-architecture-v2.md) | Explains responsibilities, evidence flow, verification classes, human judgment, and learning without publishing private implementation topology. |
 | Panel-by-panel teaching set | [`merlin-architecture-v2-visual-1.png`](merlin-architecture-v2-visual-1.png) through [`merlin-architecture-v2-visual-5.png`](merlin-architecture-v2-visual-5.png) ([HTML source](merlin-architecture-v2-visual.html)) | Five portrait panels covering preflight, the EXPRESS arc, verification policy, human judgment, and continuous improvement. |
-| Print-friendly teaching set | [`merlin-architecture-v2-visual.pdf`](merlin-architecture-v2-visual.pdf) | Five A4 portrait pages, one teaching panel per page. |
+| Accessible print-friendly teaching set | [`merlin-architecture-v2-visual.pdf`](merlin-architecture-v2-visual.pdf) | Five tagged A4 portrait pages with semantic headings, embedded alt text, and equivalent text descriptions. |
 | Digital composite | [`merlin-architecture-v2-visual.png`](merlin-architecture-v2-visual.png) | A single tall canvas containing all five teaching panels. |
 | Historical comparison only | [`merlin-architecture.md`](merlin-architecture.md) | Preserves the lesson of the original multi-agent blueprint without publishing its former implementation map. |
 

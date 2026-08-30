@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -143,6 +145,25 @@ def check_versions(errors: list[str]) -> str:
     reader_pdf = ROOT / "output" / "pdf" / f"Harnessing-the-Horse-Reader-Quick-Start-v{version}.pdf"
     if not reader_pdf.exists():
         fail(errors, f"reader quick-start PDF missing for v{version}")
+    reader_docx = ROOT / "output" / "docx" / f"Harnessing-the-Horse-Reader-Quick-Start-v{version}.docx"
+    if not reader_docx.exists():
+        fail(errors, f"reader quick-start DOCX missing for v{version}")
+    panels_pdf = ROOT / "output" / "pdf" / f"Harnessing-the-Horse-Software-Factory-Teaching-Panels-v{version}.pdf"
+    if not panels_pdf.exists():
+        fail(errors, f"teaching-panels PDF missing for v{version}")
+    panels_docx = ROOT / "output" / "docx" / f"Harnessing-the-Horse-Software-Factory-Teaching-Panels-v{version}.docx"
+    if not panels_docx.exists():
+        fail(errors, f"teaching-panels DOCX missing for v{version}")
+    pdfinfo = shutil.which("pdfinfo")
+    if pdfinfo:
+        for pdf in (reader_pdf, panels_pdf, ROOT / "diagrams" / "merlin-architecture-v2-visual.pdf"):
+            if not pdf.exists():
+                continue
+            result = subprocess.run([pdfinfo, str(pdf)], check=False, capture_output=True, text=True)
+            if result.returncode != 0:
+                fail(errors, f"pdfinfo could not inspect: {pdf.relative_to(ROOT)}")
+            elif not re.search(r"^Tagged:\s+yes$", result.stdout, re.MULTILINE | re.IGNORECASE):
+                fail(errors, f"PDF is not tagged: {pdf.relative_to(ROOT)}")
     return version
 
 

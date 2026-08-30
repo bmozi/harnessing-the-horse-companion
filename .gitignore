@@ -29,4 +29,6 @@ dist/
 build/
 *.zip
 *.docx
+!output/docx/
+!output/docx/*.docx
 # Note: .pdf is NOT ignored — diagram exports in diagrams/ are tracked source assets.

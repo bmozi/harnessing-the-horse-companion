@@ -2,7 +2,9 @@
 
 | File | Purpose |
 | --- | --- |
-| `Harnessing-the-Horse-Reader-Quick-Start-v2.1.1.pdf` | Current six-page quick start covering orientation, one governed session, the Book 2-to-Book 3 boundary, artifact selection, and a 30-day adoption sequence |
+| `Harnessing-the-Horse-Reader-Quick-Start-v2.1.2.pdf` | Current tagged six-page quick start with semantic headings, table structure, links, and image description |
+| `Harnessing-the-Horse-Software-Factory-Teaching-Panels-v2.1.2.pdf` | Current tagged five-panel teaching set with semantic headings and equivalent text descriptions |
+| `Harnessing-the-Horse-Reader-Quick-Start-v2.1.1.pdf` | Prior six-page quick start covering orientation, one governed session, the Book 2-to-Book 3 boundary, artifact selection, and a 30-day adoption sequence |
 | `Harnessing-the-Horse-Reader-Quick-Start-v2.1.0.pdf` | Prior six-page quick start covering orientation, one governed session, the public software-factory model, artifact selection, and a 30-day adoption sequence |
 | `Harnessing-the-Horse-Reader-Quick-Start-v2.0.0.pdf` | A six-page quick start covering orientation, one governed session, the public software-factory model, artifact selection, and a 30-day adoption sequence |
 

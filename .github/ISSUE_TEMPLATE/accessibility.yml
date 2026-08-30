@@ -1,0 +1,31 @@
+name: Accessibility barrier
+description: Report a barrier in a companion document or repository path.
+title: "[Accessibility]: "
+labels: [accessibility]
+body:
+  - type: input
+    id: resource
+    attributes:
+      label: Resource and location
+      description: Name the file and page, section, or link where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: Intended task and barrier
+      description: What were you trying to do, and what prevented completion?
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Reading environment
+      description: Device, operating system, application, browser, and assistive technology if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      description: Optional; tell us what would have made the task work.

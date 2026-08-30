@@ -1,5 +1,5 @@
 {
-  "version": "2.1.1",
+  "version": "2.1.2",
   "title": "Harnessing the Horse",
   "subtitle": "Reader Quick Start",
   "promise": "Move from a request to an evidence-backed SHIP, REVISE, or STOP decision - with scope, gates, evidence, and human judgment intact.",
@@ -83,8 +83,8 @@
   ],
   "links": [
     ["Companion repository", "https://github.com/bmozi/harnessing-the-horse-companion"],
-    ["Stable v2.1.1 release", "https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.1"],
-    ["Start Here", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.1/START-HERE.md"],
-    ["Errata", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.1/ERRATA.md"]
+    ["Stable v2.1.2 release", "https://github.com/bmozi/harnessing-the-horse-companion/releases/tag/v2.1.2"],
+    ["Start Here", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.2/START-HERE.md"],
+    ["Errata", "https://github.com/bmozi/harnessing-the-horse-companion/blob/v2.1.2/ERRATA.md"]
   ]
 }
