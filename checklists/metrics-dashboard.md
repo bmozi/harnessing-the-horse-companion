@@ -61,7 +61,7 @@ human-generated** (see the Attribution section below).
 
 | Metric | Measurement | Healthy threshold |
 | --- | --- | --- |
-| **Regeneration Rate** | % of agent-generated changes requiring more than one generation cycle before passing review | **< 20%** for mature teams; **40–60%** at the Crawl stage; **> 60% = stop generating** and invest in spec quality |
+| **Regeneration Rate** | % of agent-generated changes requiring more than one generation cycle before passing review | Uncalibrated starting bands: aim **< 20%**; investigate **40–60%**; **> 60%** prompts a pause in expansion and diagnosis of failed cycles |
 | **Review Findings by Category** | Per-PR finding count split by: security / correctness / style / architecture | Trends matter more than absolute numbers |
 | **Test Coverage on New Code** | Coverage % on agent-generated vs. human-generated changes | Agent code often has lower edge-case coverage; track the gap |
 | **Post-Merge Defect Rate** | Defects per merged PR within 30 days of deployment | Trend by source (agent vs. human) |
@@ -120,19 +120,21 @@ regenerates again. Each iteration consumes:
 
 | Regeneration Rate | Diagnosis | Intervention |
 | --- | --- | --- |
-| **< 20%** | Healthy (mature team) | Continue |
-| **20–40%** | Walk-stage team in progress | Continue, monitor trend |
-| **40–60%** | Crawl-stage; expected | Focus on spec quality |
-| **> 60%** | **STOP GENERATING** | Specifications are insufficient; underspecified means the agent cannot produce acceptable output on first pass. Invest in spec quality before generating more. |
+| **< 20%** | Initial aim, not proof of health | Check acceptance rigor and escaped defects |
+| **20–40%** | Local investigation band | Inspect comparable work and trend |
+| **40–60%** | Possible crawl investigation band, not inherently acceptable | Inspect failed cycles and consequences |
+| **> 60%** | Pause expansion and investigate | Diagnose the cause before choosing a remedy |
 
-A high regeneration rate indicates one of three problems:
+These are uncalibrated starting bands, not established healthy rates. A high
+regeneration rate raises several hypotheses:
 
 1. **Specification underspecified** (Standard 1 failure)
 2. **Agent's context file insufficient** (Standard 11 failure)
 3. **Quality gates catching issues too late** (Standard 6 failure)
 
-Each diagnosis has a different intervention. Without regeneration
-rate tracking, the team cannot distinguish them.
+Task difficulty, tool failures, changed requirements, and review criteria
+can also affect the rate. Inspect rejected changes to distinguish causes;
+the rate alone cannot identify one.
 
 ---
 
@@ -215,3 +217,7 @@ quality throughput lens, and the attribution discipline are the
 book's framework.
 
 © 2026 John Briggs. Licensed under CC BY-NC-SA 4.0 (see LICENSE-CONTENT). Commercial use requires separate written permission.
+
+## Interpretation boundary
+
+Capture a comparable pre-adoption baseline before the pilot. Record mixed and unknown authorship explicitly. Execution coverage does not measure assertion quality. Read failure, regeneration, review time and delivered value jointly: lower failure rates alone do not establish that one team outperforms another. Keep modeled labor, elapsed CI latency and observed outcomes separate.

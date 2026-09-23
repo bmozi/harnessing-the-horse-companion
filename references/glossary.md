@@ -58,11 +58,10 @@ companion quality-gate configuration reference.
 **Adversarial validation** — The agent mode of Standard 7,
 Falsification Review (Chapter 7). A fresh-instance agent
 attacks the generated code, looking for failure modes the
-generating session may have missed. Structurally required
-because *context contamination* defeats self-review within
-the same session. The fresh instance has none of the
-generating session's assumptions and so reads the code as a
-skeptical stranger.
+generating session may have missed. Removing the generation
+conversation reduces one source of assumption carryover; it does
+not remove shared model biases or errors in the specification.
+Verify candidate findings and treat silence as limited evidence.
 
 **Agent gateway** — An infrastructure layer that mediates
 all agent-to-LLM communication, providing circuit breaker
@@ -245,8 +244,9 @@ defaults on write tools, explicit escalation. See Chapter 17.
 
 **Context contamination** — The condition in which
 assumptions and framings from one part of an agent
-session's reasoning leak into another part, defeating
-attempts at independent review within the same session.
+session's reasoning influence another part, including review
+of its own output. Self-review can find errors but is not an
+independent check of the assumptions that produced the code.
 The structural argument for fresh-instance adversarial
 validation (Standard 7, agent mode). See Chapter 7.
 
@@ -769,11 +769,11 @@ generation cycle before passing review. A coinage of this
 book, deliberately distinct from DORA's *rework rate* (a
 deployment metric: the percentage of deployments that are
 unplanned work performed to fix user-facing bugs — see *DORA
-metrics*). Targets: under 20% for mature teams; 40–60% is
-expected at the Crawl stage; over 60% indicates stop
-generating and invest in specification quality. All
-crawl/walk/run thresholds in this book use regeneration
-rate. See Chapter 3, Chapter 18.
+metrics*). Proposed starting bands: aim below 20%; investigate
+40–60%; above 60% prompts a pause in expansion and inspection
+of failed cycles. These are uncalibrated, not established healthy
+rates or a diagnosis of specification quality. Interpret them with
+task difficulty, review rigor, and consequences. See Chapters 3 and 18.
 
 **REVIEW.md** — The pipeline artifact recording the
 reviewer's evidence-backed verdict. Sections: gate status,

@@ -1,17 +1,17 @@
 # Disprove-Only Review Prompt
 
 > **Chapter:** ch07 — Generation, Verification, and Review (Standard
-> 8: Falsification Review, human disprove-only mode)
-> **Last revised:** 2026-06-16
+> 7: Falsification Review, human disprove-only mode)
+> **Last revised:** 2026-09-10
 > **Model assumed:** Frontier model
 > **Inspired by:** Cloudflare's "disprove correctness" review practice
 > **Use this for:** Reviewing AI-generated code. Your task is NOT to
 > confirm correctness. Your task is to find how this code FAILS.
 
-"Looks good to me" is not a review. A reviewer who has a specification
-can ask: "Does this code satisfy requirement 3?" That question has a
-binary answer. A reviewer who has no specification can only ask: "Does
-this code look right?" That question has no answer.
+A specification gives review explicit claims to test. Read the changed
+code, tests, and relevant surrounding paths to understand those claims.
+Falsification directs that work; it does not replace comprehension.
+Split or defer changes that exceed available review capacity.
 
 ---
 
@@ -55,6 +55,8 @@ Search for:
       mutable state
 
 ### Output
+State which code and surrounding paths you inspected, the evidence checked,
+and any unresolved gaps. An unresolved material gap prevents approval.
 For each finding:
 1. File and line number
 2. Classification: CRITICAL / MAJOR / MINOR

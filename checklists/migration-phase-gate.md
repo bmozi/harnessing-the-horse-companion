@@ -19,10 +19,10 @@ understand what "done" means for each phase.
 # Phase Gate Checklist: [Phase Name] → [Next Phase]
 
 ## Pre-Conditions (all must be TRUE to proceed)
-- [ ] Parallel-run window completed: [N] days with zero divergence alerts
-- [ ] Data reconciliation: old-system and new-system record counts match within [tolerance]%
+- [ ] Observation window completed: [N] days with no unresolved divergence outside the agreed lag/tolerance policy
+- [ ] Data reconciliation: identities and critical fields agree at a common watermark under the phase's mismatch policy; counts alone are insufficient
 - [ ] Feature flag: new path is serving [X]% of traffic via gradual rollout
-- [ ] Rollback tested: feature flag revert confirmed in staging within [N] seconds
+- [ ] Phase-specific recovery rehearsed within [N] seconds: flag/code rollback only inside its tested compatibility and data-state horizon; approved restore or forward repair after contraction
 - [ ] Performance baseline: p99 latency within [N]ms of old path
 
 ## Acceptance Criteria
@@ -31,11 +31,17 @@ understand what "done" means for each phase.
 - [ ] Integration tests passing against new path (not just old path)
 - [ ] Monitoring dashboards show no error rate increase above baseline
 
-## Rollback Triggers (any one = revert immediately)
+## Containment and Recovery Triggers (any one = stop expansion)
 - [ ] Error rate exceeds [X]% for [N] minutes
-- [ ] Data divergence detected between old and new systems
+- [ ] Data divergence outside the agreed lag/tolerance policy at a common watermark
 - [ ] Customer-reported issue attributable to migration
 - [ ] Performance degradation exceeding [N]ms p99
+
+Contain affected work and use the phase-specific recovery plan. Roll back only
+while the tested compatibility and data-state conditions hold. Otherwise fence
+writes, isolate and reconcile pending effects, then use approved restore or
+forward repair. Allowed propagation lag stays under observation; it is not
+itself a recovery trigger.
 
 ## Sign-Off
 - [ ] Engineer: _____________ Date: _______

@@ -64,13 +64,14 @@ of other factors.
 - [ ] ASYNC gates are resolved before merge
 - [ ] See `deployment-safety-checklist.md` for the full classification
 
-> **No merge with failing blocking gates.**
+> **No merge with unresolved blocking findings.** Permitted dispositions follow
+> the escalation protocol; non-waivable security classes must be fixed.
 
 ## DN5 — Review Complete ⛔ BLOCKING
 
 - [ ] `REVIEW.md` exists
-- [ ] Falsification review findings are recorded (agent adversarial
-      and human disprove-only modes)
+- [ ] Review findings match the selected track: both agent adversarial and human
+      disprove-only modes for Full; designated human review for Standard; expedited human review for Hotfix
 - [ ] All BLOCKING findings are resolved
 - [ ] The reviewing engineer can explain the algorithm
 - [ ] The reviewing engineer can explain the failure modes

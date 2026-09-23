@@ -115,14 +115,14 @@ without the overhead of a separate document.
 
 ## Worked Example: Agent Implications in Practice
 
-For a decision to use PostgreSQL advisory locks for idempotency
-instead of a unique constraint approach (because advisory locks allow
-detection of "in-progress" events, not just the case where a previous
-processing attempt completed):
+For the service idempotency protocol in Chapter 7, which coordinates
+concurrent attempts and commits the durable processed-event record with
+the local business write in one transaction:
 
 > **Agent Implications.** Any agent-generated code that implements
-> idempotency in this service must use PostgreSQL advisory locks, not
-> unique constraints. The advisory lock pattern is defined in
+> idempotency in this service must preserve concurrent-attempt control,
+> durable duplicate recognition, and atomic local business writes.
+> The existing protocol is defined in
 > `/services/common/idempotency.py`. Agents must import and use the
 > existing `IdempotencyGuard` class rather than implementing their own
 > idempotency mechanism. If a task specification requires idempotency

@@ -35,6 +35,13 @@ hygiene rule).
 ## Review Date
 [Date]
 
+## Inspected Scope and Limits
+- Code and surrounding paths read: [files and paths]
+- Evidence checked: [tests, traces, and results]
+- Unresolved understanding or coverage gaps: [details or none]
+- Disposition: [proceed / clarify / split / obtain qualified review]
+A material unresolved gap prevents approval.
+
 ## Gate Status
 - [ ] Compilation: PASS / FAIL
 - [ ] Unit tests: PASS / FAIL

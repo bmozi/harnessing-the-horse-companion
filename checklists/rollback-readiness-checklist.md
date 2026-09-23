@@ -34,7 +34,9 @@ interpretation.
 
 ### Migration rollback
 
-The change includes a database migration.
+The change includes a reversible database migration. If reversal would lose
+data or cannot restore required behavior, use the non-reversible class and
+a tested containment or recovery plan instead of inventing a down script.
 
 - [ ] This is a migration rollback (Step 2 + Step 3)
 - [ ] Forward migration has been applied successfully in staging

@@ -42,8 +42,9 @@ produce production incidents.
 - [ ] API contract validation — generated OpenAPI matches
       implementation
 
-> A codebase that deploys with a BLOCKING gate failure has chosen
-> speed over safety. The choice is always wrong.
+> Unresolved blocking findings hold deployment. Permitted exceptions require
+> the authority, evidence and remediation controls in the escalation protocol;
+> non-waivable security classes cannot be accepted as exceptions.
 
 ### ADVISORY gates — surfaced for human judgment
 
@@ -78,44 +79,42 @@ Valuable but expensive checks.
 
 Match the deployment process to the risk level of the change.
 
+### Eligibility screen — before selecting any track
+
+Record affected consumers, external contracts, schemas, security boundaries,
+reversibility and uncertainty. File count alone does not establish low risk.
+
 ### Hotfix track
 
-For: typo fixes, configuration value updates, single-file formatting
-changes.
+Only for an emergency production failure with a contained, reversible fix in
+three files or fewer, with no schema, external-contract or security-boundary
+change. Routine typos and formatting use Standard.
 
-- [ ] Lint passes
-- [ ] Type check passes
-- [ ] Targeted test suite passes
-- [ ] Reviewer confirms change does what it claims and nothing more
-- [ ] Deployment immediate after review
+- [ ] Blocking gates pass; non-waivable security gates have no exception
+- [ ] Rollback plan verified before deploy
+- [ ] Designated human reviewer signs the expedited review
+- [ ] SPEC and full REVIEW completed within 24 hours
 
-> This track exists to prevent the pathology where fixing a misspelled
-> label requires a two-hour pipeline run.
+### Standard track
 
-### Standard track (default for agent-generated code)
+For contained enhancements and known fixes after the impact screen.
 
-For: new endpoints, UI components, business logic changes, test
-additions.
-
-- [ ] Full BLOCKING gate suite
-- [ ] REVIEW.md with design decisions and risk assessment
-- [ ] Cross-component integration tests
-- [ ] Full comprehension check (Standard 7 / `../prompts/adversarial-validation.md`)
-      complete
+- [ ] Abbreviated SPEC with acceptance criteria and MUST-NOT list
+- [ ] Blocking gates and applicable integration checks pass
+- [ ] Designated human disprove-only review recorded in REVIEW.md
+- [ ] Reviewer confirms the impact screen still holds
 
 ### Full track
 
-For: database migrations, authentication changes, payment processing,
-infrastructure modifications, cross-module changes, cross-boundary
-changes.
+For new features/endpoints, migrations, external contracts, new dependencies,
+security boundaries, irreversible or otherwise high-risk effects, cross-module
+changes or unclear root causes.
 
-- [ ] Everything in Standard track
-- [ ] Architectural review against the five questions
-      (`integration-verification-checklist.md`)
-- [ ] Extended integration testing
-- [ ] Performance baseline comparison
-- [ ] Security review with dependency audit
-- [ ] Designated second reviewer signed off
+- [ ] Full SPEC and DESIGN approved before generation
+- [ ] All applicable gates and blast-radius analysis complete
+- [ ] Fresh adversarial agent receives SPEC and code, not implementation notes
+- [ ] Separate designated human disprove-only review recorded
+- [ ] Recovery plan covers committed data and external effects
 
 ---
 

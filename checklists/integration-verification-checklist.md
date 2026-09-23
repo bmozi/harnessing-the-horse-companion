@@ -83,7 +83,7 @@ change harder**.
 
 ## The Five Architectural Review Questions
 
-Before merge, the change must answer all five **affirmatively**.
+Before merge, questions 1, 4 and 5 require yes; questions 2 and 3 require no or reviewer-approved justification.
 Adapted from Cloudflare deployment review practices and refined
 through the Merlin Software Factory.
 
@@ -108,8 +108,7 @@ through the Merlin Software Factory.
       without reading the source? Logging, metrics, health checks,
       alerts — not nice-to-haves, requirements.
 
-**If any of these five cannot be answered "yes," the change is not
-ready for merge.**
+**Every answer needs evidence and the expected disposition above before merge.**
 
 ---
 

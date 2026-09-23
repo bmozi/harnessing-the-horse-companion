@@ -27,7 +27,7 @@ A quality gate has failed. Complete this assessment before any override is consi
 - How long has the engineer been working on this issue? [duration]
 - How many fix iterations have been attempted? [count]
 - Is the issue converging toward resolution? [yes/no, with evidence]
-- If duration > 30 minutes OR iterations > 3 AND not converging:
+- If duration >= 30 minutes OR iterations >= 3:
   STOP. Document and escalate to human. Do not iterate further.
 
 ### Override Assessment

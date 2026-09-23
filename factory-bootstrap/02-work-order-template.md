@@ -52,6 +52,8 @@ Draft | Approved | In Progress | Review | Done | Superseded
 
 Hotfix | Standard | Full
 
+Record an impact screen first. Hotfix is emergency-only, <=3 files, contained and reversible, with no schema/external-contract/security-boundary change. New features and high-risk changes use Full; known contained fixes/enhancements may use Standard. Full requires fresh agent and separate human review; every track retains human review.
+
 Justification:
 
 ## Context To Load

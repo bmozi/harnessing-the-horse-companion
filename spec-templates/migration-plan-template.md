@@ -77,11 +77,13 @@ machine-readable acceptance criteria. See
 `../checklists/migration-phase-gate.md` for the per-phase gate
 template.
 
-## Rollback Procedure (per phase)
+## Recovery Procedure (per phase)
 
-For each phase, link to that phase's rollback procedure. Every phase
-must have a tested rollback. Untested rollback is not a rollback —
-it's a prayer.
+For each phase, link to its tested recovery procedure and name the compatibility
+and data-state conditions under which rollback remains safe. Fence new writes
+and reconcile pending or indeterminate effects before transferring ownership.
+After contraction closes compatibility, name approved restore or forward repair
+rather than promising that old code can simply be redeployed.
 
 See `../checklists/rollback-readiness-checklist.md` for the rollback
 classification and testing discipline.
@@ -201,3 +203,12 @@ Adapted from Chapter 12 of *Harnessing the Horse*, Section 12.2. The
 Strangler Fig migration pattern is from Martin Fowler (2004).
 
 © 2026 John Briggs. Licensed under CC BY-NC-SA 4.0 (see LICENSE-CONTENT). Commercial use requires separate written permission.
+
+## Recovery and equivalence checks
+
+- Establish an initial snapshot plus change watermark before claiming shadow parity.
+- Enable dual-write/change capture before backfill; protect newer writes.
+- Compare identities and critical fields at a common watermark; separate bounded lag from semantic mismatches.
+- Track durable external attempts as confirmed, rejected or indeterminate. A checkpoint alone cannot resolve remote success followed by a lost response; reconcile by provider idempotency/reference before retry.
+- Fence new writes and reconcile pending/indeterminate writes before routing back.
+- Treat contraction/decommission as closing compatibility: require recovery rehearsal, retained history and explicit irreversible-step approval.

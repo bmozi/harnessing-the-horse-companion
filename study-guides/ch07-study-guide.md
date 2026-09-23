@@ -9,7 +9,7 @@ Student and self-study material moved from Chapter 7 so the book's main reading 
 1. Construct a structured generation prompt containing testable requirements, all five constraint categories, a specific MUST-NOT list, an output format, and review criteria.
 2. Classify quality checks into BLOCKING, ADVISORY, INFORMATIONAL, and ASYNC tiers and defend each classification against the worst-case consequence of shipping past it.
 3. Apply the three-question disprove-only review to agent-generated code, documenting findings with location, severity, and failure scenario.
-4. Explain why context contamination structurally defeats self-review, and construct an adversarial validation pass with verified context isolation.
+4. Explain how shared assumptions can limit self-review, and construct a fresh-context adversarial pass while recognizing its remaining biases.
 5. Construct an escalation record for a gate failure, including root cause, thrashing check, authority level, and remediation plan.
 6. Evaluate tasks for delegation using the Task Fit Matrix and identify conditional fits that are weak fits in disguise.
 
@@ -17,11 +17,11 @@ Student and self-study material moved from Chapter 7 so the book's main reading 
 
 - **Adversarial validation** — The agent mode of Standard 7: a fresh-instance agent attacks the generated code with an explicit mandate to find failures, reading it as a skeptical stranger.
 - **Disprove-only review** — The human mode of Standard 7: the reviewer's task is to find how the code fails, structured as three questions rather than a holistic read.
-- **Context contamination** — The condition in which a session's assumptions leak into its own review, making self-review structurally unreliable; the argument for fresh-instance validation.
+- **Context contamination** — The condition in which a session's assumptions leak into its own review, limiting its value as independent evidence; fresh-instance validation reduces carryover but does not remove shared biases.
 - **Four-tier gate classification** — BLOCKING, ADVISORY, INFORMATIONAL, ASYNC: the book's authoritative classification of automated quality gates, defined in this chapter.
 - **Thrashing** — Repeated fix iterations against the same failure without convergence; the Standard 6 trigger is 30 minutes or three iterations, whichever comes first.
 - **ESCALATION.md** — The Standard 6 artifact documenting gate overrides and thrashing escalations: failure details, root cause, thrashing check, authority, remediation plan.
-- **Verification stance markers** — The `verified` / `ASSUMPTION` / `VERIFY` convention for factual claims in generated code, eliminating the confidently stated falsehood.
+- **Verification stance markers** — The `verified` / `ASSUMPTION` / `VERIFY` convention for factual claims in generated code, making claims and uncertainty inspectable; markers still require source verification.
 - **Subagent challenge clauses** — Prompt clauses that shift the agent's incentive from minimizing visible uncertainty to surfacing it explicitly.
 - **Fail loud** — The principle that "completed" is wrong if anything was skipped silently; uncertainty is surfaced, never hidden behind a tidy summary.
 - **The 70% problem** — Osmani's observation that AI rapidly produces the happy-path 70% of a solution while the hard 30% — edge cases, hardening, integration — is where the defects live.

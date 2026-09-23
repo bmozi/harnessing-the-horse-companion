@@ -184,3 +184,10 @@ and the security review checklist are the book's extension of
 Standard 10.
 
 © 2026 John Briggs. Licensed under CC BY-NC-SA 4.0 (see LICENSE-CONTENT). Commercial use requires separate written permission.
+
+## Execution and audit boundaries
+
+- [ ] Test indirect execution through editable test/build scripts; command denials alone are not containment.
+- [ ] Scoped identities and enforced filesystem/network/process limits keep protected credentials and remote-write authority outside agent execution.
+- [ ] Logs and previews use allowlisted, redacted summaries; no raw credentials, queries or request/response bodies by default.
+- [ ] Any retained diagnostic payload has explicit access, retention and deletion controls.

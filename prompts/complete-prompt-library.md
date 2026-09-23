@@ -389,8 +389,7 @@ override is considered.
 - Duration on this issue: [N minutes]
 - Fix iterations attempted: [N]
 - Converging toward resolution? [yes/no, with evidence]
-- If duration > 30 minutes OR iterations > 3 AND not
-  converging: STOP. Document and escalate to human.
+- If duration >= 30 minutes OR iterations >= 3: STOP. Document and escalate to human.
 
 ### Override Assessment (if override is requested)
 - Authority level required: [1 / 2 / 3 / 4-no-override]

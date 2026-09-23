@@ -148,8 +148,9 @@ that loads the stale copy.
 
 ## Failure Modes
 
-- **Too long** — exceeds 2,000 tokens and the middle gets ignored.
-  Layer it: root short, module-level for detail.
+- **Too long** — irrelevant or stale material can obscure important rules;
+  there is no universal 2,000-token failure threshold. Keep root guidance
+  focused, scope detail by module, and test retrieval of critical constraints.
 - **Too short** — "This is a Go project using PostgreSQL" is barely
   better than nothing. The Conventions and Constraints sections carry
   the weight.
