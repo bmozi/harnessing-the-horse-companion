@@ -36,6 +36,10 @@ The book stands alone. The toolkit extends it without reproducing it:
 
 ## Start Here
 
+For short explanations and a four-lesson verification path, try the new
+[AI engineering learning pilot](learning/README.md). It is a main-branch pilot,
+separate from the tagged v2.1.2 toolkit.
+
 New to the companion? Follow [`START-HERE.md`](START-HERE.md) for a
 30-minute orientation or one complete production-readiness journey:
 
