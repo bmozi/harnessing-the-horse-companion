@@ -43,5 +43,6 @@ Book connection: Harnessing the Horse, Chapter 13; Agentic Systems Architecture,
 - [Dry-run-default pattern](https://github.com/bmozi/harnessing-the-horse-companion/blob/main/patterns/dry-run-default.md)
 - [Scoped authorization token](https://github.com/bmozi/harnessing-the-horse-companion/blob/main/patterns/scoped-authorization-token.md)
 - [Integration pattern catalog](https://github.com/bmozi/harnessing-the-horse-companion/blob/main/references/pattern-catalog.md)
+- [Governed tool contract](https://github.com/bmozi/agentic-systems-architecture-companion/blob/main/governed-tool-contract.md)
 
 Author: John Briggs. Updated 2026-11-24. This is original companion learning material; constructed examples are labeled.

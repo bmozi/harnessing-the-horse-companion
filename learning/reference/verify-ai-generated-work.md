@@ -43,5 +43,6 @@ Book connection: Harnessing the Horse, Chapters 7–8; The Accountable AI Softwa
 - [Quality-gate configuration reference](https://github.com/bmozi/harnessing-the-horse-companion/blob/main/references/quality-gate-configuration-reference.md)
 - [Session decision record](https://github.com/bmozi/harnessing-the-horse-companion/blob/main/factory-bootstrap/SESSION_DECISION.md)
 - [Disprove-only review prompt](https://github.com/bmozi/harnessing-the-horse-companion/blob/main/prompts/disprove-only-review.md)
+- [Risk-to-evidence matrix](https://github.com/bmozi/accountable-ai-software-factory-companion/blob/main/companion/risk-to-evidence-matrix.md)
 
 Author: John Briggs. Updated 2026-11-24. This is original companion learning material; constructed examples are labeled.
