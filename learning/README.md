@@ -7,7 +7,7 @@ use one reference when you have a question:
 - [What belongs in an AI agent context file?](reference/useful-context-files.md)
 - [How do you limit what an AI tool can do?](reference/bound-tool-authority.md)
 
-## Four lessons and one evidence record
+## Verification: four lessons and one evidence record
 
 1. [Name the result you need to prove](verification/name-the-claim.md)
 2. [Choose evidence that can challenge the claim](verification/choose-the-check.md)
@@ -29,3 +29,20 @@ reader trial or guaranteed search visibility is claimed.
 Written content retains this repository's CC BY-NC-SA 4.0 license. The website
 shows attribution and the applicable license. Existing executable examples
 retain their separate licenses.
+
+## Context path
+
+1. [Separate project rules from the current task](context/separate-project-from-task.md)
+2. [Write a small context map](context/write-a-small-context-map.md)
+3. [Check source authority and currency](context/check-source-currency.md)
+4. [Test and maintain the handoff](context/test-the-handoff.md)
+
+The [public discovery reference](reference/public-discovery-and-ai-citations.md)
+and [discovery practice](../DISCOVERABILITY.md) explain the publishing checks and
+the distinction between technical access and actual citations. The
+[companion directory](companions.json) links the thirteen verified public
+repositories; each retains its own licensing and evidence statements.
+
+The canonical learning format is now schema version 2 with a `courses` array.
+Earlier website imports remain identifiable by their pinned commit. There are
+two four-lesson paths; the twelve-topic map remains a coverage map.

@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "title": "AI Engineering Field Guide",
   "author": "John Briggs",
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "status": "Public pilot; author and reader feedback invited",
   "license": "CC BY-NC-SA 4.0; executable examples retain their own licenses",
   "references": [
@@ -76,87 +76,29 @@
         }
       ],
       "body": "## The short answer\n\nGive a tool a narrow job and enforce its permissions in code or the service boundary. A prompt saying “be careful” is not authorization, and an agent's confirmation flag is not independent human approval.\n\n## How it works\n\nName the operation, caller, permitted records or tenant, allowed effects, and limits. The tool or underlying API must check those conditions when the operation executes. Keep a clear distinction between describing a proposed change and committing it.\n\nFor operations with consequential effects, specify what happens when the caller times out without knowing whether the operation succeeded. A safe response may require looking up an operation record rather than blindly retrying the write.\n\n## A constructed example\n\nA fictional customer-support agent may prepare a refund proposal for one order. A separate authorized operation commits an approved refund within the allowed amount. The service checks identity, tenant, amount, and the approval record. Giving the agent a tool called approve_everything would erase the boundary that the workflow needs.\n\n## When to use it\n\nApply this when an assistant can write data, send messages, spend money, change permissions, or invoke another system. Read-only tools still need data-access and cost boundaries.\n\n## What to watch for\n\n- A generic proxy tool that exposes more authority than its task needs.\n- A preview that leaks private data or produces hidden side effects.\n- A confirmation field treated as proof of independent approval.\n- Retries creating duplicate effects after an ambiguous timeout.\n- Logs that cannot connect the request to the resulting action.\n\n## Try it\n\nChoose one tool and write its allowed action in one sentence. Identify where identity and scope are enforced, which effects are withheld, and how an owner can stop or reconcile the operation. Mark unknowns instead of inventing a successful control test.\n\n## Check your understanding\n\nTool discovery answers “what can this interface expose?” Authorization answers “what may this caller do now?” Keep those questions separate when using MCP or any other tool protocol.\n"
+    },
+    {
+      "slug": "public-discovery-and-ai-citations",
+      "title": "How can readers and AI systems find your public work?",
+      "summary": "Publish useful, attributable answers on accessible public pages, connect them to maintained sources, and measure actual discovery separately from technical access.",
+      "book": "Publishing practice across the books and public companions; private manuscripts remain outside the public corpus",
+      "sources": [
+        {
+          "title": "Google: AI features and your website",
+          "url": "https://developers.google.com/search/docs/appearance/ai-features"
+        },
+        {
+          "title": "Google: robots.txt introduction",
+          "url": "https://developers.google.com/search/docs/crawling-indexing/robots/intro"
+        },
+        {
+          "title": "Public companion discovery practice",
+          "url": "https://github.com/bmozi/harnessing-the-horse-companion/blob/main/DISCOVERABILITY.md"
+        }
+      ],
+      "body": "## The short answer\n\nMake a useful public explanation easy to read, attribute, and reach. Name a real question, answer it clearly, show an example and limitations, and link to the supporting sources. These practices help people use and check your work; they do not guarantee search indexing or AI citations.\n\n## How it works\n\nFor a public website, use descriptive titles, a canonical address, readable rendered text, working links, compatible crawl and index directives, and a sitemap containing only intended public pages. Structured data should describe what a reader can actually see. A short machine-readable index can be convenient without being a special ranking requirement.\n\nFor a public GitHub companion, make the first useful task easy to find. Identify the author, title, appropriate version, licensing, sources and correction path. Citation instructions help someone attribute the resource; they are not proof that an assistant will cite it.\n\n## A constructed example\n\nAn author has a private manuscript and a public verification worksheet. A short public reference explains how to match a completion claim to evidence and links to the worksheet and book chapter. The public page gives a reader something useful without exposing the private manuscript or claiming that the worksheet certifies production readiness.\n\n## When to use it\n\nApply these checks to intended public articles, documentation, course pages, companion repositories and product resources. Keep confidential drafts, internal systems and restricted records outside the public corpus. A discovery goal does not authorize removing their access controls or changing training permissions.\n\n## What to watch for\n\n- A page that is public to a browser but blocked from indexing or required assets.\n- Structured data that invents reviews, results, authority or qualifications.\n- A copied explanation drifting away from the source that owns it.\n- Keyword repetition or many thin pages replacing a useful answer.\n- Treating a successful HTTP request as proof of indexing, citation or commercial value.\n\n## Try it\n\nChoose one resource you intend to publish. Check its answer, byline, date or version, source links, license and correction route. If it is a website, check the actual public response, canonical URL, rendered content, robots directives and sitemap entry. Keep private routes protected while testing.\n\n## Measure distinct outcomes\n\nRecord public access, observed indexing, actual assistant citations, reader usefulness, learning and commercial outcomes separately. For a citation observation, retain the date, provider or model, exact question, settings and cited URL. If nothing has been observed yet, say so. Do not claim a gain from technical checks alone.\n"
     }
   ],
-  "course": {
-    "slug": "verification",
-    "title": "Verify one AI-assisted change",
-    "summary": "Four lessons take you from a completion claim to a reviewable decision. Keep one evidence record as you work.",
-    "lessons": [
-      {
-        "slug": "name-the-claim",
-        "title": "Name the result you need to prove",
-        "summary": "Replace a vague completion claim with one observable acceptance condition.",
-        "reference": "verify-ai-generated-work",
-        "body": "## Start with the claim\n\nAn agent reports: “The CSV export works.” Before reviewing its implementation, ask what a reader or consumer must be able to do with the exported file.\n\nIn this constructed exercise, the requirement is: the export preserves all 25 selected records, writes exactly the agreed columns, and can be opened by the intended consumer. These are three claims. A file existing on disk establishes none of them on its own.\n\n## Your turn\n\nChoose one recent AI-assisted task, or use the CSV example. Write one sentence describing a result you could observe. Add the revision or artifact you will inspect and one thing outside your current claim.\n\nUse this small record:\n\n```text\nClaim:\nRevision or artifact:\nExpected observation:\nOutside this check:\n```\n\n## Compare your work\n\nA useful answer names a behavior and a boundary. “The export is good” does not. “The exported file contains all 25 selected records and no extra records” gives a reviewer a specific result to investigate.\n\nKeep this record. You will choose a check for it in the next lesson.\n",
-        "practice": "I wrote one observable claim, identified its artifact or revision, and named a limitation.",
-        "question": "Which claim gives you the clearest next verification step?",
-        "options": [
-          "The agent is confident the export works.",
-          "The exported file contains exactly the 25 selected records.",
-          "The code looks professional.",
-          "The task took less time than expected."
-        ],
-        "answer": 1,
-        "feedback": "The second claim names a count and a selection boundary that a check can investigate. Confidence, appearance, and elapsed time do not establish the file contents.",
-        "retrieval": "Tomorrow, explain why “a file was created” and “the right file was created” require different evidence."
-      },
-      {
-        "slug": "choose-the-check",
-        "title": "Choose evidence that can challenge the claim",
-        "summary": "Match a claim to a check, run it, and retain the observed result.",
-        "reference": "verify-ai-generated-work",
-        "body": "## Pick a check that reaches the result\n\nFor the CSV example, checking the generated file against the selected record identifiers can challenge the completeness claim. Running a formatter cannot. A unit test of a helper may be useful, but it may not exercise the actual exported file.\n\n## Your turn\n\nExtend your record with the check you will run and the observation you actually receive. Use a disposable local fixture if you do not have an appropriate real task. If you cannot run the check, mark it unrun and explain what that prevents you from concluding.\n\n```text\nClaim:\nRevision or artifact:\nCheck or procedure:\nObserved result:\nWhat this result supports:\nStill untested:\n```\n\n## Compare your work\n\n“The comparison found these 25 expected identifiers and no extras” is an observation. “The export must therefore be secure” is a different claim and needs different evidence. Keep those boundaries visible.\n\nFor a failure, retain the result and revise the change or the check. Do not edit a failing fixture solely to make the report green.\n",
-        "practice": "I chose a relevant check and recorded the actual result, or explicitly marked it unrun.",
-        "question": "Your build passes. Which conclusion is justified?",
-        "options": [
-          "Every acceptance criterion passed.",
-          "The change is safe to deploy anywhere.",
-          "The build completed under the recorded conditions; behavior may still need checks.",
-          "A separate reviewer is no longer useful."
-        ],
-        "answer": 2,
-        "feedback": "A successful build supports the build claim under its actual conditions. It does not automatically establish behavior, authorization, recovery, or deployment readiness.",
-        "retrieval": "Without looking, list the difference between a planned check, an observed result, and the conclusion that result supports."
-      },
-      {
-        "slug": "challenge-the-explanation",
-        "title": "Ask what would show the explanation is wrong",
-        "summary": "Seek a different evidence path instead of collecting another confident agreement.",
-        "reference": "verify-ai-generated-work",
-        "body": "## Make review capable of disagreement\n\nA second explanation is not automatically independent evidence. If a reviewer sees only the first agent's summary and repeats its reasoning, both can share the same mistake.\n\nFor the CSV example, a reviewer can inspect the agreed column contract and actual output file before reading the author's explanation. They can look for an omitted record, an unexpected column, or a value that the consumer interprets differently.\n\n## Your turn\n\nWrite one plausible failure that your current check would miss. Choose another observation or reviewer input that could expose it. Keep the review bounded to the actual task; a small formatting change does not require an organization-wide audit.\n\nUse the companion disprove-only prompt as a starting point, then remove checks unrelated to your acceptance claim. Record disagreement and any remaining uncertainty.\n\n## Compare your work\n\nA useful challenge changes the evidence available, the failure being investigated, or the method of inspection. Merely changing an agent's role name does not guarantee that independence.\n",
-        "practice": "I named a failure my first check could miss and identified a different way to investigate it.",
-        "question": "Which review adds the most useful new evidence?",
-        "options": [
-          "A second agent agrees with the first summary.",
-          "The first agent rewrites its summary more confidently.",
-          "A reviewer compares the actual output with the consumer contract before reading the implementation explanation.",
-          "A new role name is added to the original prompt."
-        ],
-        "answer": 2,
-        "feedback": "Comparing the actual output with an independently supplied contract creates a different evidence path. A role name or another agreement does not establish that difference.",
-        "retrieval": "Next session, give one example of two reviewers sharing the same blind spot."
-      },
-      {
-        "slug": "make-the-decision",
-        "title": "Choose ship, revise, or stop",
-        "summary": "Bring the scope, observations, recovery needs, and unresolved limits into one reviewable decision.",
-        "reference": "verify-ai-generated-work",
-        "body": "## Finish with a decision someone can inspect\n\nYour record now contains a claim, a check, an observation, and a challenge. Use it to decide what the result earns. A correct local exercise is not proof of production reliability, and a good quiz score does not grant deployment authority.\n\nFor the CSV example, a reversible local export may be ready for its intended use once its agreed checks pass. A change to an externally consumed export may also need a compatibility check and a recovery plan. The required evidence follows the consequence.\n\n## Your turn\n\nComplete the companion session decision record, or write a short equivalent:\n\n```text\nScope and intended use:\nEvidence observed:\nLimitations and unrun checks:\nRecovery or correction path:\nDecision: SHIP / REVISE / STOP\nDecision owner and next action:\n```\n\n## Compare your work\n\nSHIP means the evidence supports the stated use within the owner's authority. REVISE means there is a specific repair or missing check to address. STOP means the boundary, consequence, or uncertainty prevents continuing under the current conditions.\n\nRetain your record. In another session, apply the method to a different task without copying this example's acceptance criteria. Transfer is a better learning check than recognizing the same question again.\n",
-        "practice": "I completed a bounded ship, revise, or stop decision and recorded what remains unresolved.",
-        "question": "A required recovery check has not run. What should the completion report do?",
-        "options": [
-          "Count the planned check as passing.",
-          "Omit it because the other checks passed.",
-          "State that it is unrun and explain its effect on the decision.",
-          "Replace its result with the agent’s confidence."
-        ],
-        "answer": 2,
-        "feedback": "An unrun check remains unrun. Its consequence belongs in the decision record rather than being hidden behind an otherwise green report.",
-        "retrieval": "After a break, explain your decision to someone who has not seen the chat. Can they identify the scope, evidence, limits, and next action?"
-      }
-    ]
-  },
   "topics": [
     {
       "name": "Prompt",
@@ -205,6 +147,180 @@
     {
       "name": "Publishing and Discovery",
       "description": "Make useful public explanations accessible and attributable."
+    }
+  ],
+  "courses": [
+    {
+      "slug": "verification",
+      "title": "Verify one AI-assisted change",
+      "summary": "Four lessons take you from a completion claim to a reviewable decision. Keep one evidence record as you work.",
+      "lessons": [
+        {
+          "slug": "name-the-claim",
+          "title": "Name the result you need to prove",
+          "summary": "Replace a vague completion claim with one observable acceptance condition.",
+          "reference": "verify-ai-generated-work",
+          "body": "## Start with the claim\n\nAn agent reports: “The CSV export works.” Before reviewing its implementation, ask what a reader or consumer must be able to do with the exported file.\n\nIn this constructed exercise, the requirement is: the export preserves all 25 selected records, writes exactly the agreed columns, and can be opened by the intended consumer. These are three claims. A file existing on disk establishes none of them on its own.\n\n## Your turn\n\nChoose one recent AI-assisted task, or use the CSV example. Write one sentence describing a result you could observe. Add the revision or artifact you will inspect and one thing outside your current claim.\n\nUse this small record:\n\n```text\nClaim:\nRevision or artifact:\nExpected observation:\nOutside this check:\n```\n\n## Compare your work\n\nA useful answer names a behavior and a boundary. “The export is good” does not. “The exported file contains all 25 selected records and no extra records” gives a reviewer a specific result to investigate.\n\nKeep this record. You will choose a check for it in the next lesson.\n",
+          "practice": "I wrote one observable claim, identified its artifact or revision, and named a limitation.",
+          "question": "Which claim gives you the clearest next verification step?",
+          "options": [
+            "The agent is confident the export works.",
+            "The exported file contains exactly the 25 selected records.",
+            "The code looks professional.",
+            "The task took less time than expected."
+          ],
+          "answer": 1,
+          "feedback": "The second claim names a count and a selection boundary that a check can investigate. Confidence, appearance, and elapsed time do not establish the file contents.",
+          "retrieval": "Tomorrow, explain why “a file was created” and “the right file was created” require different evidence."
+        },
+        {
+          "slug": "choose-the-check",
+          "title": "Choose evidence that can challenge the claim",
+          "summary": "Match a claim to a check, run it, and retain the observed result.",
+          "reference": "verify-ai-generated-work",
+          "body": "## Pick a check that reaches the result\n\nFor the CSV example, checking the generated file against the selected record identifiers can challenge the completeness claim. Running a formatter cannot. A unit test of a helper may be useful, but it may not exercise the actual exported file.\n\n## Your turn\n\nExtend your record with the check you will run and the observation you actually receive. Use a disposable local fixture if you do not have an appropriate real task. If you cannot run the check, mark it unrun and explain what that prevents you from concluding.\n\n```text\nClaim:\nRevision or artifact:\nCheck or procedure:\nObserved result:\nWhat this result supports:\nStill untested:\n```\n\n## Compare your work\n\n“The comparison found these 25 expected identifiers and no extras” is an observation. “The export must therefore be secure” is a different claim and needs different evidence. Keep those boundaries visible.\n\nFor a failure, retain the result and revise the change or the check. Do not edit a failing fixture solely to make the report green.\n",
+          "practice": "I chose a relevant check and recorded the actual result, or explicitly marked it unrun.",
+          "question": "Your build passes. Which conclusion is justified?",
+          "options": [
+            "Every acceptance criterion passed.",
+            "The change is safe to deploy anywhere.",
+            "The build completed under the recorded conditions; behavior may still need checks.",
+            "A separate reviewer is no longer useful."
+          ],
+          "answer": 2,
+          "feedback": "A successful build supports the build claim under its actual conditions. It does not automatically establish behavior, authorization, recovery, or deployment readiness.",
+          "retrieval": "Without looking, list the difference between a planned check, an observed result, and the conclusion that result supports."
+        },
+        {
+          "slug": "challenge-the-explanation",
+          "title": "Ask what would show the explanation is wrong",
+          "summary": "Seek a different evidence path instead of collecting another confident agreement.",
+          "reference": "verify-ai-generated-work",
+          "body": "## Make review capable of disagreement\n\nA second explanation is not automatically independent evidence. If a reviewer sees only the first agent's summary and repeats its reasoning, both can share the same mistake.\n\nFor the CSV example, a reviewer can inspect the agreed column contract and actual output file before reading the author's explanation. They can look for an omitted record, an unexpected column, or a value that the consumer interprets differently.\n\n## Your turn\n\nWrite one plausible failure that your current check would miss. Choose another observation or reviewer input that could expose it. Keep the review bounded to the actual task; a small formatting change does not require an organization-wide audit.\n\nUse the companion disprove-only prompt as a starting point, then remove checks unrelated to your acceptance claim. Record disagreement and any remaining uncertainty.\n\n## Compare your work\n\nA useful challenge changes the evidence available, the failure being investigated, or the method of inspection. Merely changing an agent's role name does not guarantee that independence.\n",
+          "practice": "I named a failure my first check could miss and identified a different way to investigate it.",
+          "question": "Which review adds the most useful new evidence?",
+          "options": [
+            "A second agent agrees with the first summary.",
+            "The first agent rewrites its summary more confidently.",
+            "A reviewer compares the actual output with the consumer contract before reading the implementation explanation.",
+            "A new role name is added to the original prompt."
+          ],
+          "answer": 2,
+          "feedback": "Comparing the actual output with an independently supplied contract creates a different evidence path. A role name or another agreement does not establish that difference.",
+          "retrieval": "Next session, give one example of two reviewers sharing the same blind spot."
+        },
+        {
+          "slug": "make-the-decision",
+          "title": "Choose ship, revise, or stop",
+          "summary": "Bring the scope, observations, recovery needs, and unresolved limits into one reviewable decision.",
+          "reference": "verify-ai-generated-work",
+          "body": "## Finish with a decision someone can inspect\n\nYour record now contains a claim, a check, an observation, and a challenge. Use it to decide what the result earns. A correct local exercise is not proof of production reliability, and a good quiz score does not grant deployment authority.\n\nFor the CSV example, a reversible local export may be ready for its intended use once its agreed checks pass. A change to an externally consumed export may also need a compatibility check and a recovery plan. The required evidence follows the consequence.\n\n## Your turn\n\nComplete the companion session decision record, or write a short equivalent:\n\n```text\nScope and intended use:\nEvidence observed:\nLimitations and unrun checks:\nRecovery or correction path:\nDecision: SHIP / REVISE / STOP\nDecision owner and next action:\n```\n\n## Compare your work\n\nSHIP means the evidence supports the stated use within the owner's authority. REVISE means there is a specific repair or missing check to address. STOP means the boundary, consequence, or uncertainty prevents continuing under the current conditions.\n\nRetain your record. In another session, apply the method to a different task without copying this example's acceptance criteria. Transfer is a better learning check than recognizing the same question again.\n",
+          "practice": "I completed a bounded ship, revise, or stop decision and recorded what remains unresolved.",
+          "question": "A required recovery check has not run. What should the completion report do?",
+          "options": [
+            "Count the planned check as passing.",
+            "Omit it because the other checks passed.",
+            "State that it is unrun and explain its effect on the decision.",
+            "Replace its result with the agent’s confidence."
+          ],
+          "answer": 2,
+          "feedback": "An unrun check remains unrun. Its consequence belongs in the decision record rather than being hidden behind an otherwise green report.",
+          "retrieval": "After a break, explain your decision to someone who has not seen the chat. Can they identify the scope, evidence, limits, and next action?"
+        }
+      ],
+      "output": "One short record connecting a claim to its artifact, a check, an observed result, limitations, and a decision.",
+      "requirements": "Use your own bounded task or the constructed CSV-export example. You need a way to take notes and access to an appropriate check for your own task; mark checks unrun when they cannot be performed.",
+      "reference": "verify-ai-generated-work",
+      "workingKit": {
+        "title": "Session decision record",
+        "url": "https://github.com/bmozi/harnessing-the-horse-companion/blob/main/factory-bootstrap/SESSION_DECISION.md"
+      }
+    },
+    {
+      "slug": "context",
+      "title": "Build context that survives the next session",
+      "summary": "Four lessons help you separate durable rules from task scope, point to maintained sources, resolve stale context, and test a handoff.",
+      "output": "A small project context map, a separate task brief, and a handoff record with observed gaps and next repairs.",
+      "requirements": "Use a safe local repository or the constructed task-service example. You need a way to take notes; no model account, paid tool, or production data is required.",
+      "reference": "useful-context-files",
+      "workingKit": {
+        "title": "Context-file checklist",
+        "url": "https://github.com/bmozi/harnessing-the-horse-companion/blob/main/factory-bootstrap/01-context-file-checklist.md"
+      },
+      "lessons": [
+        {
+          "slug": "separate-project-from-task",
+          "title": "Separate project rules from the current task",
+          "summary": "Choose what must survive the session and what belongs only to this change.",
+          "body": "## Start with a small job\n\nIn this constructed exercise, a fictional task service must add an optional CSV export field. Its access-control boundary and API contract must remain intact. The requested field belongs in the current task brief; the access-control boundary is a durable project constraint.\n\nA context file is maintained information that helps an agent make the right decisions. It does not need to contain every detail the repository can supply, and it cannot enforce a permission by itself.\n\n## Your turn\n\nChoose a small task or use the fictional export. Make two lists: durable project constraints and temporary task instructions. Name the public or safely discussable artifact you will inspect. Do not copy credentials, personal records, or production customer data into the exercise.\n\n```text\nTask and intended result:\nDurable constraints:\nTemporary instructions:\nOutside this task:\n```\n\n## Compare your work\n\nA useful distinction explains why an item should persist. “Preserve tenant isolation” belongs with durable constraints. “Add the optional region column in this change” belongs in the current brief. If a line could go stale, identify its maintained source before making it a permanent rule.\n",
+          "practice": "I separated a current task from durable constraints and stated what is outside the task.",
+          "question": "Which item most clearly belongs in the temporary task brief?",
+          "options": [
+            "Add the optional region column for this export change.",
+            "Never commit credentials.",
+            "Preserve tenant isolation.",
+            "Use the maintained API contract to identify response compatibility."
+          ],
+          "answer": 0,
+          "feedback": "The requested export change is temporary task scope. The other items describe ongoing boundaries or ways to find maintained project information.",
+          "retrieval": "Tomorrow, sort three instructions from a different task without looking at your first list.",
+          "reference": "useful-context-files"
+        },
+        {
+          "slug": "write-a-small-context-map",
+          "title": "Write a small context map",
+          "summary": "Give the agent constraints and reliable pointers instead of duplicating the repository.",
+          "body": "## Point to the source that owns the detail\n\nA useful context map tells an agent what the project is, which constraints matter, where authoritative information lives, and how to check the work. It can point to a contract or test command without copying the full contract and every test into the file.\n\nIn the constructed task service, the API contract defines export fields, the contribution guide explains local setup, and the acceptance fixture names the selected records. A short project file points to these maintained sources.\n\n## Your turn\n\nDraft a context map for your bounded task. Use the companion context-file checklist. Give each pointer a purpose and verify that the target exists. Choose a real validation command from the repository; do not invent one because it looks conventional.\n\n```text\nProject purpose:\nConstraints to preserve:\nSource path and the question it answers:\nValidation command and what it checks:\n```\n\n## Compare your work\n\nA pointer is useful when it lets the next person or agent answer a concrete question. A long list of files with no stated purpose is not yet a useful map. A fixed line-count target is not a substitute for checking whether the file helps the actual task.\n",
+          "practice": "I drafted a concise context map, checked its pointers, and identified an actual validation command.",
+          "question": "Which instruction best helps an agent find the current contract?",
+          "options": [
+            "Copy an old contract into every prompt.",
+            "Load every repository file at the start.",
+            "Assume the contract from a similar service is close enough.",
+            "Point to the maintained contract and state which compatibility question it answers."
+          ],
+          "answer": 3,
+          "feedback": "A maintained pointer with a stated purpose supports current task decisions. Copying old versions or loading everything can hide the source that should decide the question.",
+          "retrieval": "After a break, explain one decision each pointer in your map is intended to change.",
+          "reference": "useful-context-files"
+        },
+        {
+          "slug": "check-source-currency",
+          "title": "Check source authority and currency",
+          "summary": "Resolve conflicting or stale context before using it to choose a change.",
+          "body": "## Relevant information can still be wrong for this task\n\nA retrieved note may match your question while describing an old version, another service, or an unapproved proposal. Relevance helps find a candidate source; it does not make that source authoritative.\n\nIn this constructed exercise, an old note says the export includes an account identifier. The maintained consumer contract prohibits that field for the current audience. Adding the identifier because the note is easy to retrieve would cross the intended boundary.\n\n## Your turn\n\nChoose one statement in your context map. Find its maintained source and record its version or revision, intended scope, and any conflict. If authority cannot be established, record the uncertainty and the person or process that can resolve it. Do not replace a missing decision with the agent's confidence.\n\n```text\nStatement being used:\nMaintained source and revision:\nScope where it applies:\nConflict or uncertainty:\nWho or what resolves it:\n```\n\n## Compare your work\n\nA good record separates what the source says from why it may govern this decision. Keep an old proposal identifiable as an old proposal. Do not quietly promote it into a project rule because it was repeated in a recent chat.\n",
+          "practice": "I checked one statement against its maintained source, recorded its scope, and kept any conflict visible.",
+          "question": "A highly relevant retrieved note conflicts with the maintained contract. What is the best next move?",
+          "options": [
+            "Follow the note because retrieval ranked it first.",
+            "Check the source roles and versions, then resolve the conflict through the appropriate authority.",
+            "Merge the two rules into a plausible compromise without recording it.",
+            "Ask the same model to repeat the note more confidently."
+          ],
+          "answer": 1,
+          "feedback": "Retrieval rank is not authority. Investigate which source governs the current scope and retain the conflict until the appropriate source or owner resolves it.",
+          "retrieval": "In another session, give an example of information that is relevant but not authoritative.",
+          "reference": "useful-context-files"
+        },
+        {
+          "slug": "test-the-handoff",
+          "title": "Test and maintain the handoff",
+          "summary": "Check whether another session can use the map, then repair what did not survive.",
+          "body": "## Test the next session, not just the file\n\nA context map is useful only if it helps the next task. A tidy file can still point to a deleted contract, omit the acceptance check, or contain conflicting instructions. Treat the handoff as something to try, not something its author can certify by appearance.\n\nFor the constructed export task, a reviewer who did not read the original chat should be able to find the current contract, name the access boundary, identify the requested change, and choose the relevant check from the handoff.\n\n## Your turn\n\nUse a fresh session or ask another reader to work from your context map and task brief without the original chat. If that is not available, conduct a limited self-review and label it as such. Record what they could actually find, what was missing, and what needs repair.\n\n```text\nHandoff inputs provided:\nReviewer or session and limits:\nTask, constraints and sources correctly identified:\nObserved gaps:\nRepair or retirement decision:\n```\n\n## Compare your work\n\nCorrect the maintained source when a rule changes, update affected pointers, and remove superseded copies through the normal review process. A passing handoff exercise establishes something about this handoff; it is not proof that every future agent will follow the rules.\n",
+          "practice": "I tried or explicitly bounded a handoff review and recorded the observed gaps and next repair.",
+          "question": "What is the strongest completion statement for a handoff exercise?",
+          "options": [
+            "The file is short, so every future agent will understand it.",
+            "The agent said it understood, so no check is needed.",
+            "The reviewer found the named contract and acceptance check; the remaining gaps and limits are recorded.",
+            "All context-management problems are solved for the project."
+          ],
+          "answer": 2,
+          "feedback": "The third statement names observations and their limits. File length and confidence do not establish successful transfer, and one exercise does not prove future compliance.",
+          "retrieval": "Next week, apply the same handoff check to a different task and compare the failures rather than copying the old brief.",
+          "reference": "useful-context-files"
+        }
+      ]
     }
   ]
 }

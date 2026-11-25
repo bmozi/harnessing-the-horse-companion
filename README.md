@@ -36,7 +36,7 @@ The book stands alone. The toolkit extends it without reproducing it:
 
 ## Start Here
 
-For short explanations and a four-lesson verification path, try the new
+For short explanations and four-lesson verification and context paths, try the
 [AI engineering learning pilot](learning/README.md). It is a main-branch pilot,
 separate from the tagged v2.1.2 toolkit.
 

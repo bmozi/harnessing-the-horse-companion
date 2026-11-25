@@ -1,0 +1,71 @@
+{
+  "updated": "2026-11-25",
+  "scope": "Public GitHub companions only; public visibility is not a statement about reuse rights. Consult each repository’s notices.",
+  "items": [
+    {
+      "title": "Harnessing the Horse",
+      "url": "https://github.com/bmozi/harnessing-the-horse-companion",
+      "description": "Specifications, bounded agent sessions, quality gates and review evidence."
+    },
+    {
+      "title": "The Amplified Engineer",
+      "url": "https://github.com/bmozi/the-amplified-engineer-companion",
+      "description": "Practice clear intent, independent challenge and useful AI-assisted outcomes."
+    },
+    {
+      "title": "The Accountable AI Software Factory",
+      "url": "https://github.com/bmozi/accountable-ai-software-factory-companion",
+      "description": "Connect work intake, controls, evidence and recovery across a delivery system."
+    },
+    {
+      "title": "Agentic Systems Architecture",
+      "url": "https://github.com/bmozi/agentic-systems-architecture-companion",
+      "description": "Map delegated authority, tools, memory, budgets and evidence."
+    },
+    {
+      "title": "API Architecture for AI Systems",
+      "url": "https://github.com/bmozi/api-architecture-for-ai-systems-companion",
+      "description": "Define governed capabilities, contracts and agent-facing API boundaries."
+    },
+    {
+      "title": "Data Platform Architecture for AI Systems",
+      "url": "https://github.com/bmozi/data-platform-architecture-for-ai-systems-companion",
+      "description": "Record meaning, lineage, quality, access and information ownership."
+    },
+    {
+      "title": "Durable Workflows for AI Systems",
+      "url": "https://github.com/bmozi/durable-workflows-for-ai-systems-companion",
+      "description": "Keep responsibility, state and recovery visible across long-running work."
+    },
+    {
+      "title": "Event-Driven Architecture for AI Systems",
+      "url": "https://github.com/bmozi/event-driven-architecture-for-ai-systems-companion",
+      "description": "Make event meaning, delivery assumptions and consequences inspectable."
+    },
+    {
+      "title": "Get More Done with Claude",
+      "url": "https://github.com/bmozi/get-more-done-with-claude-companion",
+      "description": "Reader practice files and fictional examples for everyday AI projects."
+    },
+    {
+      "title": "Get More Done with ChatGPT",
+      "url": "https://github.com/bmozi/get-more-done-with-chatgpt-companion",
+      "description": "Reader practice files and fictional examples for everyday AI projects."
+    },
+    {
+      "title": "The Business Architect’s Edge",
+      "url": "https://github.com/bmozi/business-architects-edge-companion",
+      "description": "Decision worksheets and worked fictional business-architecture exercises."
+    },
+    {
+      "title": "The Organization After AI",
+      "url": "https://github.com/bmozi/the-organization-after-ai-companion",
+      "description": "Companion resources for examining organizational choices around AI."
+    },
+    {
+      "title": "Thinking in AWS",
+      "url": "https://github.com/bmozi/amplify-aws-companion",
+      "description": "Learning routes and cloud-free practice; existing source names and edition snapshots remain supported."
+    }
+  ]
+}

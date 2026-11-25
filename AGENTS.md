@@ -16,3 +16,11 @@ retailer upload, human reader validation, or physical proof quality. Preserve th
 mandatory exact-final-file visual review gate before promotion/readiness claims.
 The shared toolkit's `BOOK-REPOSITORY-HANDOFF.md` and
 `book_production/audit_repository.py` describe the repeatable audit.
+
+## Public learning and discovery
+
+Apply [DISCOVERABILITY.md](DISCOVERABILITY.md) to intended public-facing work.
+Keep author, version, license, sources and correction paths inspectable, preserve
+private boundaries, and report access, indexing, actual citations and reader
+outcomes separately. Machine-readable indexes and citation files are aids, not
+ranking guarantees. Preserve the book-and-companion contract.

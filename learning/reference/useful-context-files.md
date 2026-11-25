@@ -44,4 +44,4 @@ Book connection: Harnessing the Horse, Chapter 4; Agentic Systems Architecture, 
 - [Tool and context configuration](https://github.com/bmozi/harnessing-the-horse-companion/blob/main/references/tool-configuration-reference.md)
 - [Memory and provenance record](https://github.com/bmozi/agentic-systems-architecture-companion/blob/main/memory-and-provenance-record.md)
 
-Author: John Briggs. Updated 2026-11-24. This is original companion learning material; constructed examples are labeled.
+Author: John Briggs. Updated 2026-11-25. This is original companion learning material; constructed examples are labeled.
